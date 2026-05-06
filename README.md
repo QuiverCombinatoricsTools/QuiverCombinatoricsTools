@@ -11,7 +11,7 @@ You can read the documentation of QuiverTools as
 
 # Instructions
 
-Since this is a private repository for now, you can access it as follows. In your terminal, add an .ssh folder if you don't have it already
+Since this is a private repository for now, you can access it as follows. In your unix bash terminal, add an .ssh folder if you don't have it already
 
 ``mkdir -p ~/.ssh``
 
@@ -29,11 +29,13 @@ Then open nano in the ssh config
 
 and add this
 
+```
 Host github      
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_ed25519
   IdentitiesOnly yes
+  ```
 
 Where you have sage installed, run 
 
