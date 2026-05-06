@@ -11,8 +11,16 @@ A more detailed user guide is in the works.
 
 # Instructions
 
-You can install it by running
+You can install it by going into your sage environment, and ensuring you can get to this repository. Because it is private, you will have to install an ssh key! Make sure an .ssh/authorized_keys directory exists, then run
 
-``sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools``
+``nano ~/.ssh/authorized_keys``
 
-and then you can just do `from quivercombinatorics import *` to get started.
+and add the following line
+
+``ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHt2WDoUV+R+t2sjWwsRrhYqbJiZJJsoagfGoNnlDXb QuiverCombinatoricsTools``
+
+then exit nano. Now, enter the environment with your sage install, and run pip
+
+``pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools``
+
+in any sage code, use `from quivercombinatorics import *` to get started.
