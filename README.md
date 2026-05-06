@@ -23,7 +23,11 @@ and add this key to the file
 
 ``ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHt2WDoUV+R+t2sjWwsRrhYqbJiZJJsoagfGoNnlDXb QuiverCombinatoricsTools``
 
-Now you have the ssh deploy key for this repo! Where you have sage installed, run 
+log in to this repo (make sure this is the only SSH key GitHub knows)
+
+``ssh -T git@github.com``
+
+Where you have sage installed, run 
 
 ``pip install git+ssh://github.com/emanuel-roth/QuiverCombinatoricsTools``
 
