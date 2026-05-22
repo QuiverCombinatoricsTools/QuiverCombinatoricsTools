@@ -1,13 +1,8 @@
 # QuiverCombinatoricsTools
  
-AGQ computing project by Mia, Tudor, and Emanuel.
+AGQ computing project by Tudor-Ioan Caba, Mia Lam & Emanuel Roth.
 
-We hope to extend the sage package [QuiverTools](https://github.com/QuiverTools/QuiverTools) written by Pieter Bielmans, Hans Franzen, and Gianni Petrella. We do this by copying the package here and extending this repository.
-
-You can read the documentation of QuiverTools as
-
-* [a webpage](https://sage.quiver.tools)
-* [a pdf](https://sage.quiver.tools/documentation.pdf)
+We code an add-on to the sage package [QuiverTools](https://github.com/QuiverTools/QuiverTools) written by Pieter Bielmans, Hans Franzen, and Gianni Petrella. All of our code will be written in `quivercombinatorics.py`.
 
 # Instructions
 
@@ -42,3 +37,12 @@ Where you have sage installed, run
 ``pip install git+ssh://git@github.com/emanuel-roth/QuiverCombinatoricsTools.git``
 
 Then, in any sage code, use `from quivercombinatorics import *` to get started.
+
+# Documentation
+
+We have not yet figured out the 
+
+You can read the documentation of the original QuiverTools as:
+
+* [a webpage](https://sage.quiver.tools)
+* [a pdf](https://sage.quiver.tools/documentation.pdf)

@@ -2,9 +2,9 @@ import setuptools
 
 setuptools.setup(
     name="quivercombinatorics",
-    version="1.1",
-    description="Work with quivers, their representations, and their moduli spaces",
-    url="https://quiver.tools",
+    version="1.0",
+    description="An addon to QuiverTools that focuses on the combinatorics and symplectic leaves of quiver varieties",
+    url="https://github.com/emanuel-roth/QuiverCombinatoricsTools",
     packages=setuptools.find_packages(),
     zip_safe=False,
 )

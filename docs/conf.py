@@ -22,13 +22,14 @@ import sys
 from sage.env import SAGE_DOC_SRC
 import sage.all
 
-sys.path.insert(0, os.path.abspath("."))
+#sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # -- Project information -----------------------------------------------------
 
-project = "QuiverTools"
+project = "QuiverCombinatoricsTools"
 copyright = "2024"
-author = "Pieter Belmans, Hans Franzen, Gianni Petrella"
+author = "Tudor-Ioan Caba, Mia Lam, Emanuel Roth"
 # The full version, including alpha/beta/rc tags
 release = "1.0"
 
@@ -68,5 +69,5 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 #
 html_theme = "sphinx_book_theme"
-html_logo = "logo.png"
+html_logo = "logo.svg"
 html_favicon = "favicon.ico"

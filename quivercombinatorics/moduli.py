@@ -54,7 +54,7 @@ class QuiverModuli(Element):
 
         We can instantiate an abstract quiver moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3))
             sage: X
@@ -115,7 +115,7 @@ class QuiverModuli(Element):
 
         A Kronecker moduli space with non-standard description::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3))
             sage: print(X._QuiverModuli__repr_helper("Kronecker moduli space"))
@@ -139,7 +139,7 @@ class QuiverModuli(Element):
 
         A Kronecker moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuli(Q, (2, 3))
             abstract moduli of semistable representations, with
@@ -160,7 +160,7 @@ class QuiverModuli(Element):
 
         A Kronecker moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuli(Q, (2, 3))
             abstract moduli of semistable representations, with
@@ -181,7 +181,7 @@ class QuiverModuli(Element):
 
         From an abstract quiver moduli to a space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3))
             sage: X.to_space()
@@ -214,7 +214,7 @@ class QuiverModuli(Element):
 
         From an abstract quiver moduli to a stack::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3))
             sage: X.to_stack()
@@ -246,7 +246,7 @@ class QuiverModuli(Element):
 
         The quiver of a Kronecker moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3))
             sage: Q == X.quiver()
@@ -264,7 +264,7 @@ class QuiverModuli(Element):
 
         The dimension vector of a Kronecker moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3))
             sage: X.dimension_vector()
@@ -289,7 +289,7 @@ class QuiverModuli(Element):
 
         The stability parameter of a Kronecker moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3), (3, -2))
             sage: X.stability_parameter()
@@ -315,7 +315,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: X.denominator()
@@ -334,7 +334,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver for `d = (2, 3)` has stable representations::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q, d = GeneralizedKroneckerQuiver(3), (2, 3)
             sage: X = QuiverModuliSpace(Q, d, condition="stable"); X.is_nonempty()
             True
@@ -366,7 +366,7 @@ class QuiverModuli(Element):
 
         A coprime example::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).is_theta_coprime()
             True
@@ -408,7 +408,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: X.all_harder_narasimhan_types()
@@ -436,7 +436,7 @@ class QuiverModuli(Element):
 
         A 3-vertex quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = ThreeVertexQuiver(2, 3, 4)
             sage: Z = QuiverModuliSpace(Q, (2, 3, 2))
             sage: Z.all_harder_narasimhan_types()
@@ -547,7 +547,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: HNs = X.all_harder_narasimhan_types()
@@ -630,7 +630,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: HNs = X.all_harder_narasimhan_types()
@@ -666,7 +666,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: X.codimension_unstable_locus()
@@ -762,7 +762,7 @@ class QuiverModuli(Element):
 
         The Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (3, 3), (1, -1))
             sage: X.all_luna_types()
@@ -770,7 +770,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (3, 3), (1, -1))
             sage: X.all_luna_types()
@@ -782,7 +782,7 @@ class QuiverModuli(Element):
 
         The zero vector::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (0, 0), (1, -1))
             sage: X.all_luna_types()
@@ -870,7 +870,7 @@ class QuiverModuli(Element):
 
         The Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (3, 3), (1, -1))
             sage: Ls = X.all_luna_types()
@@ -879,7 +879,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver with zero vector::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (0, 0), (1, -1))
             sage: X.is_luna_type({Q.zero_vector(): [1]})
@@ -936,7 +936,7 @@ class QuiverModuli(Element):
 
         The Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (2, 2), (1, -1))
             sage: Ls = X.all_luna_types(); Ls
@@ -971,7 +971,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 2), (1, -1))
             sage: Ls = X.all_luna_types(); Ls
@@ -1043,7 +1043,7 @@ class QuiverModuli(Element):
         This is currently not working properly because we cannot compute the dimension
         of the nullcone::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (3, 3))
             sage: Ls = X.all_luna_types()
@@ -1082,7 +1082,7 @@ class QuiverModuli(Element):
 
         If the semistable locus is the stable locus the codimension is -Infinity::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).codimension_properly_semistable_locus()
             -Infinity
@@ -1090,7 +1090,7 @@ class QuiverModuli(Element):
         This is currently not working properly because we cannot compute the dimension
         of the nullcone::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (3, 3)).codimension_properly_semistable_locus()
             Traceback (most recent call last):
@@ -1122,7 +1122,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (3, 3))
             sage: X.semistable_equals_stable()
@@ -1133,7 +1133,7 @@ class QuiverModuli(Element):
 
         A double framed example as in arXiv.2311.17004_::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q = Q.framed_quiver((1, 0)).coframed_quiver((0, 0, 1))
             sage: d = (1, 2, 3, 1)
@@ -1181,7 +1181,7 @@ class QuiverModuli(Element):
 
         3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).is_amply_stable()
             True
@@ -1219,14 +1219,14 @@ class QuiverModuli(Element):
 
         3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).is_strongly_amply_stable()
             True
 
         A 3-vertex quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = ThreeVertexQuiver(5, 1, 1)
             sage: X = QuiverModuliSpace(Q, [4, 1, 4])
             sage: X.is_amply_stable()
@@ -1264,7 +1264,7 @@ class QuiverModuli(Element):
 
         EXAMPLE:
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: HN = X.all_harder_narasimhan_types(proper=True)
@@ -1301,7 +1301,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: HN = X.all_harder_narasimhan_types(proper=True)
@@ -1345,7 +1345,7 @@ class QuiverModuli(Element):
 
         The 6-dimensional 3-Kronecker example::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: X = QuiverModuliSpace(KroneckerQuiver(3), (2, 3))
             sage: X.teleman_bounds()
             [15, 60, 100, 360, 100, 270, 270]
@@ -1382,7 +1382,7 @@ class QuiverModuli(Element):
 
         Kronecker moduli satisfy the rigidity inequality::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: X = QuiverModuliSpace(KroneckerQuiver(3), (2, 3))
             sage: X.if_rigidity_inequality_holds()
             True
@@ -1411,7 +1411,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, [2, 3])
             sage: X.all_weights_endomorphisms_universal_bundle()
@@ -1445,7 +1445,7 @@ class QuiverModuli(Element):
 
             The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: X.weights_endomorphisms_universal_bundle(0,1)
@@ -1498,7 +1498,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3); d = (2, 3)
             sage: X = QuiverModuliSpace(Q, d)
             sage: X.weights_universal_bundle(0)
@@ -1561,7 +1561,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3); d = (2, 3)
             sage: X = QuiverModuliSpace(Q, d)
             sage: X.weights_canonical()
@@ -1615,7 +1615,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, [3, 3], [1, -1], condition="semistable")
             sage: X._all_forbidden_subdimension_vectors()
@@ -1657,7 +1657,7 @@ class QuiverModuli(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (3, 3))
             sage: X._all_minimal_forbidden_subdimension_vectors()
@@ -1691,7 +1691,7 @@ class QuiverModuli(Element):
         We index some generators of the polynomial ring defining the Chow ring of the
         Kronecker 6-fold::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: chi = (-1, 1)
@@ -1730,7 +1730,7 @@ class QuiverModuli(Element):
 
         The tautological ideal for our favourite 6-fold has 9 non-zero generators::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: len(X.tautological_ideal().gens())
@@ -1760,7 +1760,7 @@ class QuiverModuli(Element):
 
         The tautological ideal for our favourite 6-fold has 9 non-zero generators::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: X._QuiverModuli__tautological_ideal_helper()["ambient_ring"]
@@ -1929,7 +1929,7 @@ class QuiverModuli(Element):
         This is not implemented as it is ambiguous: it depends on whether we consider
         it as a variety or as a stack::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuli(Q, (2, 3)).dimension()
             Traceback (most recent call last):
@@ -1952,7 +1952,7 @@ class QuiverModuli(Element):
         This is not implemented as it is ambiguous: it depends on whether we consider
         it as a variety or as a stack::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuli(Q, (2, 3)).is_smooth()
             Traceback (most recent call last):
@@ -1977,7 +1977,7 @@ class QuiverModuli(Element):
         This is not implemented as it is ambiguous: it depends on whether we consider
         it as a variety or as a stack::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuli(Q, (2, 3)).is_smooth()
             Traceback (most recent call last):
@@ -2011,7 +2011,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         An example::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3))
             moduli space of semistable representations, with
@@ -2037,7 +2037,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         A Kronecker moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3))
             moduli space of semistable representations, with
@@ -2059,7 +2059,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         A Kronecker moduli space::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3))
             moduli space of semistable representations, with
@@ -2089,7 +2089,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The A2-quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(1)
             sage: X = QuiverModuliSpace(Q, [1, 1], condition="stable")
             sage: X.dimension()
@@ -2106,7 +2106,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(2)
             sage: X = QuiverModuliSpace(Q, [1, 1], [1, -1], condition="stable")
             sage: X.dimension()
@@ -2123,7 +2123,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3), condition="semistable")
             sage: X.dimension()
@@ -2243,7 +2243,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         Some Kronecker quivers::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (1, 1))
             sage: X.poincare_polynomial()
@@ -2293,7 +2293,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         Some Kronecker quivers::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (1, 1), condition="semistable")
             sage: X.poincare_polynomial()
@@ -2343,7 +2343,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         Some 3-Kronecker example::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).is_smooth()
             True
@@ -2384,7 +2384,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         For an acyclic quiver this moduli space is a point::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: X.semisimple_moduli_space().dimension()
@@ -2413,7 +2413,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         For acyclic quivers the semistable moduli space is always projective::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).is_projective()
             True
@@ -2472,7 +2472,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         Kronecker moduli are rank 1::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).picard_rank()
             1
@@ -2493,7 +2493,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The usual 3-Kronecker example::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliSpace(Q, (2, 3)).index()
             3
@@ -2597,7 +2597,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q= KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (1, 1))
             sage: chi = (1, 0)
@@ -2609,7 +2609,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: chi = (-1, 1)
@@ -2626,7 +2626,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The 5-subspace quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q, d = SubspaceQuiver(5), (1, 1, 1, 1, 1, 2)
             sage: theta = (2, 2, 2, 2, 2, -5)
             sage: X = QuiverModuliSpace(Q, d, theta, condition="semistable")
@@ -2639,7 +2639,7 @@ class QuiverModuliSpace(QuiverModuli):
         The ideal Chow ring for our favourite 6-fold has 10 generators, 9 from the
         tautological ideal, and 1 linear relation::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: chi = (-1, 1)
@@ -2719,7 +2719,7 @@ class QuiverModuliSpace(QuiverModuli):
         On the Kronecker 6-fold we can take the canonical line bundle, which we can
         see to have index 3::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: eta = Q.canonical_stability_parameter((2, 3))
@@ -2749,7 +2749,7 @@ class QuiverModuliSpace(QuiverModuli):
         On the Kronecker 6-fold the canonical line bundle has the following Chern
         character::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: eta = Q.canonical_stability_parameter((2, 3))
@@ -2770,7 +2770,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The two summands for the Kronecker 6-fold::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: chi = (-1, 1)
@@ -2810,7 +2810,7 @@ class QuiverModuliSpace(QuiverModuli):
         :math:`\mathbb{P}^7` as a quiver moduli space
         of a generalized Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(8)
             sage: X = QuiverModuliSpace(Q, (1, 1))
             sage: chi = (1, 0)
@@ -2819,7 +2819,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         Our favorite 6-fold::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: chi = (-1, 1)
@@ -2830,7 +2830,7 @@ class QuiverModuliSpace(QuiverModuli):
         it agrees with the blow-up of :math:`\mathbb{P}^2` in 4 points
         in general position::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = SubspaceQuiver(5)
             sage: theta = (2, 2, 2, 2, 2, -5)
             sage: X = QuiverModuliSpace(Q, (1, 1, 1, 1, 1, 2))
@@ -2881,7 +2881,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         Rederive a calculation from arXiv.2307.01711_::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: d = (2, 3)
             sage: X = QuiverModuliSpace(Q, d)
@@ -2925,7 +2925,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         An example from arXiv.2307.01711_::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliSpace(Q, (2, 3))
             sage: X.todd_class()
@@ -3014,7 +3014,7 @@ class QuiverModuliSpace(QuiverModuli):
 
         The integral of :math:`\mathcal{O}(i)` on the projective line for some `i`::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver()
             sage: X = QuiverModuliSpace(Q, (1, 1))
             sage: L = X.chern_character_line_bundle((1, -1))
@@ -3070,7 +3070,7 @@ class QuiverModuliStack(QuiverModuli):
 
         An example::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliStack(Q, (2, 3))
 
@@ -3085,7 +3085,7 @@ class QuiverModuliStack(QuiverModuli):
 
         A Kronecker moduli stack::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliStack(Q, (2, 3))
             moduli stack of semistable representations, with
@@ -3107,7 +3107,7 @@ class QuiverModuliStack(QuiverModuli):
 
         A Kronecker moduli spac::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: QuiverModuliStack(Q, (2, 3))
             moduli stack of semistable representations, with
@@ -3136,7 +3136,7 @@ class QuiverModuliStack(QuiverModuli):
         The dimension of a moduli space of stable is off by one from the moduli stack
         because of the generic stabilizer being 1-dimensional::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuli(Q, (2, 3))
             sage: X.to_stack().dimension()
@@ -3162,7 +3162,7 @@ class QuiverModuliStack(QuiverModuli):
 
         Nothing interesting to see here::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: QuiverModuliSpace(KroneckerQuiver(3), (2, 3)).is_smooth()
             True
         """
@@ -3178,7 +3178,7 @@ class QuiverModuliStack(QuiverModuli):
 
         Loop quivers::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = LoopQuiver(0)
             sage: X = QuiverModuliStack(Q, (2,), (0,))
             sage: X.motive()
@@ -3259,7 +3259,7 @@ class QuiverModuliStack(QuiverModuli):
         The Chow ring of the stack defining the Kronecker 6-fold has as its defining
         ideal the tautological ideal::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: X = QuiverModuliStack(Q, (2, 3))
             sage: X.tautological_ideal() == X.chow_ring().defining_ideal()

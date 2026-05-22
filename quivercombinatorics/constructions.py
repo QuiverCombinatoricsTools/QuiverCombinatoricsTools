@@ -5,6 +5,14 @@ from sage.rings.integer_ring import ZZ
 
 from . import Quiver
 
+def quiver_from_cartan_matrix(C):
+    """Returns the quiver Q given by a Cartan matrix C."""
+    for i in range(len(C)):
+        C[i][i] /= 2                        
+        for j in range(i):
+            C[i][j] = 0                     
+    E = matrix.identity(len(C)) - matrix(C)
+    return Quiver(E)                        
 
 def disjoint_union(Q1, Q2):
     """Returns the disjoint union of two quivers Q1 and Q2.
@@ -13,7 +21,7 @@ def disjoint_union(Q1, Q2):
 
     We construct the disjoint union of 2 generalized Kronecker quivers::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q1 = GeneralizedKroneckerQuiver(3)
         sage: Q2 = GeneralizedKroneckerQuiver(4)
         sage: Q = disjoint_union(Q1,Q2)
@@ -57,7 +65,7 @@ def GeneralizedKroneckerQuiver(m: int):
 
     The generalized Kronecker quiver is as claimed::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = GeneralizedKroneckerQuiver(3)
         sage: Q.number_of_vertices()
         2
@@ -86,7 +94,7 @@ def KroneckerQuiver(m: int = 2):
 
     The Kronecker quiver is as claimed::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = KroneckerQuiver()
         sage: Q.number_of_vertices()
         2
@@ -121,7 +129,7 @@ def ThreeVertexQuiver(m12: int, m13: int, m23: int):
 
     A 3-vertex quiver with 5 arrows::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = ThreeVertexQuiver(2, 2, 1); Q
         an acyclic 3-vertex quiver of type (2, 2, 1)
         sage: Q.number_of_arrows()
@@ -148,7 +156,7 @@ def LoopQuiver(m: int):
 
     This is a synonym::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: LoopQuiver(7) == GeneralizedJordanQuiver(7)
         True
 
@@ -160,7 +168,7 @@ def LoopQuiver(m: int):
 
     The loop quiver with 7 loops::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = LoopQuiver(7)
         sage: Q.adjacency_matrix()
         [7]
@@ -180,7 +188,7 @@ def JordanQuiver(m: int = 1):
 
     This is a synonym::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: JordanQuiver(7) == GeneralizedJordanQuiver(7)
         True
 
@@ -193,7 +201,7 @@ def JordanQuiver(m: int = 1):
 
     The Jordan quiver has one loop::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = JordanQuiver()
         sage: Q.adjacency_matrix()
         [1]
@@ -217,7 +225,7 @@ def GeneralizedJordanQuiver(m: int):
 
     The generalized Jordan quiver has 1 vertex and ``m`` arrows::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = GeneralizedJordanQuiver(7)
         sage: Q.number_of_vertices()
         1
@@ -250,7 +258,7 @@ def SubspaceQuiver(m: int):
 
     The subspace quiver with ``m`` sources has ``m`` arrows and ``m+1`` vertices::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = SubspaceQuiver(6)
         sage: Q.number_of_vertices()
         7
@@ -290,7 +298,7 @@ def ThickenedSubspaceQuiver(m, k):
     The ``k``-thickened subspace quiver with ``m`` sources has ``km`` arrows, ``m+1``
     vertices::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = ThickenedSubspaceQuiver(6, 2)
         sage: Q.number_of_vertices()
         7
@@ -329,7 +337,7 @@ def GeneralizedSubspaceQuiver(m, K):
     The generalized subspace quiver with `m` sources and multiplicities `K`
     has :math:`\sum_{i=1}^mK_i` arrows and :math:`m+1` vertices::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: Q = GeneralizedSubspaceQuiver(6, (1, 2, 3, 4, 5, 6))
         sage: Q.number_of_vertices()
         7
@@ -370,7 +378,7 @@ def DynkinQuiver(T):
 
     The :math:`\mathrm{A}_2` quiver is the generalized Kronecker quiver with 1 arrow::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: DynkinQuiver("A2") == GeneralizedKroneckerQuiver(1)
         True
 
@@ -415,7 +423,7 @@ def ExtendedDynkinQuiver(T):
 
     The extended :math:`\mathrm{A}_1` quiver is the Kronecker quiver::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: ExtendedDynkinQuiver("A1") == KroneckerQuiver()
         True
 
@@ -452,7 +460,7 @@ def CyclicQuiver(n):
     The doubled Dynkin quiver of type :math:`\mathrm{A}_2` is also the cyclic quiver on
     2 vertices::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: CyclicQuiver(2) == DynkinQuiver("A2").doubled_quiver()
         True
 
@@ -483,7 +491,7 @@ def BipartiteQuiver(m, n):
 
     When `m=n=1` we get the :math:`\mathrm{A}_2` quiver::
 
-        sage: from quiver import *
+        sage: from quivercombinatorics import *
         sage: BipartiteQuiver(1, 1) == DynkinQuiver("A2")
         True
 

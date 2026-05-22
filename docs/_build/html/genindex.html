@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; QuiverCombinatoricsTools 1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=a681ed88"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+<script defer data-domain="quiver.combinatorics.tools" src="https://plausible.io/js/script.js"></script>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.svg" class="logo__image only-light" alt="QuiverCombinatoricsTools 1.0 documentation - Home"/>
+    <img src="_static/logo.svg" class="logo__image only-dark pst-js-only" alt="QuiverCombinatoricsTools 1.0 documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.__eq__">__eq__() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.__hash__">__hash__ (quiver.Quiver attribute)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.__init__">__init__() (quiver.Quiver method)</a>
+
+      <ul>
+        <li><a href="index.html#quiver.QuiverModuli.__init__">(quiver.QuiverModuli method)</a>
+</li>
+        <li><a href="index.html#quiver.QuiverModuliSpace.__init__">(quiver.QuiverModuliSpace method)</a>
+</li>
+        <li><a href="index.html#quiver.QuiverModuliStack.__init__">(quiver.QuiverModuliStack method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.__str__">__str__() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.__weakref__">__weakref__ (quiver.Quiver attribute)</a>
+
+      <ul>
+        <li><a href="index.html#quiver.QuiverModuli.__weakref__">(quiver.QuiverModuli attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.adjacency_matrix">adjacency_matrix() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.all_general_subdimension_vectors">all_general_subdimension_vectors() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.all_harder_narasimhan_types">all_harder_narasimhan_types() (quiver.QuiverModuli method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.all_luna_types">all_luna_types() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.all_subdimension_vectors">all_subdimension_vectors() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.all_weights_endomorphisms_universal_bundle">all_weights_endomorphisms_universal_bundle() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.arrows">arrows() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuliSpace.betti_numbers">betti_numbers() (quiver.QuiverModuliSpace method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.BipartiteQuiver">BipartiteQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.canonical_decomposition">canonical_decomposition() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.canonical_stability_parameter">canonical_stability_parameter() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.cartan_matrix">cartan_matrix() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace.chern_character_line_bundle">chern_character_line_bundle() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace.chern_class_line_bundle">chern_class_line_bundle() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.chow_ring">chow_ring() (quiver.QuiverModuli method)</a>
+
+      <ul>
+        <li><a href="index.html#quiver.QuiverModuliSpace.chow_ring">(quiver.QuiverModuliSpace method)</a>
+</li>
+        <li><a href="index.html#quiver.QuiverModuliStack.chow_ring">(quiver.QuiverModuliStack method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.codimension_of_harder_narasimhan_stratum">codimension_of_harder_narasimhan_stratum() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.codimension_properly_semistable_locus">codimension_properly_semistable_locus() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.codimension_unstable_locus">codimension_unstable_locus() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.coframed_quiver">coframed_quiver() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.CyclicQuiver">CyclicQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuliSpace.degree">degree() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.denominator">denominator() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.dimension">dimension() (quiver.QuiverModuli method)</a>
+
+      <ul>
+        <li><a href="index.html#quiver.QuiverModuliSpace.dimension">(quiver.QuiverModuliSpace method)</a>
+</li>
+        <li><a href="index.html#quiver.QuiverModuliStack.dimension">(quiver.QuiverModuliStack method)</a>
+</li>
+      </ul></li>
+      <li><a href="index.html#quiver.Quiver.dimension_nullcone">dimension_nullcone() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.dimension_of_luna_stratum">dimension_of_luna_stratum() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.dimension_vector">dimension_vector() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.disjoint_union">disjoint_union() (in module quiver)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.division_order">division_order() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.doubled_quiver">doubled_quiver() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.DynkinQuiver">DynkinQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.euler_form">euler_form() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.euler_matrix">euler_matrix() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.ExtendedDynkinQuiver">ExtendedDynkinQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.first_hochschild_cohomology">first_hochschild_cohomology() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.framed_quiver">framed_quiver() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.from_digraph">from_digraph() (quiver.Quiver class method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.from_matrix">from_matrix() (quiver.Quiver class method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.from_string">from_string() (quiver.Quiver class method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.full_subquiver">full_subquiver() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.general_ext">general_ext() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.general_hom">general_hom() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.GeneralizedJordanQuiver">GeneralizedJordanQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.GeneralizedKroneckerQuiver">GeneralizedKroneckerQuiver() (in module quiver)</a>
+</li>
+      <li><a href="index.html#quiver.GeneralizedSubspaceQuiver">GeneralizedSubspaceQuiver() (in module quiver)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.graph">graph() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.harder_narasimhan_type_weights">harder_narasimhan_type_weights() (quiver.QuiverModuli method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.has_semistable_representation">has_semistable_representation() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.has_stable_representation">has_stable_representation() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.if_rigidity_inequality_holds">if_rigidity_inequality_holds() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.in_degree">in_degree() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.in_fundamental_domain">in_fundamental_domain() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace.index">index() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace.integral">integral() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_acyclic">is_acyclic() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.is_amply_stable">is_amply_stable() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_connected">is_connected() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_finite_type">is_finite_type() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_general_subdimension_vector">is_general_subdimension_vector() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.is_harder_narasimhan_type">is_harder_narasimhan_type() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_imaginary_root">is_imaginary_root() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_indivisible">is_indivisible() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.is_luna_type">is_luna_type() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.is_nonempty">is_nonempty() (quiver.QuiverModuli method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuliSpace.is_projective">is_projective() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_real_root">is_real_root() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_root">is_root() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_schur_root">is_schur_root() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_sink">is_sink() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.is_smooth">is_smooth() (quiver.QuiverModuli method)</a>
+
+      <ul>
+        <li><a href="index.html#quiver.QuiverModuliSpace.is_smooth">(quiver.QuiverModuliSpace method)</a>
+</li>
+        <li><a href="index.html#quiver.QuiverModuliStack.is_smooth">(quiver.QuiverModuliStack method)</a>
+</li>
+      </ul></li>
+      <li><a href="index.html#quiver.Quiver.is_source">is_source() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.is_strongly_amply_stable">is_strongly_amply_stable() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_subdimension_vector">is_subdimension_vector() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_tame_type">is_tame_type() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.is_theta_coprime">is_theta_coprime() (quiver.Quiver method)</a>
+
+      <ul>
+        <li><a href="index.html#quiver.QuiverModuli.is_theta_coprime">(quiver.QuiverModuli method)</a>
+</li>
+      </ul></li>
+      <li><a href="index.html#quiver.Quiver.is_wild_type">is_wild_type() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.JordanQuiver">JordanQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.KroneckerQuiver">KroneckerQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.local_quiver_setting">local_quiver_setting() (quiver.QuiverModuli method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.LoopQuiver">LoopQuiver() (in module quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuliStack.motive">motive() (quiver.QuiverModuliStack method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.number_of_arrows">number_of_arrows() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.number_of_vertices">number_of_vertices() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.opposite_quiver">opposite_quiver() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.out_degree">out_degree() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuliSpace.picard_rank">picard_rank() (quiver.QuiverModuliSpace method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuliSpace.poincare_polynomial">poincare_polynomial() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace.point_class">point_class() (quiver.QuiverModuliSpace method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver">Quiver (class in quiver)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.quiver">quiver() (quiver.QuiverModuli method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli">QuiverModuli (class in quiver)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace">QuiverModuliSpace (class in quiver)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliStack">QuiverModuliStack (class in quiver)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.repr">repr() (quiver.Quiver method)</a>
+
+      <ul>
+        <li><a href="index.html#quiver.QuiverModuli.repr">(quiver.QuiverModuli method)</a>
+</li>
+        <li><a href="index.html#quiver.QuiverModuliSpace.repr">(quiver.QuiverModuliSpace method)</a>
+</li>
+        <li><a href="index.html#quiver.QuiverModuliStack.repr">(quiver.QuiverModuliStack method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuliSpace.semisimple_moduli_space">semisimple_moduli_space() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.semistable_equals_stable">semistable_equals_stable() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.simple_root">simple_root() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.sinks">sinks() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.slope">slope() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.sources">sources() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.stability_parameter">stability_parameter() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.str">str() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.SubspaceQuiver">SubspaceQuiver() (in module quiver)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.support">support() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.symmetrized_euler_form">symmetrized_euler_form() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.tautological_ideal">tautological_ideal() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.teleman_bound">teleman_bound() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.teleman_bounds">teleman_bounds() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.ThickenedSubspaceQuiver">ThickenedSubspaceQuiver() (in module quiver)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.thin_dimension_vector">thin_dimension_vector() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.ThreeVertexQuiver">ThreeVertexQuiver() (in module quiver)</a>
+</li>
+      <li><a href="index.html#quiver.Quiver.tits_form">tits_form() (quiver.Quiver method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.to_space">to_space() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.to_stack">to_stack() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace.todd_class">todd_class() (quiver.QuiverModuliSpace method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuliSpace.total_chern_class_universal">total_chern_class_universal() (quiver.QuiverModuliSpace method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.vertices">vertices() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.weights_canonical">weights_canonical() (quiver.QuiverModuli method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.QuiverModuli.weights_endomorphisms_universal_bundle">weights_endomorphisms_universal_bundle() (quiver.QuiverModuli method)</a>
+</li>
+      <li><a href="index.html#quiver.QuiverModuli.weights_universal_bundle">weights_universal_bundle() (quiver.QuiverModuli method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#quiver.Quiver.zero_vector">zero_vector() (quiver.Quiver method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tudor-Ioan Caba, Mia Lam, Emanuel Roth
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

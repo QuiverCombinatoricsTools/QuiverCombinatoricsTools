@@ -9,6 +9,30 @@ from sage.modules.free_module_element import vector
 from sage.rings.integer_ring import ZZ
 from sage.structure.element import Element
 
+#Extra packages needed for QuiverToolsCombinatorics
+from sage.combinat.posets.hasse_diagram import HasseDiagram
+from sage.misc.latex import LatexExpr
+from collections import defaultdict
+
+def N_set(S, v):
+    if isinstance(v, int):                                                                  #make sure v is of the right type
+        v = vector([v])
+    else:
+        v = vector(v)
+    reachable = {tuple(a) for a in S}
+    changed = True                      #flag to make sure duplicates don't end up in the generated set
+    while changed:
+        new_reachable = set(reachable)
+        for a in reachable:
+            a_vec = vector(a)
+            for b in S:
+                b_vec = vector(b)
+                s = a_vec + b_vec
+                if all(s[i] <= v[i] for i in range(len(v))):
+                    new_reachable.add(tuple(s))
+        changed = (new_reachable != reachable)
+        reachable = new_reachable
+    return [vector(a) for a in reachable]
 
 class Quiver(Element):
     r"""
@@ -47,7 +71,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver from an adjacency matrix::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = Quiver([[0, 3], [0, 0]]); Q
             a quiver with 2 vertices and 3 arrows
 
@@ -81,7 +105,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: M = [[0, 3], [0, 0]]
             sage: Quiver.from_digraph(DiGraph(matrix(M))) == Quiver.from_matrix(M)
             True
@@ -105,7 +129,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = Quiver.from_matrix([[0, 3], [0, 0]]); Q.adjacency_matrix()
             [0 3]
             [0 0]
@@ -142,7 +166,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver defined in two different ways::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Quiver.from_matrix([[0, 3], [0, 0]]) == Quiver.from_string("a---b")
             True
 
@@ -159,7 +183,7 @@ class Quiver(Element):
         The actual labeling we use doesn't matter for the isomorphism type of the
         quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Quiver.from_matrix([[0, 3], [0, 0]]) == Quiver.from_string("12---b")
             True
 
@@ -232,7 +256,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = Quiver.from_string("1---2"); Q
             a quiver with 2 vertices and 3 arrows
             sage: Q.rename("3-Kronecker quiver"); Q
@@ -271,7 +295,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = Quiver.from_string("1---2"); print(Q)
             a quiver with 2 vertices and 3 arrows
             adjacency matrix:
@@ -301,7 +325,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = Quiver.from_string("1---2"); Q
             a quiver with 2 vertices and 3 arrows
             sage: Q.rename("3-Kronecker quiver"); Q
@@ -336,7 +360,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = Quiver.from_string("1---2"); print(Q)
             a quiver with 2 vertices and 3 arrows
             adjacency matrix:
@@ -368,7 +392,7 @@ class Quiver(Element):
 
         The 2-Kronecker quiver and the generalized Kronecker quiver are the same::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver() == GeneralizedKroneckerQuiver(2)
             True
 
@@ -395,7 +419,7 @@ class Quiver(Element):
 
         Some basic examples::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q._is_vector((2, 3))
             True
@@ -448,7 +472,7 @@ class Quiver(Element):
 
         Some basic examples::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q._is_dimension_vector((2, 3))
             True
@@ -493,13 +517,13 @@ class Quiver(Element):
 
         - ``d``: a candidate dimension vector
 
-        OUTPUT: either a dict or vector
+        OUTPUT: a vector
 
         EXAMPLES:
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q._coerce_dimension_vector((1, 2))
             (1, 2)
@@ -540,7 +564,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q._coerce_vector((-1, 2))
             (-1, 2)
@@ -578,7 +602,7 @@ class Quiver(Element):
 
         The adjacency matrix of a quiver construct from an adjacency matrix::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: M = matrix([[0, 3], [0, 0]])
             sage: M == Quiver(M).adjacency_matrix()
             True
@@ -596,7 +620,7 @@ class Quiver(Element):
 
         The underlying graph of the quiver from a directed graph is that graph::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: G = DiGraph(matrix([[0, 3], [0, 0]]))
             sage: G == Quiver.from_digraph(G).graph()
             True
@@ -620,7 +644,7 @@ class Quiver(Element):
 
         Usually the vertices will be just integers::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Quiver([[0, 3], [0, 0]]).vertices()
             [0, 1]
 
@@ -641,7 +665,7 @@ class Quiver(Element):
 
         There are 3 vertices in a 3-vertex quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: ThreeVertexQuiver(1, 2, 4).number_of_vertices()
             3
 
@@ -655,7 +679,7 @@ class Quiver(Element):
 
         With vertex labels::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(2)
             sage: Q._Quiver__has_vertex_labels()
             False
@@ -678,7 +702,7 @@ class Quiver(Element):
 
         There are 7 arrows in this 3-vertex quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: ThreeVertexQuiver(1, 2, 4).number_of_arrows()
             7
 
@@ -695,7 +719,7 @@ class Quiver(Element):
 
         The arrows of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.arrows()
             [(0, 1), (0, 1), (0, 1)]
@@ -720,7 +744,7 @@ class Quiver(Element):
 
         An acyclic graph::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(3).is_acyclic()
             True
 
@@ -741,7 +765,7 @@ class Quiver(Element):
 
         The n-Kronecker quivers are connected::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(4).is_connected()
             True
 
@@ -763,7 +787,7 @@ class Quiver(Element):
 
         The generalized Kronecker quiver is finite only for :math:`m=1`::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(1).is_finite_type()
             True
             sage: GeneralizedKroneckerQuiver(2).is_finite_type()
@@ -786,7 +810,7 @@ class Quiver(Element):
 
         The generalized Kronecker quiver is tame only for :math:`m=2`::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(1).is_tame_type()
             False
             sage: GeneralizedKroneckerQuiver(2).is_tame_type()
@@ -809,7 +833,7 @@ class Quiver(Element):
 
         The generalized Kronecker quiver is wild for all :math:`m\geq 3`::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(1).is_wild_type()
             False
             sage: GeneralizedKroneckerQuiver(2).is_wild_type()
@@ -843,7 +867,7 @@ class Quiver(Element):
 
         In the 3-Kronecker quiver the in-degree is either 0 or 3::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.in_degree(0)
             0
@@ -880,7 +904,7 @@ class Quiver(Element):
 
         In the 3-Kronecker quiver the out-degree is either 3 or 0::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.out_degree(0)
             3
@@ -913,7 +937,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver has one source::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.is_source(0)
             True
@@ -946,7 +970,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver has one sink::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.is_sink(0)
             False
@@ -973,7 +997,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver has one source::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(3).sources()
             [0]
 
@@ -994,7 +1018,7 @@ class Quiver(Element):
 
         The 3-Kronecker quiver has one source::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(3).sources()
             [0]
 
@@ -1029,7 +1053,7 @@ class Quiver(Element):
 
         The Kronecker 3-quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(3).euler_matrix()
             [ 1 -3]
             [ 0  1]
@@ -1059,7 +1083,7 @@ class Quiver(Element):
 
         An example using the Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.euler_form((1, 3), (2, -2))
             2
@@ -1089,7 +1113,7 @@ class Quiver(Element):
 
         The Kronecker 3-quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(3).cartan_matrix()
             [ 2 -3]
             [-3  2]
@@ -1112,7 +1136,7 @@ class Quiver(Element):
 
         An example using the Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.symmetrized_euler_form((1, 3), (2, -2))
             -20
@@ -1146,7 +1170,7 @@ class Quiver(Element):
 
         An example using the Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.tits_form((2, 3))
             -5
@@ -1160,6 +1184,27 @@ class Quiver(Element):
 
         """
         return self.euler_form(x, x)
+    
+    def p_function(self, x):
+        r"""Outputs the function p(x)=1-0.5(x,x), where (x,x) is the symmetrized Euler form
+        
+        INPUT:
+
+        - ``x`` -- an element of :math:`\mathbb{Z}Q_0`
+
+        OUTPUT: The p function p(x)=1-0.5(x,x)
+
+        EXAMPLES:
+
+            sage: from quivercombinatorics import *
+            sage: Q = Quiver([[0,1], [1,0]])
+            sage: Q.p_function((2,3))
+            0.0
+        
+        """
+        return 1 - 0.5 * self.symmetrized_euler_form(x, x)
+    
+
 
     """
     Constructing new quivers out of old
@@ -1178,7 +1223,7 @@ class Quiver(Element):
 
         The opposite of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: print(GeneralizedKroneckerQuiver(3).opposite_quiver())
             opposite of 3-Kronecker quiver
             adjacency matrix:
@@ -1218,7 +1263,7 @@ class Quiver(Element):
 
         The double of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: print(GeneralizedKroneckerQuiver(3).doubled_quiver())
             double of 3-Kronecker quiver
             adjacency matrix:
@@ -1268,7 +1313,7 @@ class Quiver(Element):
 
         Framing the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3).framed_quiver([1, 0])
             sage: print(Q)
             framing of 3-Kronecker quiver
@@ -1340,7 +1385,7 @@ class Quiver(Element):
 
         Coframing the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3).coframed_quiver([1, 0])
             sage: print(Q)
             coframing of 3-Kronecker quiver
@@ -1408,7 +1453,7 @@ class Quiver(Element):
 
         Some basic examples::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = ThreeVertexQuiver(2, 3, 4)
             sage: print(Q.full_subquiver([0, 1]))
             full subquiver of an acyclic 3-vertex quiver of type (2, 3, 4)
@@ -1460,7 +1505,7 @@ class Quiver(Element):
 
         Usually it is an actual vector::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(3).zero_vector()
             (0, 0)
             sage: type(KroneckerQuiver(3).zero_vector())
@@ -1482,7 +1527,7 @@ class Quiver(Element):
 
         The zero vector of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(3).zero_vector()
             (0, 0)
 
@@ -1509,7 +1554,7 @@ class Quiver(Element):
 
         Usually it is an actual vector::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(3).thin_dimension_vector()
             (1, 1)
             sage: type(KroneckerQuiver(3).thin_dimension_vector())
@@ -1532,7 +1577,7 @@ class Quiver(Element):
 
         The thin dimension vector of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(3).thin_dimension_vector()
             (1, 1)
 
@@ -1559,7 +1604,7 @@ class Quiver(Element):
 
         Usually it is an actual vector::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(3).simple_root(1)
             (0, 1)
             sage: type(KroneckerQuiver(3).simple_root(1))
@@ -1581,7 +1626,7 @@ class Quiver(Element):
 
         The simple root at the source of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: KroneckerQuiver(3).simple_root(0)
             (1, 0)
 
@@ -1619,7 +1664,7 @@ class Quiver(Element):
 
         Some roots and non-roots for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.is_root((2, 3))
             True
@@ -1648,7 +1693,7 @@ class Quiver(Element):
 
         Some real and non-real for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.is_real_root((2, 3))
             False
@@ -1677,7 +1722,7 @@ class Quiver(Element):
 
         Some imaginary roots and non imaginary roots for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.is_imaginary_root((2, 3))
             True
@@ -1713,14 +1758,14 @@ class Quiver(Element):
 
         The dimension vector `(2, 3)` is Schurian for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.is_schur_root([2, 3])
             True
 
         Examples from Derksen--Weyman's book (Example 11.1.4)::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = ThreeVertexQuiver(1, 1, 1)
             sage: Q.is_schur_root((1, 1, 2))
             True
@@ -1760,7 +1805,7 @@ class Quiver(Element):
         Some slopes for the Kronecker quiver, first for the canonical stability
         parameter, then for some other::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: d = (2, 3)
             sage: Q.slope(d, (9, -6))
@@ -1809,7 +1854,7 @@ class Quiver(Element):
 
         Some basic examples::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.is_subdimension_vector((1, 2), (2, 3))
             True
@@ -1862,7 +1907,7 @@ class Quiver(Element):
         If we let `b` be the largest entry plus one we get a good key, at least for
         subdimension vectors of the original one::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: d = (2, 3)
             sage: Q._deglex_key(d, max(d) + 1)
@@ -1905,7 +1950,7 @@ class Quiver(Element):
 
         The usual use cases::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.all_subdimension_vectors((2, 3))
                 [(0, 0),
@@ -2017,7 +2062,7 @@ class Quiver(Element):
 
         Examples of coprimality::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: d = (2, 3)
             sage: Q.is_theta_coprime(d, Q.canonical_stability_parameter(d))
@@ -2052,7 +2097,7 @@ class Quiver(Element):
 
         Two examples with the Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.is_indivisible((2, 3))
             True
@@ -2078,7 +2123,7 @@ class Quiver(Element):
         The support is the set of vertices for which the value of the dimension
         vector is nonzero::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = ThreeVertexQuiver(2, 0, 4)
             sage: d = (1, 1, 1)
             sage: Q.support(d)
@@ -2129,7 +2174,7 @@ class Quiver(Element):
 
         The fundamental domain of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.in_fundamental_domain((1, 1))
             True
@@ -2151,7 +2196,7 @@ class Quiver(Element):
         We test for dimension vectors in the strict interior, where the depth is
         equal to 1::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.in_fundamental_domain((1, 1), depth=1)
             True
@@ -2191,7 +2236,7 @@ class Quiver(Element):
 
         The division order on some dimension vectors for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: d = (1, 1)
             sage: e = (2, 1)
@@ -2261,7 +2306,7 @@ class Quiver(Element):
 
         Some examples on loop quivers::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = LoopQuiver(1)
             sage: ds = [vector([i]) for i in range(3)]
             sage: for (e, d) in cartesian_product([ds, ds]):
@@ -2390,7 +2435,7 @@ class Quiver(Element):
 
         General subdimension vectors for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q, d, theta = GeneralizedKroneckerQuiver(3), (2, 3), (3, -2)
             sage: for e in Q.all_subdimension_vectors(d):
             ....:     print("{} is general subdimension vector of {}: {}".format(
@@ -2438,7 +2483,7 @@ class Quiver(Element):
 
         Some n-Kronecker quivers::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(1)
             sage: d = (3, 3)
             sage: Q.all_general_subdimension_vectors(d)
@@ -2510,7 +2555,7 @@ class Quiver(Element):
 
         General ext on the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: ds = [Q.simple_root(0), Q.simple_root(1), Q.thin_dimension_vector()]
             sage: for (d, e) in cartesian_product([ds]*2):
@@ -2563,7 +2608,7 @@ class Quiver(Element):
 
         General hom on the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: ds = [Q.simple_root(0), Q.simple_root(1), Q.thin_dimension_vector()]
             sage: for (d, e) in cartesian_product([ds]*2):
@@ -2606,7 +2651,7 @@ class Quiver(Element):
 
         The Harder--Narasimhan types for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: d = (2, 3)
             sage: theta = (3, -2)
@@ -2684,7 +2729,7 @@ class Quiver(Element):
 
         Our usual example of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.canonical_stability_parameter((2, 3))
             (9, -6)
@@ -2705,14 +2750,14 @@ class Quiver(Element):
 
         Canonical stability parameter for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q, d = GeneralizedKroneckerQuiver(3), (2, 3)
             sage: Q.canonical_stability_parameter(d)
             (9, -6)
 
         This method also works with vertex labels::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = Quiver.from_string("foo---bar", forget_labels=False)
             sage: d = {"foo": 2, "bar": 3}
             sage: Q.canonical_stability_parameter(d)
@@ -2746,7 +2791,7 @@ class Quiver(Element):
 
         Semistables for the :math:`\mathrm{A}_2` quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(1)
             sage: Q.has_semistable_representation((1, 1), (1, -1))
             True
@@ -2759,7 +2804,7 @@ class Quiver(Element):
 
         Semistables for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.has_semistable_representation((2, 3))
             True
@@ -2800,7 +2845,7 @@ class Quiver(Element):
 
         Stables for the :math:`\mathrm{A}_2` quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(1)
             sage: theta = (1, -1)
             sage: Q.has_stable_representation((1, 1), theta)
@@ -2812,7 +2857,7 @@ class Quiver(Element):
 
         Stables for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: d = (2, 3)
             sage: theta = Q.canonical_stability_parameter(d)
@@ -2862,7 +2907,7 @@ class Quiver(Element):
 
         Canonical decomposition of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(3)
             sage: Q.canonical_decomposition((2, 3))
             ((2, 3),)
@@ -2915,7 +2960,7 @@ class Quiver(Element):
 
         Canonical decomposition of `(5, 3)` for the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = GeneralizedKroneckerQuiver(2)
             sage: Q._Quiver__canonical_decomposition((5, 5))
             ((1, 1), (1, 1), (1, 1), (1, 1), (1, 1))
@@ -2949,7 +2994,7 @@ class Quiver(Element):
 
         The usual example of the 3-Kronecker quiver::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(3)
             sage: Q.dimension_nullcone((2, 3))
             18
@@ -2975,13 +3020,13 @@ class Quiver(Element):
         The first Hochschild cohomology of the `m`-th generalized Kronecker quiver
         is the dimension of :math:`\mathrm{PGL}_{m+1}`::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: GeneralizedKroneckerQuiver(3).first_hochschild_cohomology()
             8
 
         The first Hochschild cohomology vanishes if and only if the quiver is a tree::
 
-            sage: from quiver import *
+            sage: from quivercombinatorics import *
             sage: SubspaceQuiver(7).first_hochschild_cohomology()
             0
 
