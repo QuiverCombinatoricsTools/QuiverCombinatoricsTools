@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>quiver.quiver &#8212; QuiverCombinatoricsTools 1.0 documentation</title>
+    <title>quivercombinatorics.quivercombinatorics &#8212; QuiverCombinatoricsTools 1.0 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/quiver/quiver';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/quivercombinatorics/quivercombinatorics';</script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -132,7 +132,7 @@
     
     
     <img src="../../_static/logo.svg" class="logo__image only-light" alt="QuiverCombinatoricsTools 1.0 documentation - Home"/>
-    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="QuiverCombinatoricsTools 1.0 documentation - Home"/>
+    <img src="../../_static/logo-dark.svg" class="logo__image only-dark pst-js-only" alt="QuiverCombinatoricsTools 1.0 documentation - Home"/>
   
   
 </a></div>
@@ -243,8 +243,9 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Source code for quiver.quiver</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sage.arith.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">gcd</span>
+  <h1>Source code for quivercombinatorics.quivercombinatorics</h1><div class="highlight"><pre>
+<span></span><span class="c1">#Packages required by QuiverTools</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.arith.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">gcd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.categories.cartesian_product</span><span class="w"> </span><span class="kn">import</span> <span class="n">cartesian_product</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.root_system.cartan_matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">CartanMatrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.graphs.digraph</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiGraph</span>
@@ -254,1499 +255,133 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.modules.free_module_element</span><span class="w"> </span><span class="kn">import</span> <span class="n">vector</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.rings.integer_ring</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZZ</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.structure.element</span><span class="w"> </span><span class="kn">import</span> <span class="n">Element</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quiver</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quiver</span> <span class="k">as</span> <span class="n">BaseQuiver</span>
+
+<span class="c1">#Extra packages needed for QuiverToolsCombinatorics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.posets.hasse_diagram</span><span class="w"> </span><span class="kn">import</span> <span class="n">HasseDiagram</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.misc.latex</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatexExpr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+
+<div class="viewcode-block" id="quiver_from_cartan_matrix">
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.quiver_from_cartan_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">quiver_from_cartan_matrix</span><span class="p">(</span><span class="n">C</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the quiver `Q` given by a Cartan matrix `C`.</span>
+<span class="sd">        </span>
+<span class="sd">        INPUT:</span>
+
+<span class="sd">        - ``C`` -- a square matrix with entries in :math:`\mathbb{Z}`.</span>
+
+<span class="sd">        OUTPUT: The quiver `Q` given by a Cartan matrix `C`.</span>
+
+<span class="sd">        EXAMPLE::</span>
+<span class="sd">        </span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
+<span class="sd">            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]</span>
+<span class="sd">            sage: quiver_from_cartan_matrix(C)</span>
+<span class="sd">            a quiver with 3 vertices and 3 arrows</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C</span><span class="p">)):</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">2</span>                        
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>                     
+    <span class="n">E</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C</span><span class="p">))</span> <span class="o">-</span> <span class="n">matrix</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Quiver</span><span class="p">(</span><span class="n">E</span><span class="p">)</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">random_quiver</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">max_arrows_per_edge</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a randomly generated quiver.</span>
+<span class="sd">        </span>
+<span class="sd">        INPUT:</span>
+
+<span class="sd">        - ``vertices`` -- number of vertices you want in the quiver, in :math:`\mathbb{N}_0`.</span>
+<span class="sd">        - ``max_arrows_per_edge`` -- maximum of number of arrows you want in the quiver, in :math:`\mathbb{N}_0`.</span>
+
+<span class="sd">        OUTPUT: A randomly generated quiver with the prescribed vertices and maximum number of edges.</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            sage: random_quiver(3, 2)</span>
+<span class="sd">            a quiver with 3 vertices and 6 arrows</span>
+
+<span class="sd">            sage: random_quiver(46, 25)</span>
+<span class="sd">            a quiver with 46 vertices and 26388 arrows</span>
+<span class="sd">            </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_arrows_per_edge</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Quiver</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<div class="viewcode-block" id="N_set">
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.N_set">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">N_set</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;For a list of vectors `S` in :math:`\mathbb{Z}^n`, returns all possible sums of vectors in `S` as a list, up to the upper bound `v`.</span>
+<span class="sd">        </span>
+<span class="sd">        INPUT:</span>
+
+<span class="sd">        - ``S`` -- a list of vectors `S` in :math:`\mathbb{Z}^n`.</span>
+<span class="sd">        - ``v`` -- vector in :math:`\mathbb{Z}^n`.</span>
+
+<span class="sd">        OUTPUT: All possible sums of vectors in `S` as a list, up to the upper bound `v`.</span>
+
+<span class="sd">        EXAMPLE::</span>
+<span class="sd">        </span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
+<span class="sd">            sage: N_set([[0,1]],[0,3])</span>
+<span class="sd">            [(0, 1), (0, 2), (0, 3)]</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>                                                                  <span class="c1">#make sure v is of the right type</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">vector</span><span class="p">([</span><span class="n">v</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">reachable</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">S</span><span class="p">}</span>
+    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>                      <span class="c1">#flag to make sure duplicates don&#39;t end up in the generated set</span>
+    <span class="k">while</span> <span class="n">changed</span><span class="p">:</span>
+        <span class="n">new_reachable</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">reachable</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">reachable</span><span class="p">:</span>
+            <span class="n">a_vec</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+                <span class="n">b_vec</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">a_vec</span> <span class="o">+</span> <span class="n">b_vec</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))):</span>
+                    <span class="n">new_reachable</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+        <span class="n">changed</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_reachable</span> <span class="o">!=</span> <span class="n">reachable</span><span class="p">)</span>
+        <span class="n">reachable</span> <span class="o">=</span> <span class="n">new_reachable</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">vector</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">reachable</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="Quiver">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">Quiver</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A quiver is a (finite) directed multigraph. It is an important tool in the</span>
-<span class="sd">    representation theory of (finite-dimensional) algebras, because it allows one to</span>
-<span class="sd">    construct the path algebra, whose modules are equivalently described as</span>
-<span class="sd">    representations of the quiver. These in turn can be classified using moduli spaces</span>
-<span class="sd">    of quiver representations.</span>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Quiver</span><span class="p">(</span><span class="n">BaseQuiver</span><span class="p">):</span>
 
-<span class="sd">    For an introduction to the subject one is referred to</span>
-
-<span class="sd">    * Harm Derksen and Jerzy Weyman: An introduction to quiver representations</span>
-<span class="sd">    * Markus Reineke: Moduli of representations of quivers</span>
-
-<span class="sd">    or one of the many other resources that exist.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="Quiver.__init__">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructor for a quiver.</span>
-
-<span class="sd">        This takes a directed graph as input. If it is not a `DiGraph` instance,</span>
-<span class="sd">        it is interpreted it as an adjacency matrix.</span>
-<span class="sd">        For other constructions, see</span>
-
-<span class="sd">        - :meth:`Quiver.from_digraph`</span>
-<span class="sd">        - :meth:`Quiver.from_matrix`</span>
-<span class="sd">        - :meth:`Quiver.from_string`</span>
-
+<div class="viewcode-block" id="Quiver.p_function">
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.p_function">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">p_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Outputs the function p(x)=1-0.5(x,x), where (x,x) is the symmetrized Euler form.</span>
+<span class="sd">        </span>
 <span class="sd">        INPUT:</span>
 
-<span class="sd">        - ``G`` -- directed graph</span>
+<span class="sd">        - ``x`` -- an element of :math:`\mathbb{Z}Q_0`.</span>
 
-<span class="sd">        - ``name`` -- optional name for the quiver</span>
+<span class="sd">        OUTPUT: The `p` function `p(x)=1-0.5(x,x)`</span>
 
-<span class="sd">        EXAMPLES:</span>
+<span class="sd">        EXAMPLE:</span>
 
-<span class="sd">        The 3-Kronecker quiver from an adjacency matrix::</span>
+<span class="sd">        The `p` function evaluated at `(2,3)` of the doubled A2 quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = Quiver([[0, 3], [0, 0]]); Q</span>
-<span class="sd">            a quiver with 2 vertices and 3 arrows</span>
-
+<span class="sd">            sage: from quivercombinatorics import *</span>
+<span class="sd">            sage: Q = Quiver([[0,1], [1,0]])</span>
+<span class="sd">            sage: Q.p_function((2,3))</span>
+<span class="sd">            0.0</span>
+<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">DiGraph</span><span class="p">):</span>
-            <span class="c1"># it is the user&#39;s responsibility to not change the graph afterwards</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__G</span> <span class="o">=</span> <span class="n">G</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__G</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">immutable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="c1"># if name is None this doesn&#39;t do anything</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-        <span class="c1"># for caching purposes: order along the specified order of vertices</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__G</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">vertices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__G</span><span class="o">.</span><span class="n">vertices</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span></div>
-
-
-<div class="viewcode-block" id="Quiver.from_digraph">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.from_digraph">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_digraph</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a quiver from a `DiGraph` object.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``G`` -- directed graph as a `DiGraph` object</span>
-
-<span class="sd">        - ``name`` -- optional name for the quiver</span>
-
-<span class="sd">        OUTPUT: the quiver.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: M = [[0, 3], [0, 0]]</span>
-<span class="sd">            sage: Quiver.from_digraph(DiGraph(matrix(M))) == Quiver.from_matrix(M)</span>
-<span class="sd">            True</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.from_matrix">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.from_matrix">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_matrix</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a quiver from its adjacency matrix.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``M`` -- adjacency matrix of the quiver</span>
-
-<span class="sd">        - ``name`` -- optional name for the quiver</span>
-
-<span class="sd">        OUTPUT: the quiver.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = Quiver.from_matrix([[0, 3], [0, 0]]); Q.adjacency_matrix()</span>
-<span class="sd">            [0 3]</span>
-<span class="sd">            [0 0]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">M</span><span class="p">),</span> <span class="n">name</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.from_string">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.from_string">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Q</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">forget_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a quiver from a comma-separated list of chains like ``i-j-k-...``</span>
-
-<span class="sd">        You specify an arrow from ``i`` to ``j`` by writing ``i-j``.</span>
-<span class="sd">        Multiple arrows are specified by repeating the hyphen, so that ``1--2`` is the</span>
-<span class="sd">        Kronecker quiver. If you write ``i-j-k`` then you have 1 arrow from ``i`` to</span>
-<span class="sd">        ``j`` and one from ``j`` to ``k``. The full quiver is specified by concatenating</span>
-<span class="sd">        (multiple) arrows by commas.</span>
-
-<span class="sd">        The values for a vertex can be anything, and the chosen names will be used for</span>
-<span class="sd">        the vertices in the underlying graph. Labels are cast to an integer, if</span>
-<span class="sd">        possible, and otherwise to strings.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``Q`` -- a string of the format described above giving a quiver</span>
-
-<span class="sd">        - ``forget_labels`` -- (default: True): whether to use labels for vertices or</span>
-<span class="sd">          to number them ``0,...,n-1``</span>
-
-<span class="sd">        - ``name`` -- optional name for the quiver</span>
-
-<span class="sd">        OUTPUT: the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver defined in two different ways::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Quiver.from_matrix([[0, 3], [0, 0]]) == Quiver.from_string(&quot;a---b&quot;)</span>
-<span class="sd">            True</span>
-
-<span class="sd">        A more complicated example::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;a--b-3,a---3,3-a&quot;)</span>
-<span class="sd">            sage: Q.adjacency_matrix()</span>
-<span class="sd">            [0 2 3]</span>
-<span class="sd">            [0 0 1]</span>
-<span class="sd">            [1 0 0]</span>
-<span class="sd">            sage: Q.vertices()</span>
-<span class="sd">            [0, 1, 2]</span>
-
-<span class="sd">        The actual labeling we use doesn&#39;t matter for the isomorphism type of the</span>
-<span class="sd">        quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Quiver.from_matrix([[0, 3], [0, 0]]) == Quiver.from_string(&quot;12---b&quot;)</span>
-<span class="sd">            True</span>
-
-<span class="sd">        However, it does influence the labels of the vertex if we choose so::</span>
-
-<span class="sd">            sage: Quiver.from_string(&quot;12---b&quot;, forget_labels=False).vertices()</span>
-<span class="sd">            [12, &#39;b&#39;]</span>
-<span class="sd">            sage: Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False).vertices()</span>
-<span class="sd">            [&#39;foo&#39;, &#39;bar&#39;]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># remove all whitespace from the string</span>
-        <span class="n">Q</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-
-        <span class="c1"># determine the vertices used in the string, preserving the order</span>
-        <span class="n">vertices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-            <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span>
-                <span class="n">vertex</span>
-                <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">Q</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">chain</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">vertex</span>  <span class="c1"># this filters out &quot;&quot; from chained hyphens</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-
-        <span class="c1"># adjacency matrix to be built</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">zero_matrix</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">))</span>
-
-        <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">Q</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
-            <span class="n">pieces</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
-
-            <span class="n">source</span> <span class="o">=</span> <span class="n">vertices</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
-
-            <span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">pieces</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-                <span class="c1"># if the string is empty we increase the number of arrows counter</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">piece</span><span class="p">:</span>
-                    <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="c1"># if the string is non-empty we treat it as a label</span>
-                <span class="c1"># this means we add the appropriate number of arrows</span>
-                <span class="c1"># and make the target the source to start the process again</span>
-                <span class="k">if</span> <span class="n">piece</span><span class="p">:</span>
-                    <span class="n">target</span> <span class="o">=</span> <span class="n">vertices</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">piece</span><span class="p">)</span>
-                    <span class="n">M</span><span class="p">[</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">]</span> <span class="o">+=</span> <span class="n">number</span>
-
-                    <span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
-                    <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">,</span> <span class="kc">None</span>
-
-        <span class="n">G</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-
-        <span class="c1"># attempt to cast vertex labels to integers, otherwise to strings</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">forget_labels</span><span class="p">:</span>
-            <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span>
-                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="n">perm</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_digraph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_repr_</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Give a shorthand string presentation for the quiver</span>
-
-<span class="sd">        If a name is set, use that, if not, just give information on number of vertices</span>
-<span class="sd">        and arrows.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = Quiver.from_string(&quot;1---2&quot;); Q</span>
-<span class="sd">            a quiver with 2 vertices and 3 arrows</span>
-<span class="sd">            sage: Q.rename(&quot;3-Kronecker quiver&quot;); Q</span>
-<span class="sd">            3-Kronecker quiver</span>
-
-<span class="sd">        Renaming and resetting the name::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;1---2&quot;)</span>
-<span class="sd">            sage: Q.get_custom_name()</span>
-
-<span class="sd">            sage: Q.rename(&quot;3-Kronecker quiver&quot;)</span>
-<span class="sd">            sage: Q.get_custom_name()</span>
-<span class="sd">            &#39;3-Kronecker quiver&#39;</span>
-<span class="sd">            sage: Q.reset_name()</span>
-<span class="sd">            sage: Q.get_custom_name()</span>
-
-<span class="sd">            sage: Q</span>
-<span class="sd">            a quiver with 2 vertices and 3 arrows</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">():</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="s2">&quot;a quiver with </span><span class="si">{}</span><span class="s2"> vertices and </span><span class="si">{}</span><span class="s2"> arrows&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">nrows</span><span class="p">(),</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()))</span>
-        <span class="p">)</span>
-
-<div class="viewcode-block" id="Quiver.__str__">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.__str__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Detailed description of the quiver</span>
-
-<span class="sd">        Everything you get from :meth:`Quiver.repr()` together with the adjacency</span>
-<span class="sd">        matrix.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = Quiver.from_string(&quot;1---2&quot;); print(Q)</span>
-<span class="sd">            a quiver with 2 vertices and 3 arrows</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 3]</span>
-<span class="sd">            [0 0]</span>
-<span class="sd">            sage: Q.rename(&quot;3-Kronecker quiver&quot;); print(Q)</span>
-<span class="sd">            3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 3]</span>
-<span class="sd">            [0 0]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">adjacency matrix:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repr</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">())</span></div>
-
-
-<div class="viewcode-block" id="Quiver.repr">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.repr">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Basic description of the quiver</span>
-
-<span class="sd">        To override the output, one uses :meth:`Quiver.rename` from the `Element`</span>
-<span class="sd">        class. The output of :meth:`Quiver.repr` is that of</span>
-<span class="sd">        :meth:`Quiver.get_custom_name` if it is set, else it is the default specifying</span>
-<span class="sd">        the number of vertices and arrows.</span>
-
-<span class="sd">        OUTPUT: a basic description of the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = Quiver.from_string(&quot;1---2&quot;); Q</span>
-<span class="sd">            a quiver with 2 vertices and 3 arrows</span>
-<span class="sd">            sage: Q.rename(&quot;3-Kronecker quiver&quot;); Q</span>
-<span class="sd">            3-Kronecker quiver</span>
-
-<span class="sd">        Renaming and resetting the name::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;1---2&quot;)</span>
-<span class="sd">            sage: Q.get_custom_name() is None</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q.rename(&quot;3-Kronecker quiver&quot;)</span>
-<span class="sd">            sage: Q.get_custom_name()</span>
-<span class="sd">            &#39;3-Kronecker quiver&#39;</span>
-<span class="sd">            sage: Q.reset_name()</span>
-<span class="sd">            sage: Q.get_custom_name() is None</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q</span>
-<span class="sd">            a quiver with 2 vertices and 3 arrows</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repr_</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.str">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.str">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Full description of the quiver</span>
-
-<span class="sd">        This combines the output of :meth:`Quiver.repr` with the adjacency matrix.</span>
-
-<span class="sd">        OUTPUT: a complete description of the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = Quiver.from_string(&quot;1---2&quot;); print(Q)</span>
-<span class="sd">            a quiver with 2 vertices and 3 arrows</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 3]</span>
-<span class="sd">            [0 0]</span>
-<span class="sd">            sage: Q.rename(&quot;3-Kronecker quiver&quot;); print(Q)</span>
-<span class="sd">            3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 3]</span>
-<span class="sd">            [0 0]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.__eq__">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.__eq__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Checks for equality of quivers.</span>
-
-<span class="sd">        Equality here refers to equality of adjacency matrices,</span>
-<span class="sd">        but disregarding the name of the quiver.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``other`` -- Quiver; the quiver to compare against</span>
-
-<span class="sd">        OUTPUT: whether the adjacency matrices are the same</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 2-Kronecker quiver and the generalized Kronecker quiver are the same::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: KroneckerQuiver() == GeneralizedKroneckerQuiver(2)</span>
-<span class="sd">            True</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span></div>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_is_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Checks whether ``x`` is an element of :math:`\mathbb{Z}Q_0`</span>
-
-<span class="sd">        If the quiver doesn&#39;t use vertex labels we check that it has the right length.</span>
-<span class="sd">        If the quiver uses vertex labels, we check that ``x`` is a dict with the right</span>
-<span class="sd">        set of keys.</span>
-
-<span class="sd">        We actually do not care whether the values are in :math:`\mathbb{Z}`.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``x`` -- vector</span>
-
-<span class="sd">        OUTPUT: whether ``x`` can be used as a dimension vector for the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        Some basic examples::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = KroneckerQuiver(3)</span>
-<span class="sd">            sage: Q._is_vector((2, 3))</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_vector((0, 0))</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_vector((-2, -2))</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_vector((1, 2, 3))</span>
-<span class="sd">            False</span>
-
-<span class="sd">        We allow non-integral values, because this can be useful for stability::</span>
-
-<span class="sd">            sage: Q._is_vector((1/2, 3))</span>
-<span class="sd">            True</span>
-
-<span class="sd">        An example with vertex labels::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q._is_vector({&quot;foo&quot; : 0, &quot;bar&quot; : 0})</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_vector({&quot;bar&quot; : 0, &quot;foo&quot; : 0})</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_vector({&quot;baz&quot; : 0, &quot;ofo&quot; : 0})</span>
-<span class="sd">            False</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">())</span>
-
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_is_dimension_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Checks whether ``d`` is a dimension vector of the quiver</span>
-
-<span class="sd">        If the quiver doesn&#39;t use vertex labels we check that it has the right length</span>
-<span class="sd">        and has positive entries.</span>
-<span class="sd">        If the quiver uses vertex labels, we check that ``d`` is a dict with the right</span>
-<span class="sd">        set of keys and positive entries.</span>
-
-<span class="sd">        We only check for non-negativity, not for integrality.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``d`` -- dimension vector</span>
-
-<span class="sd">        OUTPUT: whether ``d`` can be used as a dimension vector for the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        Some basic examples::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = KroneckerQuiver(3)</span>
-<span class="sd">            sage: Q._is_dimension_vector((2, 3))</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_dimension_vector((0, 0))</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_dimension_vector((-2, -2))</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: Q._is_dimension_vector((1, 2, 3))</span>
-<span class="sd">            False</span>
-
-<span class="sd">        An example with vertex labels::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q._is_dimension_vector({&quot;foo&quot; : 2, &quot;bar&quot; : 3})</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q._is_dimension_vector({&quot;bar&quot; : 0, &quot;foo&quot; : -1})</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: Q._is_dimension_vector({&quot;baz&quot; : 0, &quot;ofo&quot; : 0})</span>
-<span class="sd">            False</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_vector</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">di</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">di</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">di</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">di</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_coerce_dimension_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Coerces ``d`` to be a dimension vector of the quiver</span>
-
-<span class="sd">        The input ``d`` must be a data structure that is indexed</span>
-<span class="sd">        by the vertices of the quiver, so most likely a dict, list, or vector.</span>
-<span class="sd">        It is coerced to a vector, see :meth:`Quiver._coerce_vector`.</span>
-
-<span class="sd">        As a consistency check we verify that all entries are non-negative,</span>
-<span class="sd">        raising a `ValueError` if it isn&#39;t the case.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``d``: a candidate dimension vector</span>
-
-<span class="sd">        OUTPUT: either a dict or vector</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q._coerce_dimension_vector((1, 2))</span>
-<span class="sd">            (1, 2)</span>
-<span class="sd">            sage: Q._coerce_dimension_vector((1, 2, 3, 4))</span>
-<span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ...</span>
-<span class="sd">            ValueError: The input is not an element of :math:`\mathbb{Z}Q_0`.</span>
-<span class="sd">            sage: Q._coerce_dimension_vector((1, -3))</span>
-<span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ...</span>
-<span class="sd">            ValueError: The input is not a dimension vector of the quiver.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_vector</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">di</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">di</span> <span class="ow">in</span> <span class="n">d</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">d</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input is not a dimension vector of the quiver.&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_coerce_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Coerces ``x`` to be a vector in :math:`\mathbb{Z}Q_0`.</span>
-
-<span class="sd">        The input ``x`` must be a data structure that is indexed by</span>
-<span class="sd">        the vertices of the quiver,</span>
-<span class="sd">        so most likely a dict, list, tuple, or vector.</span>
-
-<span class="sd">        It raises a `ValueError` if it is not a data structure of length the number</span>
-<span class="sd">        of vertices in the quiver.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``x``: a list, tuple, or dict of integers</span>
-
-<span class="sd">        OUTPUT: a Sage vector if ``x`` is an element of :math:`\mathbb{Z}Q_0`</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q._coerce_vector((-1, 2))</span>
-<span class="sd">            (-1, 2)</span>
-<span class="sd">            sage: Q._coerce_vector((1, 2, 3, 4))</span>
-<span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ...</span>
-<span class="sd">            ValueError: The input is not an element of :math:`\mathbb{Z}Q_0`.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;The input is not an element of :math:`\mathbb</span><span class="si">{Z}</span><span class="s2">Q_0`.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()])</span>
-
-        <span class="c1"># so that it can be used for hashing</span>
-        <span class="n">x</span><span class="o">.</span><span class="n">set_immutable</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">x</span>
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Basic graph-theoretic properties of the quiver</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="Quiver.adjacency_matrix">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.adjacency_matrix">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the adjacency matrix of the quiver.</span>
-
-<span class="sd">        OUTPUT: The square matrix ``M`` whose entry ``M[i,j]`` is the number of arrows</span>
-<span class="sd">        from the vertex ``i`` to the vertex ``j``</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The adjacency matrix of a quiver construct from an adjacency matrix::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: M = matrix([[0, 3], [0, 0]])</span>
-<span class="sd">            sage: M == Quiver(M).adjacency_matrix()</span>
-<span class="sd">            True</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__M</span></div>
-
-
-<div class="viewcode-block" id="Quiver.graph">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.graph">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the underlying graph of the quiver</span>
-
-<span class="sd">        OUTPUT: the underlying quiver as a DiGraph object</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The underlying graph of the quiver from a directed graph is that graph::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: G = DiGraph(matrix([[0, 3], [0, 0]]))</span>
-<span class="sd">            sage: G == Quiver.from_digraph(G).graph()</span>
-<span class="sd">            True</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__G</span></div>
-
-
-<div class="viewcode-block" id="Quiver.vertices">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.vertices">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the vertices of the quiver</span>
-
-<span class="sd">        If the quiver is created from a DiGraph or string, the vertices are labelled</span>
-<span class="sd">        using the data in the DiGraph or string, as explained in</span>
-<span class="sd">        :meth:`Quiver.from_digraph` or :meth:`Quiver.from_string`.</span>
-<span class="sd">        If the quiver is created from a matrix, the vertices are labelled from `0`</span>
-<span class="sd">        to `n-1`, where `n` is the number of rows or columns in the matrix.</span>
-
-<span class="sd">        OUTPUT: the vertices in the underlying graph</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        Usually the vertices will be just integers::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Quiver([[0, 3], [0, 0]]).vertices()</span>
-<span class="sd">            [0, 1]</span>
-
-<span class="sd">        We can have non-trivial labels for a quiver::</span>
-
-<span class="sd">            sage: Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False).vertices()</span>
-<span class="sd">            [&#39;foo&#39;, &#39;bar&#39;]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">vertices</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.number_of_vertices">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.number_of_vertices">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the number of vertices</span>
-
-<span class="sd">        OUTPUT: the number of vertices</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        There are 3 vertices in a 3-vertex quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: ThreeVertexQuiver(1, 2, 4).number_of_vertices()</span>
-<span class="sd">            3</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">order</span><span class="p">()</span></div>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__has_vertex_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check whether vertex labels are used</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        With vertex labels::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = KroneckerQuiver(2)</span>
-<span class="sd">            sage: Q._Quiver__has_vertex_labels()</span>
-<span class="sd">            False</span>
-
-<span class="sd">        With vertex labels::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q._Quiver__has_vertex_labels()</span>
-<span class="sd">            True</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span> <span class="o">!=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()))</span>
-
-<div class="viewcode-block" id="Quiver.number_of_arrows">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.number_of_arrows">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">number_of_arrows</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the number of arrows</span>
-
-<span class="sd">        OUTPUT: the number of arrows</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        There are 7 arrows in this 3-vertex quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: ThreeVertexQuiver(1, 2, 4).number_of_arrows()</span>
-<span class="sd">            7</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">size</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.arrows">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.arrows">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">arrows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the arrows of the quiver</span>
-
-<span class="sd">        OUTPUT: list of the arrows in the underlying graph as tuples (source, target)</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The arrows of the 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.arrows()</span>
-<span class="sd">            [(0, 1), (0, 1), (0, 1)]</span>
-
-<span class="sd">        Arrows respect the labeling of the vertices if one is given::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar,bar-foo&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.arrows()</span>
-<span class="sd">            [(&#39;foo&#39;, &#39;bar&#39;),</span>
-<span class="sd">             (&#39;foo&#39;, &#39;bar&#39;),</span>
-<span class="sd">             (&#39;foo&#39;, &#39;bar&#39;),</span>
-<span class="sd">             (&#39;bar&#39;, &#39;foo&#39;)]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.is_acyclic">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_acyclic">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_acyclic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns whether the quiver is acyclic.</span>
-
-<span class="sd">        OUTPUT: True if the quiver is acyclic, False otherwise.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        An acyclic graph::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: KroneckerQuiver(3).is_acyclic()</span>
-<span class="sd">            True</span>
-
-<span class="sd">        A non-acyclic graph::</span>
-
-<span class="sd">            sage: GeneralizedJordanQuiver(5).is_acyclic()</span>
-<span class="sd">            False</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">is_directed_acyclic</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.is_connected">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_connected">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns whether the underlying graph of the quiver is connected or not.</span>
-
-<span class="sd">        OUTPUT: True if the quiver is connected, False otherwise.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The n-Kronecker quivers are connected::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: KroneckerQuiver(4).is_connected()</span>
-<span class="sd">            True</span>
-
-<span class="sd">        The loop quivers are connected::</span>
-
-<span class="sd">            sage: GeneralizedJordanQuiver(3).is_connected()</span>
-<span class="sd">            True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">is_connected</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.is_finite_type">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_finite_type">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_finite_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns whether the quiver is of finite type representation type.</span>
-
-<span class="sd">        This is the case if and only the connected components of the underlying</span>
-<span class="sd">        undirected graph are isomorphic to Dynkin diagrams.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The generalized Kronecker quiver is finite only for :math:`m=1`::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(1).is_finite_type()</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(2).is_finite_type()</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(3).is_finite_type()</span>
-<span class="sd">            False</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">CartanMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cartan_matrix</span><span class="p">())</span><span class="o">.</span><span class="n">is_finite</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.is_tame_type">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_tame_type">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_tame_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns whether the quiver is of tame type representation type.</span>
-
-<span class="sd">        This is the case if and only the connected components of the underlying</span>
-<span class="sd">        undirected graph are isomorphic to (extended) Dynkin diagrams, with at least one</span>
-<span class="sd">        being extended Dynkin.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The generalized Kronecker quiver is tame only for :math:`m=2`::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(1).is_tame_type()</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(2).is_tame_type()</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(3).is_tame_type()</span>
-<span class="sd">            False</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">CartanMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cartan_matrix</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">M</span><span class="o">.</span><span class="n">is_affine</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">M</span><span class="o">.</span><span class="n">is_finite</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.is_wild_type">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_wild_type">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_wild_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns whether the quiver is of wild type representation type.</span>
-
-<span class="sd">        This is the case if and only the connected components of the underlying</span>
-<span class="sd">        undirected graph are not all isomorphic to (extended) Dynkin diagrams.</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The generalized Kronecker quiver is wild for all :math:`m\geq 3`::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(1).is_wild_type()</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(2).is_wild_type()</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(3).is_wild_type()</span>
-<span class="sd">            True</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_finite_type</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_tame_type</span><span class="p">()</span></div>
-
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Some graph-theoretic properties of the quiver</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="Quiver.in_degree">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.in_degree">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">in_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the in-degree of a vertex.</span>
-
-<span class="sd">        The in-degree of ``i`` is the number of incoming arrows at ``i``.</span>
-
-<span class="sd">        The parameter ``i`` must be an element of the vertices of the underlying graph.</span>
-<span class="sd">        If constructed from a matrix or string, ``i`` can go from `0` to</span>
-<span class="sd">        `n-1` where `n` is the number of vertices in the graph.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``i`` -- a vertex of the underlying graph</span>
-
-<span class="sd">        OUTPUT: The in-degree of the vertex ``i``</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        In the 3-Kronecker quiver the in-degree is either 0 or 3::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.in_degree(0)</span>
-<span class="sd">            0</span>
-<span class="sd">            sage: Q.in_degree(1)</span>
-<span class="sd">            3</span>
-
-<span class="sd">        If we specified a non-standard labeling on the vertices we must use it::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;a---b&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.in_degree(&quot;a&quot;)</span>
-<span class="sd">            0</span>
-<span class="sd">            sage: Q.in_degree(&quot;b&quot;)</span>
-<span class="sd">            3</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.out_degree">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.out_degree">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">out_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the out-degree of a vertex.</span>
-
-<span class="sd">        The parameter ``i`` must be an element of the vertices of the underlying graph.</span>
-<span class="sd">        If constructed from a matrix or string, ``i`` can go from `0` to</span>
-<span class="sd">        `n-1` where `n` is the number of vertices in the graph.</span>
-
-<span class="sd">        The out-degree of ``i`` is the number of outgoing arrows at ``i``.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``i`` -- a vertex of the underlying graph</span>
-
-<span class="sd">        OUTPUT: The out-degree of the vertex ``i``</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        In the 3-Kronecker quiver the out-degree is either 3 or 0::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.out_degree(0)</span>
-<span class="sd">            3</span>
-<span class="sd">            sage: Q.out_degree(1)</span>
-<span class="sd">            0</span>
-
-<span class="sd">        If we specified a non-standard labeling on the vertices we must use it::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;a---b&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.out_degree(&quot;a&quot;)</span>
-<span class="sd">            3</span>
-<span class="sd">            sage: Q.out_degree(&quot;b&quot;)</span>
-<span class="sd">            0</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.is_source">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_source">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if ``i`` is a source of the quiver</span>
-
-<span class="sd">        The vertex ``i`` is a source if there are no incoming arrows at ``i``.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``i`` -- a vertex of the quiver</span>
-
-<span class="sd">        OUTPUT: whether ``i`` is a source of the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver has one source::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.is_source(0)</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q.is_source(1)</span>
-<span class="sd">            False</span>
-
-<span class="sd">        If we specified a non-standard labeling on the vertices we must use it::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;a---b&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.is_source(&quot;a&quot;)</span>
-<span class="sd">            True</span>
-<span class="sd">            sage: Q.is_source(&quot;b&quot;)</span>
-<span class="sd">            False</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
-
-
-<div class="viewcode-block" id="Quiver.is_sink">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_sink">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">is_sink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if ``i`` is a sink of the quiver</span>
-
-<span class="sd">        The vertex ``i`` is a sink if there are no outgoing arrows out of ``i``.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``i`` -- a vertex of the quiver</span>
-
-<span class="sd">        OUTPUT: whether ``i`` is a sink of the quiver</span>
-
-<span class="sd">        EXAMPLES</span>
-
-<span class="sd">        The 3-Kronecker quiver has one sink::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.is_sink(0)</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: Q.is_sink(1)</span>
-<span class="sd">            True</span>
-
-<span class="sd">        If we specified a non-standard labeling on the vertices we must use it::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;a---b&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.is_sink(&quot;a&quot;)</span>
-<span class="sd">            False</span>
-<span class="sd">            sage: Q.is_sink(&quot;b&quot;)</span>
-<span class="sd">            True</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
-
-
-<div class="viewcode-block" id="Quiver.sources">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.sources">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the vertices which are sources in the quiver</span>
-
-<span class="sd">        OUTPUT: the list of vertices without incoming edges</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver has one source::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(3).sources()</span>
-<span class="sd">            [0]</span>
-
-<span class="sd">        It is possible that a quiver has no sources::</span>
-
-<span class="sd">            sage: JordanQuiver().sources()</span>
-<span class="sd">            []</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_source</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()))</span></div>
-
-
-<div class="viewcode-block" id="Quiver.sinks">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.sinks">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sinks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the vertices which are sinks in the quiver</span>
-
-<span class="sd">        OUTPUT: the list of vertices without incoming edges</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The 3-Kronecker quiver has one source::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(3).sources()</span>
-<span class="sd">            [0]</span>
-
-<span class="sd">        It is possible that a quiver has no sinks::</span>
-
-<span class="sd">            sage: JordanQuiver().sinks()</span>
-<span class="sd">            []</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_sink</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()))</span></div>
-
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Basic representation-theoretical properties of the quiver</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="Quiver.euler_matrix">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.euler_matrix">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">euler_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the Euler matrix of the quiver</span>
-
-<span class="sd">        This is the matrix representing the Euler form, defined by</span>
-
-<span class="sd">        .. MATH::</span>
-
-<span class="sd">            \langle\mathbf{d},\mathbf{e}\rangle=</span>
-<span class="sd">            \sum_{i\in Q_0}d_i e_i-\sum_{\alpha\in Q_1}d_{s(\alpha)}e_{t(\alpha)}</span>
-
-<span class="sd">        In the basis given by the vertices, it can be written as the difference</span>
-<span class="sd">        of the identity matrix and the adjacency matrix.</span>
-
-<span class="sd">        OUTPUT: the Euler matrix of the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The Kronecker 3-quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(3).euler_matrix()</span>
-<span class="sd">            [ 1 -3]</span>
-<span class="sd">            [ 0  1]</span>
-
-<span class="sd">        It uses the basis of the vertices, so it agrees with this alternative</span>
-<span class="sd">        definition::</span>
-
-<span class="sd">            sage: Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False).euler_matrix()</span>
-<span class="sd">            [ 1 -3]</span>
-<span class="sd">            [ 0  1]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">matrix</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">())</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.euler_form">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.euler_form">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">euler_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The value :math:`\langle x,y\rangle` of the Euler form</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``x`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-
-<span class="sd">        - ``y`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-
-<span class="sd">        OUTPUT: the value of the Euler form, i.e., ``x * self.euler_matrix() * y``</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        An example using the Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.euler_form((1, 3), (2, -2))</span>
-<span class="sd">            2</span>
-
-<span class="sd">        It uses the basis of the vertices, so we specify the entries of elements of</span>
-<span class="sd">        :math:`\mathbb{Z}Q_0` in this order, thus the same example as before::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.euler_form((1, 3), (2, -2))</span>
-<span class="sd">            2</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_vector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_vector</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_matrix</span><span class="p">()</span> <span class="o">*</span> <span class="n">y</span></div>
-
-
-<div class="viewcode-block" id="Quiver.cartan_matrix">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.cartan_matrix">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">cartan_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the Cartan matrix of the quiver</span>
-
-<span class="sd">        This is the matrix representing the symmetrization of the Euler form,</span>
-<span class="sd">        see :meth:`Quiver.euler_matrix`</span>
-
-<span class="sd">        OUTPUT: the Cartan matrix of the quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The Kronecker 3-quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: GeneralizedKroneckerQuiver(3).cartan_matrix()</span>
-<span class="sd">            [ 2 -3]</span>
-<span class="sd">            [-3  2]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_matrix</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Quiver.symmetrized_euler_form">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.symmetrized_euler_form">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">symmetrized_euler_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The value :math:`(x,y)` of the Euler form</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``x`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-
-<span class="sd">        - ``y`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-
-<span class="sd">        OUTPUT: the value of the symmetrized Euler form applied to ``x`` and ``y``</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        An example using the Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.symmetrized_euler_form((1, 3), (2, -2))</span>
-<span class="sd">            -20</span>
-
-<span class="sd">        It uses the basis of the vertices, so we specify the entries of elements of</span>
-<span class="sd">        :math:`\mathbb{Z}Q_0` in this order, thus the same example as before::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.symmetrized_euler_form((1, 3), (2, -2))</span>
-<span class="sd">            -20</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_vector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_vector</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_form</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_form</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.tits_form">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.tits_form">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">tits_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The value of the Tits quadratic form of the quiver at ``x``</span>
-
-<span class="sd">        This is really just the value :math:`\langle x,x\rangle` of the Euler form,</span>
-<span class="sd">        or half of the value :math:`(x,x)` of the symmetrized Euler form.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``x`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-
-<span class="sd">        OUTPUT: the value of the Tits form applied to ``x``</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        An example using the Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
-<span class="sd">            sage: Q.tits_form((2, 3))</span>
-<span class="sd">            -5</span>
-
-<span class="sd">        It uses the basis of the vertices, so we specify the entries of elements of</span>
-<span class="sd">        :math:`\mathbb{Z}Q_0` in this order, thus the same example as before::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Q.tits_form((2, 3))</span>
-<span class="sd">            -5</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">euler_form</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
-
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructing new quivers out of old</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="Quiver.opposite_quiver">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.opposite_quiver">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">opposite_quiver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the opposite quiver</span>
-
-<span class="sd">        The opposite quiver is the quiver with all arrows reversed.</span>
-<span class="sd">        Its adjacency matrix is given by the transpose of the adjacency matrix.</span>
-
-<span class="sd">        OUTPUT: the opposite quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The opposite of the 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: print(GeneralizedKroneckerQuiver(3).opposite_quiver())</span>
-<span class="sd">            opposite of 3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 0]</span>
-<span class="sd">            [3 0]</span>
-
-<span class="sd">        It preserves the labelling of the vertices::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Qopp = Q.opposite_quiver()</span>
-<span class="sd">            sage: Qopp.vertices()</span>
-<span class="sd">            [&#39;foo&#39;, &#39;bar&#39;]</span>
-<span class="sd">            sage: Qopp.adjacency_matrix()</span>
-<span class="sd">            [0 0]</span>
-<span class="sd">            [3 0]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">():</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;opposite of &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">Quiver</span><span class="o">.</span><span class="n">from_digraph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">reverse</span><span class="p">(),</span> <span class="n">name</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.doubled_quiver">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.doubled_quiver">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">doubled_quiver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the doubled quiver</span>
-
-<span class="sd">        The double of a quiver is the quiver where for each arrow</span>
-<span class="sd">        we add an arrow in the opposite direction.</span>
-
-<span class="sd">        Its adjacency matrix is the sum of the adjacency matrix</span>
-<span class="sd">        of the original quiver and its transpose.</span>
-
-<span class="sd">        OUTPUT: the doubled quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        The double of the 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: print(GeneralizedKroneckerQuiver(3).doubled_quiver())</span>
-<span class="sd">            double of 3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 3]</span>
-<span class="sd">            [3 0]</span>
-
-<span class="sd">        It preserves the labelling of the vertices::</span>
-
-<span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
-<span class="sd">            sage: Qbar = Q.doubled_quiver()</span>
-<span class="sd">            sage: Qbar.vertices()</span>
-<span class="sd">            [&#39;foo&#39;, &#39;bar&#39;]</span>
-<span class="sd">            sage: Qbar.adjacency_matrix()</span>
-<span class="sd">            [0 3]</span>
-<span class="sd">            [3 0]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">G</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">())</span>
-        <span class="n">G</span><span class="o">.</span><span class="n">add_edges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opposite_quiver</span><span class="p">()</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
-
-        <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">():</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;double of &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">Quiver</span><span class="o">.</span><span class="n">from_digraph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.framed_quiver">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.framed_quiver">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">framed_quiver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">framing</span><span class="p">,</span> <span class="n">vertex</span><span class="o">=</span><span class="s2">&quot;-oo&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the framed quiver with framing vector ``framing``</span>
-
-<span class="sd">        The optional parameter ``vertex`` determines the name of the framing vertex,</span>
-<span class="sd">        which defaults to `-oo`.</span>
-
-<span class="sd">        The framed quiver has one additional vertex, and :math:`f_i` many arrows from</span>
-<span class="sd">        the framing vertex to :math:`i`, for every :math:`i\in Q_0`.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``framing`` -- list of non-negative integers saying how many arrows from the</span>
-<span class="sd">          framed vertex to ``i``</span>
-
-<span class="sd">        - ``vertex`` (default: &quot;-oo&quot;) -- name of the framing vertex</span>
-
-<span class="sd">        OUTPUT: the framed quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        Framing the 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3).framed_quiver([1, 0])</span>
-<span class="sd">            sage: print(Q)</span>
-<span class="sd">            framing of 3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 1 0]</span>
-<span class="sd">            [0 0 3]</span>
-<span class="sd">            [0 0 0]</span>
-<span class="sd">            sage: Q.vertices()</span>
-<span class="sd">            [&#39;-oo&#39;, 0, 1]</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3).framed_quiver([2, 2], vertex=&quot;a&quot;)</span>
-<span class="sd">            sage: print(Q)</span>
-<span class="sd">            framing of 3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 2 2]</span>
-<span class="sd">            [0 0 3]</span>
-<span class="sd">            [0 0 0]</span>
-<span class="sd">            sage: Q.vertices()</span>
-<span class="sd">            [&#39;a&#39;, 0, 1]</span>
-
-<span class="sd">        If you frame twice it will have to use a different vertex label::</span>
-
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3).framed_quiver([2, 2])</span>
-<span class="sd">            sage: Q.framed_quiver([1, 1, 1]).vertices()</span>
-<span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ...</span>
-<span class="sd">            ValueError: -oo is already a vertex</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is already a vertex&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span>
-
-        <span class="n">framing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_dimension_vector</span><span class="p">(</span><span class="n">framing</span><span class="p">)</span>
-
-        <span class="n">G</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">())</span>
-
-        <span class="c1"># adding framing the vertex (as the _first_ vertex by default)</span>
-        <span class="n">G</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
-
-        <span class="c1"># adding the arrows according to the framing vector</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()):</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">add_edges</span><span class="p">([(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">v</span><span class="p">)]</span> <span class="o">*</span> <span class="n">framing</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-        <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">():</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;framing of &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">Quiver</span><span class="o">.</span><span class="n">from_digraph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Quiver.coframed_quiver">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.coframed_quiver">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">coframed_quiver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coframing</span><span class="p">,</span> <span class="n">vertex</span><span class="o">=</span><span class="s2">&quot;+oo&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the coframed quiver with coframing vector ``coframing``</span>
-
-<span class="sd">        The optional parameter ``vertex`` determines the name of the coframing vertex,</span>
-<span class="sd">        which defaults to `+oo`.</span>
-
-<span class="sd">        The coframed quiver has one additional vertex, and :math:`f_i` many arrows from</span>
-<span class="sd">        the vertex `i` to the coframed vertex, for every :math:`i\in Q_0`.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``coframing`` -- list of non-negative integers saying how many arrows go from</span>
-<span class="sd">          the framed vertex to `i`</span>
-
-<span class="sd">        - ``vertex`` (default: None) -- name of the framing vertex</span>
-
-<span class="sd">        OUTPUT: the framed quiver</span>
-
-<span class="sd">        EXAMPLES:</span>
-
-<span class="sd">        Coframing the 3-Kronecker quiver::</span>
-
-<span class="sd">            sage: from quiver import *</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3).coframed_quiver([1, 0])</span>
-<span class="sd">            sage: print(Q)</span>
-<span class="sd">            coframing of 3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 3 1]</span>
-<span class="sd">            [0 0 0]</span>
-<span class="sd">            [0 0 0]</span>
-<span class="sd">            sage: Q.vertices()</span>
-<span class="sd">            [0, 1, &#39;+oo&#39;]</span>
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3).coframed_quiver([2, 2], vertex=&quot;a&quot;)</span>
-<span class="sd">            sage: print(Q)</span>
-<span class="sd">            coframing of 3-Kronecker quiver</span>
-<span class="sd">            adjacency matrix:</span>
-<span class="sd">            [0 3 2]</span>
-<span class="sd">            [0 0 2]</span>
-<span class="sd">            [0 0 0]</span>
-<span class="sd">            sage: Q.vertices()</span>
-<span class="sd">            [0, 1, &#39;a&#39;]</span>
-
-<span class="sd">        If you coframe twice it will have to use a different vertex label::</span>
-
-<span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3).coframed_quiver([2, 2])</span>
-<span class="sd">            sage: Q.coframed_quiver([1, 1, 1]).vertices()</span>
-<span class="sd">            Traceback (most recent call last):</span>
-<span class="sd">            ...</span>
-<span class="sd">            ValueError: +oo is already a vertex</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is already a vertex&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span>
-
-        <span class="n">coframing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_dimension_vector</span><span class="p">(</span><span class="n">coframing</span><span class="p">)</span>
-
-        <span class="c1"># build the graph from the ground up</span>
-        <span class="n">G</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="n">vertex</span><span class="p">],</span> <span class="p">[]],</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">loops</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="c1"># there doesn&#39;t seem to be a way to save the order of vertices otherwise</span>
-        <span class="c1"># so make sure the coframing vertex appears last</span>
-        <span class="n">permutation</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vertices</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="n">vertex</span><span class="p">]))</span>
-        <span class="n">G</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="n">perm</span><span class="o">=</span><span class="n">permutation</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="c1"># adding the existing arrows</span>
-        <span class="n">G</span><span class="o">.</span><span class="n">add_edges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">()</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
-
-        <span class="c1"># adding the arrows according to the framing vector</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()):</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">add_edges</span><span class="p">([(</span><span class="n">v</span><span class="p">,</span> <span class="n">vertex</span><span class="p">)]</span> <span class="o">*</span> <span class="n">coframing</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-        <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">():</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;coframing of &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_name</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">Quiver</span><span class="o">.</span><span class="n">from_digraph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetrized_euler_form</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Quiver.full_subquiver">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.full_subquiver">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.full_subquiver">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">full_subquiver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the full subquiver supported on the given set of vertices</span>
 
@@ -1760,7 +395,7 @@
 
 <span class="sd">        Some basic examples::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = ThreeVertexQuiver(2, 3, 4)</span>
 <span class="sd">            sage: print(Q.full_subquiver([0, 1]))</span>
 <span class="sd">            full subquiver of an acyclic 3-vertex quiver of type (2, 3, 4)</span>
@@ -1802,7 +437,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Quiver.zero_vector">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.zero_vector">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.zero_vector">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">zero_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the zero dimension vector.</span>
@@ -1815,7 +450,7 @@
 
 <span class="sd">        Usually it is an actual vector::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: KroneckerQuiver(3).zero_vector()</span>
 <span class="sd">            (0, 0)</span>
 <span class="sd">            sage: type(KroneckerQuiver(3).zero_vector())</span>
@@ -1838,7 +473,7 @@
 
 <span class="sd">        The zero vector of the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: KroneckerQuiver(3).zero_vector()</span>
 <span class="sd">            (0, 0)</span>
 
@@ -1854,7 +489,7 @@
         <span class="k">return</span> <span class="n">vector</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">(),</span> <span class="n">immutable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Quiver.thin_dimension_vector">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.thin_dimension_vector">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.thin_dimension_vector">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">thin_dimension_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the thin dimension vector, i.e., all ones</span>
@@ -1867,7 +502,7 @@
 
 <span class="sd">        Usually it is an actual vector::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: KroneckerQuiver(3).thin_dimension_vector()</span>
 <span class="sd">            (1, 1)</span>
 <span class="sd">            sage: type(KroneckerQuiver(3).thin_dimension_vector())</span>
@@ -1891,7 +526,7 @@
 
 <span class="sd">        The thin dimension vector of the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: KroneckerQuiver(3).thin_dimension_vector()</span>
 <span class="sd">            (1, 1)</span>
 
@@ -1907,7 +542,7 @@
         <span class="k">return</span> <span class="n">vector</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">(),</span> <span class="n">immutable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Quiver.simple_root">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.simple_root">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.simple_root">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">simple_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the simple root at the vertex ``i``</span>
@@ -1920,7 +555,7 @@
 
 <span class="sd">        Usually it is an actual vector::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: KroneckerQuiver(3).simple_root(1)</span>
 <span class="sd">            (0, 1)</span>
 <span class="sd">            sage: type(KroneckerQuiver(3).simple_root(1))</span>
@@ -1943,7 +578,7 @@
 
 <span class="sd">        The simple root at the source of the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: KroneckerQuiver(3).simple_root(0)</span>
 <span class="sd">            (1, 0)</span>
 
@@ -1966,7 +601,7 @@
         <span class="k">return</span> <span class="n">root</span>
 
 <div class="viewcode-block" id="Quiver.is_root">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_root">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_root">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks whether ``x`` is a root of the underlying diagram of the quiver.</span>
 
@@ -1983,7 +618,7 @@
 
 <span class="sd">        Some roots and non-roots for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.is_root((2, 3))</span>
 <span class="sd">            True</span>
@@ -1999,7 +634,7 @@
 
 
 <div class="viewcode-block" id="Quiver.is_real_root">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_real_root">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_real_root">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_real_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks whether ``x`` is a real root of the underlying diagram of the quiver.</span>
 
@@ -2015,7 +650,7 @@
 
 <span class="sd">        Some real and non-real for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.is_real_root((2, 3))</span>
 <span class="sd">            False</span>
@@ -2031,7 +666,7 @@
 
 
 <div class="viewcode-block" id="Quiver.is_imaginary_root">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_imaginary_root">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_imaginary_root">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_imaginary_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks whether ``x`` is a imaginary root of the quiver.</span>
 
@@ -2047,7 +682,7 @@
 
 <span class="sd">        Some imaginary roots and non imaginary roots for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.is_imaginary_root((2, 3))</span>
 <span class="sd">            True</span>
@@ -2063,7 +698,7 @@
 
 
 <div class="viewcode-block" id="Quiver.is_schur_root">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_schur_root">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_schur_root">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_schur_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks if ``d`` is a Schur root.</span>
 
@@ -2086,14 +721,14 @@
 
 <span class="sd">        The dimension vector `(2, 3)` is Schurian for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.is_schur_root([2, 3])</span>
 <span class="sd">            True</span>
 
 <span class="sd">        Examples from Derksen--Weyman&#39;s book (Example 11.1.4)::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = ThreeVertexQuiver(1, 1, 1)</span>
 <span class="sd">            sage: Q.is_schur_root((1, 1, 2))</span>
 <span class="sd">            True</span>
@@ -2112,7 +747,7 @@
 
 
 <div class="viewcode-block" id="Quiver.slope">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.slope">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.slope">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">slope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="nb">sum</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the slope of ``d`` with respect to ``theta``</span>
@@ -2136,7 +771,7 @@
 <span class="sd">        Some slopes for the Kronecker quiver, first for the canonical stability</span>
 <span class="sd">        parameter, then for some other::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: d = (2, 3)</span>
 <span class="sd">            sage: Q.slope(d, (9, -6))</span>
@@ -2171,7 +806,7 @@
 
 
 <div class="viewcode-block" id="Quiver.is_subdimension_vector">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_subdimension_vector">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_subdimension_vector">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_subdimension_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Determine whether ``e`` is a subdimension vector of ``d``</span>
@@ -2188,7 +823,7 @@
 
 <span class="sd">        Some basic examples::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.is_subdimension_vector((1, 2), (2, 3))</span>
 <span class="sd">            True</span>
@@ -2242,7 +877,7 @@
 <span class="sd">        If we let `b` be the largest entry plus one we get a good key, at least for</span>
 <span class="sd">        subdimension vectors of the original one::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: d = (2, 3)</span>
 <span class="sd">            sage: Q._deglex_key(d, max(d) + 1)</span>
@@ -2264,7 +899,7 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="Quiver.all_subdimension_vectors">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.all_subdimension_vectors">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.all_subdimension_vectors">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">all_subdimension_vectors</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">proper</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nonzero</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">forget_labels</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
@@ -2287,7 +922,7 @@
 
 <span class="sd">        The usual use cases::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.all_subdimension_vectors((2, 3))</span>
 <span class="sd">                [(0, 0),</span>
@@ -2381,7 +1016,7 @@
 
 
 <div class="viewcode-block" id="Quiver.is_theta_coprime">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_theta_coprime">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_theta_coprime">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_theta_coprime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks if ``d`` is ``theta``-coprime.</span>
 
@@ -2402,7 +1037,7 @@
 
 <span class="sd">        Examples of coprimality::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: d = (2, 3)</span>
 <span class="sd">            sage: Q.is_theta_coprime(d, Q.canonical_stability_parameter(d))</span>
@@ -2425,7 +1060,7 @@
 
 
 <div class="viewcode-block" id="Quiver.is_indivisible">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_indivisible">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_indivisible">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_indivisible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if the gcd of all the entries of ``d`` is 1</span>
@@ -2440,7 +1075,7 @@
 
 <span class="sd">        Two examples with the Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.is_indivisible((2, 3))</span>
 <span class="sd">            True</span>
@@ -2452,7 +1087,7 @@
 
 
 <div class="viewcode-block" id="Quiver.support">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.support">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.support">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">support</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the support of the dimension vector.</span>
 
@@ -2469,7 +1104,7 @@
 <span class="sd">        The support is the set of vertices for which the value of the dimension</span>
 <span class="sd">        vector is nonzero::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = ThreeVertexQuiver(2, 0, 4)</span>
 <span class="sd">            sage: d = (1, 1, 1)</span>
 <span class="sd">            sage: Q.support(d)</span>
@@ -2492,7 +1127,7 @@
 
 
 <div class="viewcode-block" id="Quiver.in_fundamental_domain">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.in_fundamental_domain">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.in_fundamental_domain">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">in_fundamental_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks if a dimension vector is in the fundamental domain.</span>
 
@@ -2523,7 +1158,7 @@
 
 <span class="sd">        The fundamental domain of the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.in_fundamental_domain((1, 1))</span>
 <span class="sd">            True</span>
@@ -2545,7 +1180,7 @@
 <span class="sd">        We test for dimension vectors in the strict interior, where the depth is</span>
 <span class="sd">        equal to 1::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.in_fundamental_domain((1, 1), depth=1)</span>
 <span class="sd">            True</span>
@@ -2569,7 +1204,7 @@
 
 
 <div class="viewcode-block" id="Quiver.division_order">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.division_order">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.division_order">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">division_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if :math:`d\ll e`</span>
@@ -2588,7 +1223,7 @@
 
 <span class="sd">        The division order on some dimension vectors for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: d = (1, 1)</span>
 <span class="sd">            sage: e = (2, 1)</span>
@@ -2636,7 +1271,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Quiver.is_general_subdimension_vector">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.is_general_subdimension_vector">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.is_general_subdimension_vector">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_general_subdimension_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks if e is a general subdimension vector of d.</span>
 
@@ -2661,7 +1296,7 @@
 
 <span class="sd">        Some examples on loop quivers::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = LoopQuiver(1)</span>
 <span class="sd">            sage: ds = [vector([i]) for i in range(3)]</span>
 <span class="sd">            sage: for (e, d) in cartesian_product([ds, ds]):</span>
@@ -2791,7 +1426,7 @@
 
 <span class="sd">        General subdimension vectors for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q, d, theta = GeneralizedKroneckerQuiver(3), (2, 3), (3, -2)</span>
 <span class="sd">            sage: for e in Q.all_subdimension_vectors(d):</span>
 <span class="sd">            ....:     print(&quot;{} is general subdimension vector of {}: {}&quot;.format(</span>
@@ -2827,7 +1462,7 @@
         <span class="k">return</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_general_subdimension_vector</span><span class="p">(</span><span class="n">eprime</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">eprime</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Quiver.all_general_subdimension_vectors">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.all_general_subdimension_vectors">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.all_general_subdimension_vectors">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">all_general_subdimension_vectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">proper</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nonzero</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns the list of all general subdimension vectors of ``d``.</span>
 
@@ -2841,7 +1476,7 @@
 
 <span class="sd">        Some n-Kronecker quivers::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(1)</span>
 <span class="sd">            sage: d = (3, 3)</span>
 <span class="sd">            sage: Q.all_general_subdimension_vectors(d)</span>
@@ -2889,7 +1524,7 @@
 
 
 <div class="viewcode-block" id="Quiver.general_ext">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.general_ext">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.general_ext">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">general_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes :math:`\operatorname{ext}(d, e)`.</span>
@@ -2916,7 +1551,7 @@
 
 <span class="sd">        General ext on the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: ds = [Q.simple_root(0), Q.simple_root(1), Q.thin_dimension_vector()]</span>
 <span class="sd">            sage: for (d, e) in cartesian_product([ds]*2):</span>
@@ -2941,7 +1576,7 @@
 
 
 <div class="viewcode-block" id="Quiver.general_hom">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.general_hom">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.general_hom">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">general_hom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes :math:`\operatorname{hom}(d, e)`.</span>
@@ -2972,7 +1607,7 @@
 
 <span class="sd">        General hom on the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: ds = [Q.simple_root(0), Q.simple_root(1), Q.thin_dimension_vector()]</span>
 <span class="sd">            sage: for (d, e) in cartesian_product([ds]*2):</span>
@@ -3016,7 +1651,7 @@
 
 <span class="sd">        The Harder--Narasimhan types for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: d = (2, 3)</span>
 <span class="sd">            sage: theta = (3, -2)</span>
@@ -3078,7 +1713,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Quiver.canonical_stability_parameter">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.canonical_stability_parameter">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.canonical_stability_parameter">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">canonical_stability_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the canonical stability parameter for ``d``</span>
@@ -3096,7 +1731,7 @@
 
 <span class="sd">        Our usual example of the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.canonical_stability_parameter((2, 3))</span>
 <span class="sd">            (9, -6)</span>
@@ -3117,14 +1752,14 @@
 
 <span class="sd">        Canonical stability parameter for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q, d = GeneralizedKroneckerQuiver(3), (2, 3)</span>
 <span class="sd">            sage: Q.canonical_stability_parameter(d)</span>
 <span class="sd">            (9, -6)</span>
 
 <span class="sd">        This method also works with vertex labels::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = Quiver.from_string(&quot;foo---bar&quot;, forget_labels=False)</span>
 <span class="sd">            sage: d = {&quot;foo&quot;: 2, &quot;bar&quot;: 3}</span>
 <span class="sd">            sage: Q.canonical_stability_parameter(d)</span>
@@ -3139,7 +1774,7 @@
 
 
 <div class="viewcode-block" id="Quiver.has_semistable_representation">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.has_semistable_representation">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.has_semistable_representation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_semistable_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="nb">sum</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks if there is a ``theta``-semistable of dimension vector ``d``</span>
 
@@ -3161,7 +1796,7 @@
 
 <span class="sd">        Semistables for the :math:`\mathrm{A}_2` quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(1)</span>
 <span class="sd">            sage: Q.has_semistable_representation((1, 1), (1, -1))</span>
 <span class="sd">            True</span>
@@ -3174,7 +1809,7 @@
 
 <span class="sd">        Semistables for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.has_semistable_representation((2, 3))</span>
 <span class="sd">            True</span>
@@ -3195,7 +1830,7 @@
 
 
 <div class="viewcode-block" id="Quiver.has_stable_representation">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.has_stable_representation">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.has_stable_representation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_stable_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="nb">sum</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if there is a ``theta``-stable representation of ``d``</span>
@@ -3218,7 +1853,7 @@
 
 <span class="sd">        Stables for the :math:`\mathrm{A}_2` quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(1)</span>
 <span class="sd">            sage: theta = (1, -1)</span>
 <span class="sd">            sage: Q.has_stable_representation((1, 1), theta)</span>
@@ -3230,7 +1865,7 @@
 
 <span class="sd">        Stables for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: d = (2, 3)</span>
 <span class="sd">            sage: theta = Q.canonical_stability_parameter(d)</span>
@@ -3260,7 +1895,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Quiver.canonical_decomposition">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.canonical_decomposition">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.canonical_decomposition">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">canonical_decomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the canonical decomposition of a dimension vector.</span>
@@ -3283,7 +1918,7 @@
 
 <span class="sd">        Canonical decomposition of the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.canonical_decomposition((2, 3))</span>
 <span class="sd">            ((2, 3),)</span>
@@ -3337,7 +1972,7 @@
 
 <span class="sd">        Canonical decomposition of `(5, 3)` for the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = GeneralizedKroneckerQuiver(2)</span>
 <span class="sd">            sage: Q._Quiver__canonical_decomposition((5, 5))</span>
 <span class="sd">            ((1, 1), (1, 1), (1, 1), (1, 1), (1, 1))</span>
@@ -3356,7 +1991,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">d</span><span class="p">,)</span>
 
 <div class="viewcode-block" id="Quiver.dimension_nullcone">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.dimension_nullcone">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.dimension_nullcone">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">dimension_nullcone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the dimension of the nullcone</span>
@@ -3373,7 +2008,7 @@
 
 <span class="sd">        The usual example of the 3-Kronecker quiver::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(3)</span>
 <span class="sd">            sage: Q.dimension_nullcone((2, 3))</span>
 <span class="sd">            18</span>
@@ -3388,7 +2023,7 @@
 
 
 <div class="viewcode-block" id="Quiver.first_hochschild_cohomology">
-<a class="viewcode-back" href="../../index.html#quiver.Quiver.first_hochschild_cohomology">[docs]</a>
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.first_hochschild_cohomology">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">first_hochschild_cohomology</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the dimension of the first Hochschild cohomology</span>
@@ -3402,13 +2037,13 @@
 <span class="sd">        The first Hochschild cohomology of the `m`-th generalized Kronecker quiver</span>
 <span class="sd">        is the dimension of :math:`\mathrm{PGL}_{m+1}`::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: GeneralizedKroneckerQuiver(3).first_hochschild_cohomology()</span>
 <span class="sd">            8</span>
 
 <span class="sd">        The first Hochschild cohomology vanishes if and only if the quiver is a tree::</span>
 
-<span class="sd">            sage: from quiver import *</span>
+<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: SubspaceQuiver(7).first_hochschild_cohomology()</span>
 <span class="sd">            0</span>
 

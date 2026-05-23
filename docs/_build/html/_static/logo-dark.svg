@@ -6,7 +6,7 @@
    fill="none"
    version="1.1"
    id="svg42"
-   sodipodi:docname="logo.svg"
+   sodipodi:docname="logo-dark.svg"
    inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -128,7 +128,7 @@
        gradientUnits="userSpaceOnUse" />
   </defs>
   <rect
-     style="fill:#000000;fill-opacity:1;stroke-width:2.12007"
+     style="fill:#ffffff;fill-opacity:1;stroke-width:2.12007"
      id="rect57"
      width="46.586887"
      height="57.208138"
@@ -155,7 +155,7 @@
        id="tspan1"
        x="32.575882"
        y="165.2173"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;font-family:UnYetgul;-inkscape-font-specification:'UnYetgul Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.40597;stroke-opacity:1">Combinatorics</tspan></text>
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;font-family:UnYetgul;-inkscape-font-specification:'UnYetgul Bold';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.40597;stroke-opacity:1">Combinatorics</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:44.9909px;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke:url(#radialGradient17);stroke-width:1.37644;stroke-dasharray:none"
@@ -167,7 +167,7 @@
        id="tspan42"
        x="95.99646"
        y="121.6213"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:52.4893px;font-family:UnYetgul;-inkscape-font-specification:UnYetgul;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.37644;stroke-dasharray:none">uiver</tspan><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:52.4893px;font-family:UnYetgul;-inkscape-font-specification:UnYetgul;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.37644;stroke-dasharray:none">uiver</tspan><tspan
        sodipodi:role="line"
        x="95.99646"
        y="178.48672"
@@ -183,5 +183,5 @@
        id="tspan2"
        x="141.44743"
        y="187.32249"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;font-family:UnYetgul;-inkscape-font-specification:'UnYetgul Bold'">Tools</tspan></text>
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.6667px;font-family:UnYetgul;-inkscape-font-specification:'UnYetgul Bold';fill:#ffffff;fill-opacity:1">Tools</tspan></text>
 </svg>

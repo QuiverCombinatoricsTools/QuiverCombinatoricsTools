@@ -1,80 +1,45 @@
 ***********
-QuiverTools
+QuiverCombinatoricsTools
 ***********
 
-QuiverTools is a SageMath package to deal with quivers and moduli of quiver representations.
-Below you can find its documentation.
-A more detailed user guide is in the works.
+`QuiverCombinatoricsTools` is a SageMath package that adds combinatorial functions to `QuiverTools` to calculate symplectic leaves of quiver varieties, available here `https://github.com/emanuel-roth/QuiverCombinatoricsTools <https://github.com/emanuel-roth/QuiverCombinatoricsTools>`_. It adds on to the `QuiverTools` package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here `https://sage.quiver.tools/ <https://sage.quiver.tools/>`_ and here `https://github.com/QuiverTools/QuiverTools <https://github.com/QuiverTools/QuiverTools>`_, so consult their documentation when needed.
 
-To install it, run
+To install it, make sure you have both QuiverTools and QuiverCombinatoricsTools
 
 .. code-block::
 
    sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
+   sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools.git
 
 and then you can simply run
 
 .. code-block:: python
 
+   from quiver import *
    from quivercombinatorics import *
 
 to get started.
 
-For more information, see `https://quiver.tools <https://quiver.tools>`_.
-
 **Authors**
 
-* Pieter Belmans (University of Luxembourg)
-* Hans Franzen (University of Paderborn)
-* Gianni Petrella (University of Luxembourg)
+* Tudor-Ioan Caba (University of Edinburgh, AGQ)
+* Mia Lam (University of Edinburgh, AGQ)
+* Emanuel Roth (University of Edinburgh, AGQ)
 
-**Funding**
+We were supervised by Gwyn Bellamy (University of Glasgow), as part of an AGQ computing project.
 
-We acknowledge the generous support of:
-
-* the Luxembourg National Research Fund (FNR–17113194 and FNR–17953441)
-* the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) SFB-TRR 358/1 2023 "Integral Structures in Geometry and Representation Theory" (491392403)
-
-Quivers
+Generating quivers
 =======
+.. autofunction:: quivercombinatorics.quiver_from_cartan_matrix
+.. autofunction:: quivercombinatorics.random_quiver
 
-.. autoclass:: quiver.Quiver
-    :members:
-    :special-members:
-    :member-order: bysource
 
-Moduli spaces
-=============
-
-.. autoclass:: quiver.QuiverModuli
-    :members:
-    :special-members:
-    :member-order: bysource
-
-.. autoclass:: quiver.QuiverModuliSpace
-    :members:
-    :special-members:
-    :member-order: bysource
-
-.. autoclass:: quiver.QuiverModuliStack
+The construction of :math:`\Sigma_{\lambda}`
+=======
+.. autofunction:: quivercombinatorics.N_set
+.. autoclass:: quivercombinatorics.Quiver
     :members:
     :special-members:
     :member-order: bysource
 
 Constructing quivers
-====================
-
-.. autofunction:: quiver.disjoint_union
-.. autofunction:: quiver.GeneralizedKroneckerQuiver
-.. autofunction:: quiver.KroneckerQuiver
-.. autofunction:: quiver.ThreeVertexQuiver
-.. autofunction:: quiver.LoopQuiver
-.. autofunction:: quiver.JordanQuiver
-.. autofunction:: quiver.GeneralizedJordanQuiver
-.. autofunction:: quiver.SubspaceQuiver
-.. autofunction:: quiver.ThickenedSubspaceQuiver
-.. autofunction:: quiver.GeneralizedSubspaceQuiver
-.. autofunction:: quiver.DynkinQuiver
-.. autofunction:: quiver.ExtendedDynkinQuiver
-.. autofunction:: quiver.CyclicQuiver
-.. autofunction:: quiver.BipartiteQuiver
