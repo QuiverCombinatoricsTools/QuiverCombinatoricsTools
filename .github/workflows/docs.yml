@@ -39,7 +39,7 @@ jobs:
             texlive-luatex \
             latexmk \
             fonts-freefont-otf \
-            xindy \
+            xindy \ 
             python3-sphinx
 
           sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
