@@ -38,14 +38,18 @@ jobs:
             python3-sphinx
 
           sage --pip install sphinx-book-theme
+          mkdir -p /tmp/build && cp -r . /tmp/build/
           cd /tmp/build && rm -rf .git
           sage --pip install .
 
       - name: Build docs
         run: |
           cd docs
-          sage -sh -c "make html"
-          sage -sh -c "make latexpdf"
+          sage -sh -c "python3 -m sphinx.cmd.build -b html . _build/html"
+          sage -sh -c "python3 -m sphinx.cmd.build -b latex . _build/latex"
+
+          cd _build/latex
+          latexmk -pdf -dvi- -ps- *.tex
 
       - name: Prepare Pages folder
         run: |
