@@ -117,7 +117,7 @@ def vector_decomposition(S, x):
         EXAMPLE::
         
             sage: from quivercombinatorics import *
-            sage: vector_decomposition((4,5), [(0,1),(1,0),(1,1)])
+            sage: vector_decomposition([(0,1),(1,0),(1,1)], (4,5))
             [[[(0, 1), 1], [(1, 1), 4]],
             [[(0, 1), 2], [(1, 0), 1], [(1, 1), 3]],
             [[(0, 1), 3], [(1, 0), 2], [(1, 1), 2]],
@@ -133,7 +133,7 @@ def vector_decomposition(S, x):
     s = vector(S[0])
     decomps = vector_decomposition(x, S[1:]) 
     n = 1
-    while all(i >= 0 for i in v - x*s):
+    while all(i >= 0 for i in x - x*s):
         current = vector_decomposition(v - x*s, S[1:])
         current = [[[s,x]] + item for item in current]
         decomps = decomps + current
