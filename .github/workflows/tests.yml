@@ -1,0 +1,22 @@
+name: tests
+on:
+  push:
+    branches: [ main, dev ]
+    paths:
+      - "quiver/**.py"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: sagemath/sagemath:latest
+      options: --user root
+    steps:
+      - name: Checkout QuiverTools
+        uses: actions/checkout@v4
+      - name: Install QuiverTools
+        run: sage --pip install .
+      - name: Run the tests
+        run: sage -t quiver

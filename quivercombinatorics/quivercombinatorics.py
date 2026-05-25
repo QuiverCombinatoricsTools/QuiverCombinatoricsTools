@@ -152,7 +152,7 @@ def small_decomposition(v, n):
         EXAMPLE::
         
             sage: from quivercombinatorics import *
-            sage: small_decomp((1,1), 3)
+            sage: small_decomposition((1,1), 3)
             [[[(1, 1), 1], [(1, 1), 1], [(1, 1), 1]],
             [[(1, 1), 2], [(1, 1), 1]],
             [[(1, 1), 3]]]
@@ -873,7 +873,7 @@ class Quiver(BaseQuiver):
         for decomp in all_decomps:
             current = [[]]
             for pair in decomp:
-                current = [sorted(temp + item) for item in current for temp in small_decomp(pair[0], pair[1])]
+                current = [sorted(temp + item) for item in current for temp in small_decomposition(pair[0], pair[1])]
             all_reps = all_reps + current
         return sorted(all_reps)
 
