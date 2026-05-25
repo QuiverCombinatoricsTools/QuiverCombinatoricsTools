@@ -110,7 +110,7 @@ def vector_decomposition(x, S):
         INPUT:
 
         - ``x`` -- a vector in :math:`\mathbb{Z}Q_0`
-        - ``S`` -- a list of vectors `S` in :math:`\mathbb{Z}Q_0`
+        - ``S`` -- a list of vectors :math:`S` in :math:`\mathbb{Z}Q_0`
 
         OUTPUT: All possible sums of vectors in :math:`S` as a list that sum up to :math:`x`
 
@@ -324,7 +324,7 @@ class Quiver(BaseQuiver):
         - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
         - ``v`` -- an element of :math:`\mathbb{N}Q_0`
 
-        OUTPUT: A list of elements of :math:`\Sigma_\lambda`, where ``l`` is `\lambda`, up to the upper bound :math:`v`
+        OUTPUT: A list of elements of :math:`\Sigma_\lambda`, where ``l`` is :math:`\lambda`, up to the upper bound :math:`v`
 
         EXAMPLE::
 
