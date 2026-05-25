@@ -278,7 +278,7 @@
 <span class="sd">        EXAMPLE::</span>
 <span class="sd">        </span>
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]</span>
+<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: quiver_from_cartan_matrix(C)</span>
 <span class="sd">            a quiver with 3 vertices and 3 arrows</span>
 <span class="sd">        </span>
@@ -313,6 +313,7 @@
 <span class="sd">            sage: random_quiver(46, 25)</span>
 <span class="sd">            a quiver with 46 vertices and 26388 arrows</span>
 <span class="sd">            </span>
+<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_arrows_per_edge</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
@@ -334,7 +335,7 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: N_set([[0,1]],[0,3])</span>
+<span class="sd">            sage: N_set([[0, 1]],[0, 3])</span>
 <span class="sd">            [(0, 1), (0, 2), (0, 3)]</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -360,38 +361,38 @@
 
 <div class="viewcode-block" id="vector_decomposition">
 <a class="viewcode-back" href="../../index.html#quivercombinatorics.vector_decomposition">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">vector_decomposition</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vector_decomposition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;For a list of vectors :math:`S` in :math:`\mathbb{Z}Q_0`, returns all possible sums of vectors in :math:`S` as a list that sum up to :math:`x`. This is a helper function in order to define CB-decompositions</span>
 <span class="sd">        </span>
 <span class="sd">        INPUT:</span>
 
-<span class="sd">        - ``S`` -- a list of vectors `S` in :math:`\mathbb{Z}Q_0`</span>
 <span class="sd">        - ``x`` -- a vector in :math:`\mathbb{Z}Q_0`</span>
+<span class="sd">        - ``S`` -- a list of vectors `S` in :math:`\mathbb{Z}Q_0`</span>
 
 <span class="sd">        OUTPUT: All possible sums of vectors in :math:`S` as a list that sum up to :math:`x`</span>
 
 <span class="sd">        EXAMPLE::</span>
 <span class="sd">        </span>
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: vector_decomposition([(0,1),(1,0),(1,1)], (4,5))</span>
+<span class="sd">            sage: vector_decomposition((4, 5), [(0, 1),(1, 0),(1, 1)])</span>
 <span class="sd">            [[[(0, 1), 1], [(1, 1), 4]],</span>
 <span class="sd">            [[(0, 1), 2], [(1, 0), 1], [(1, 1), 3]],</span>
 <span class="sd">            [[(0, 1), 3], [(1, 0), 2], [(1, 1), 2]],</span>
 <span class="sd">            [[(0, 1), 4], [(1, 0), 3], [(1, 1), 1]],</span>
 <span class="sd">            [[(0, 1), 5], [(1, 0), 4]]]</span>
 <span class="sd">        </span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[[]]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">S</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">decomps</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">decomps</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> 
     <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">while</span> <span class="nb">all</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">s</span><span class="p">):</span> 
-        <span class="n">current</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">x</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">s</span><span class="p">)</span>
-        <span class="n">current</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">]]</span> <span class="o">+</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span><span class="p">]</span>
+    <span class="k">while</span> <span class="nb">all</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">s</span><span class="p">,</span> <span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">s</span><span class="p">,</span><span class="n">n</span><span class="p">]]</span> <span class="o">+</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span><span class="p">]</span>
         <span class="n">decomps</span> <span class="o">=</span> <span class="n">decomps</span> <span class="o">+</span> <span class="n">current</span>
         <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">decomps</span><span class="p">)</span></div>
@@ -412,7 +413,7 @@
 <span class="sd">        EXAMPLE::</span>
 <span class="sd">        </span>
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: small_decomposition((1,1), 3)</span>
+<span class="sd">            sage: small_decomposition((1, 1), 3)</span>
 <span class="sd">            [[[(1, 1), 1], [(1, 1), 1], [(1, 1), 1]],</span>
 <span class="sd">            [[(1, 1), 2], [(1, 1), 1]],</span>
 <span class="sd">            [[(1, 1), 3]]]</span>
@@ -451,11 +452,11 @@
 <div class="viewcode-block" id="D_map">
 <a class="viewcode-back" href="../../index.html#quivercombinatorics.D_map">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">D_map</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluates a map :math:`D:\mathbb{Z}^k\to\mathbb{Z}^n` from dimension vectors of the :math:`ext`-quiver to dimension vectors of the original quiver by :math:`D(m_1,\dots,m_k):=\sum_{i=1}^k m_i\beta^{(i)}`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluates a map :math:`D:\mathbb{Z}^k\to\mathbb{Z}^n` from dimension vectors of the :math:`\mathrm{ext}`-quiver to dimension vectors of the original quiver by :math:`D(m_1,\dots,m_k):=\sum_{i=1}^k m_i\beta^{(i)}`</span>
 
 <span class="sd">        INPUT:</span>
 <span class="sd">        </span>
-<span class="sd">        - ``m`` -- a vector in :math:`\mathbb{Z}ext(Q)_0`</span>
+<span class="sd">        - ``m`` -- a vector in :math:`\mathbb{Z}\operatorname{ext}(Q)_0`</span>
 <span class="sd">        - ``tau`` -- a representation type of the original quiver, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`</span>
 
 <span class="sd">        OUTPUT: a vector in :math:`\mathbb{Z}Q_0`</span>
@@ -474,20 +475,20 @@
 <div class="viewcode-block" id="D_map_on_rep">
 <a class="viewcode-back" href="../../index.html#quivercombinatorics.D_map_on_rep">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">D_map_on_rep</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies ``d_map`` to a representation type of the :math:`ext`-quiver</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies ``d_map`` to a representation type of the :math:`\mathrm{ext}`-quiver</span>
 
 <span class="sd">        INPUT:</span>
 
-<span class="sd">        - ``L`` -- a representation type of the :math:`ext`-quiver, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}ext(Q)_0`, and the second is in :math:`\mathbb{N}`</span>
+<span class="sd">        - ``L`` -- a representation type of the :math:`\mathrm{ext}`-quiver, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}\mathrm{ext}(Q)_0`, and the second is in :math:`\mathbb{N}`</span>
 <span class="sd">        - ``tau`` -- a representation type, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`</span>
 
-<span class="sd">        OUTPUT: a representation type of the :math:`ext`-quiver</span>
+<span class="sd">        OUTPUT: a representation type of the :math:`\mathrm{ext}`-quiver</span>
 
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: tau = [[(1, 1), 2], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]</span>
-<span class="sd">            sage: D_map_on_rep([[(1,2,8,-3),3]],tau)</span>
+<span class="sd">            sage: D_map_on_rep([[(1, 2, 8, -3), 3]],tau)</span>
 <span class="sd">            [[(8, 8), 3]]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -512,8 +513,8 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: rho = [((1,0), 2), ((1,0), 3)]</span>
-<span class="sd">            sage: epsilon = [((1,0), 5)]</span>
+<span class="sd">            sage: rho = [((1, 0), 2), ((1, 0), 3)]</span>
+<span class="sd">            sage: epsilon = [((1, 0), 5)]</span>
 <span class="sd">            sage: is_direct_successor(epsilon, rho)</span>
 <span class="sd">            True</span>
 <span class="sd">        </span>
@@ -543,21 +544,21 @@
 <div class="viewcode-block" id="Quiver.p_function">
 <a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.p_function">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">p_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Outputs the function :math:`p(x)=1-0.5(x,x)`, where :math:`(x,x)` is the symmetrized Euler form. Note that :math:`p(x)\geq0` if :math:`x` is a root, and :math:`p(x)=0` if and only if :math:`x` is a real root</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Outputs the function :math:`p(x) = 1 - \frac{1}{2}(x, x)`, where :math:`(x, x)` is the symmetrized Euler form. Note that :math:`p(x)\geq 0` if :math:`x` is a root, and :math:`p(x) = 0` if and only if :math:`x` is a real root</span>
 <span class="sd">        </span>
 <span class="sd">        INPUT:</span>
 
 <span class="sd">        - ``x`` -- an element of :math:`\mathbb{Z}Q_0`</span>
 
-<span class="sd">        OUTPUT: :math:`1-0.5(x,x)`</span>
+<span class="sd">        OUTPUT: :math:`1 - \frac{1}{2}(x, x)`</span>
 
 <span class="sd">        EXAMPLE:</span>
 
-<span class="sd">        The :math:`p` function evaluated at :math:`(2,3)` of the doubled A2 quiver::</span>
+<span class="sd">        The :math:`p` function evaluated at :math:`(2, 3)` of the doubled A2 quiver::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1], [1,0]])</span>
-<span class="sd">            sage: Q.p_function((2,3))</span>
+<span class="sd">            sage: Q = Quiver([[0, 1], [1, 0]])</span>
+<span class="sd">            sage: Q.p_function((2, 3))</span>
 <span class="sd">            0.0</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -580,8 +581,8 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1], [1,0]])</span>
-<span class="sd">            sage: Q.R_lambda_plus((1,-1), (5,5))</span>
+<span class="sd">            sage: Q = Quiver([[0, 1], [1, 0]])</span>
+<span class="sd">            sage: Q.R_lambda_plus((1, -1), (5, 5))</span>
 <span class="sd">            [(1, 1), (2, 2), (3, 3), (4, 4)]</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -609,8 +610,8 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1], [1,0]])</span>
-<span class="sd">            sage: Q.sigma_lambda((1,-1), (5,5))</span>
+<span class="sd">            sage: Q = Quiver([[0, 1], [1, 0]])</span>
+<span class="sd">            sage: Q.sigma_lambda((1, -1), (5, 5))</span>
 <span class="sd">            [(1, 1)]</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -640,8 +641,8 @@
 
 <span class="sd">        EXAMPLES::</span>
 
-<span class="sd">            Q = Quiver([[0,1], [1,0]])</span>
-<span class="sd">            Q.all_representation_types((1,-1), (5,5))</span>
+<span class="sd">            Q = Quiver([[0, 1], [1, 0]])</span>
+<span class="sd">            Q.all_representation_types((1, -1), (5, 5))</span>
 <span class="sd">            [[[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]],</span>
 <span class="sd">            [[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 2]],</span>
 <span class="sd">            [[(1, 1), 1], [(1, 1), 1], [(1, 1), 3]],</span>
@@ -672,12 +673,12 @@
 <span class="sd">                </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_dimension_vector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">all_decomps</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma_lambda</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">all_decomps</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_lambda</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
         <span class="n">all_reps</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">decomp</span> <span class="ow">in</span> <span class="n">all_decomps</span><span class="p">:</span>
             <span class="n">current</span> <span class="o">=</span> <span class="p">[[]]</span>
             <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">decomp</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_imaginary_root</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">Q</span><span class="o">.</span><span class="n">is_imaginary_root</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
                     <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">small_decomposition</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">([</span><span class="n">pair</span><span class="p">]</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span><span class="p">]</span>
@@ -700,7 +701,7 @@
 <span class="sd">        EXAMPLE::</span>
 <span class="sd">            </span>
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1],[1,0]])</span>
+<span class="sd">            sage: Q = Quiver([[0, 1],[1, 0]])</span>
 <span class="sd">            sage: Q.symplectic_leaf_dimension([[(1, 1), 2], [(1, 1), 3]])</span>
 <span class="sd">            4</span>
 <span class="sd">        </span>
@@ -727,8 +728,8 @@
 <span class="sd">        EXAMPLE::</span>
 <span class="sd">            </span>
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1],[1,0]])</span>
-<span class="sd">            sage: Q.CB_decomposition((1,-1), (5,5))</span>
+<span class="sd">            sage: Q = Quiver([[0, 1],[1, 0]])</span>
+<span class="sd">            sage: Q.CB_decomposition((1, -1), (5, 5))</span>
 <span class="sd">            [[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -759,8 +760,8 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1],[1,0]])</span>
-<span class="sd">            sage: Q.quiver_variety_dimension((1,-1), (5,5))</span>
+<span class="sd">            sage: Q = Quiver([[0, 1],[1, 0]])</span>
+<span class="sd">            sage: Q.quiver_variety_dimension((1, -1), (5, 5))</span>
 <span class="sd">            10</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -782,8 +783,8 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1],[1,0]])</span>
-<span class="sd">            sage: Q.codimension_two_leaves((0,0), (5,5))</span>
+<span class="sd">            sage: Q = Quiver([[0, 1],[1, 0]])</span>
+<span class="sd">            sage: Q.codimension_two_leaves((0, 0), (5, 5))</span>
 <span class="sd">            [[[(0, 1), 1],</span>
 <span class="sd">            [(1, 0), 1],</span>
 <span class="sd">            [(1, 1), 1],</span>
@@ -811,12 +812,12 @@
 
 <span class="sd">        - ``tau`` -- a representation type, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`</span>
 
-<span class="sd">        OUTPUT: The ext-quiver</span>
+<span class="sd">        OUTPUT: The :math:`\mathrm{ext}`-quiver</span>
 
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: Q = Quiver([[0,1],[1,0]])</span>
+<span class="sd">            sage: Q = Quiver([[0, 1], [1, 0]])</span>
 <span class="sd">            sage: tau = [[(1, 1), 2], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]</span>
 <span class="sd">            sage: Q.ext_quiver(tau)</span>
 <span class="sd">            a quiver with 4 vertices and 4 arrows</span>
@@ -895,7 +896,7 @@
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = CyclicQuiver(3)</span>
-<span class="sd">            sage: Q.all_subminimal_representation_types((3,3,3))</span>
+<span class="sd">            sage: Q.all_subminimal_representation_types((3, 3, 3))</span>
 <span class="sd">            [([[(0, 0, 1), 2], [(0, 1, 0), 2], [(1, 0, 0), 2], [(1, 1, 1), 1]], &#39;A_{2}&#39;),</span>
 <span class="sd">            ([[(0, 0, 1), 1], [(0, 1, 0), 1], [(1, 0, 0), 1], [(1, 1, 1), 2]], &#39;A_{2}&#39;),</span>
 <span class="sd">            ([[(1, 1, 1), 3]], &#39;A_{2}&#39;)]</span>
@@ -906,9 +907,9 @@
 <span class="sd">            [([[(1), 1], [(1), 4]], &#39;m_{3}&#39;), ([[(1), 2], [(1), 3]], &#39;m_{3}&#39;)]</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: A = [[0,1,0,3], [1,0,0,0], [0,0,2,0], [0,0,0,0]]</span>
+<span class="sd">            sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]</span>
 <span class="sd">            sage: Q = Quiver(A)</span>
-<span class="sd">            sage: Q.all_minimal_non_trivial_representation_types((1,1,4,1))</span>
+<span class="sd">            sage: Q.all_minimal_non_trivial_representation_types((1, 1, 4, 1))</span>
 <span class="sd">            [([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]], &#39;A_1&#39;),</span>
 <span class="sd">            ([[(0, 0, 1, 0), 4], [(0, 1, 0, 0), 1], [(1, 0, 0, 1), 1]], &#39;a_{2}&#39;),</span>
 <span class="sd">            ([[(0, 0, 0, 1), 1],</span>
@@ -1006,7 +1007,7 @@
 <span class="sd">        EXAMPLES::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: A = [[0,1,0,3], [1,0,0,0], [0,0,2,0], [0,0,0,0]]</span>
+<span class="sd">            sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]</span>
 <span class="sd">            sage: Q = Quiver(A)</span>
 <span class="sd">            sage: Q.minimal_degenerations([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]])</span>
 <span class="sd">            [([[(0, 0, 1, 0), 4], [(1, 1, 0, 1), 1]], &#39;$a_{2}(1)$&#39;),</span>
@@ -1045,7 +1046,7 @@
 <span class="sd">        EXAMPLES::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]</span>
+<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
 <span class="sd">            sage: Q.get_Hasse_diagram_method_1((0,0,0), (2,4,3))</span>
 <span class="sd">            </span>
@@ -1111,9 +1112,9 @@
 <span class="sd">        EXAMPLES::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]</span>
+<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: Q.plot_Hasse_diagram_method_1((0,0,0), (2,4,3))</span>
+<span class="sd">            sage: Q.plot_Hasse_diagram_method_1((0, 0, 0), (2, 4, 3))</span>
 <span class="sd">            Finite poset containing 8 elements</span>
 
 <span class="sd">            sage: Q = LoopQuiver(3)</span>
@@ -1145,9 +1146,9 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]</span>
+<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: P = self.plot_Hasse_diagram_method_1_labels((0,0,0), (2,4,3), latex=True, dimensions=True)</span>
+<span class="sd">            sage: P = self.plot_Hasse_diagram_method_1_labels((0, 0, 0), (2, 4, 3), latex=True, dimensions=True)</span>
 <span class="sd">            sage: P.set_latex_options(format=&#39;dot2tex&#39;, prog=&#39;dot&#39;, rankdir=&#39;up&#39;, edge_labels=True, color_by_label=False)</span>
 <span class="sd">            sage: tex_code = latex(P)</span>
 <span class="sd">            sage: with open(&quot;poset_diagram.tex&quot;, &quot;w&quot;) as f:</span>
@@ -1181,7 +1182,7 @@
 <span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: A = [[0,1,0,3], [1,0,0,0], [0,0,2,0], [0,0,0,0]]</span>
+<span class="sd">            sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]</span>
 <span class="sd">            sage: Q = Quiver(A)</span>
 <span class="sd">            sage: Q.all_decompositions((1, 0, 2, 0))</span>
 <span class="sd">            [[[(0, 0, 1, 0), 1], [(0, 0, 1, 0), 1], [(1, 0, 0, 0), 1]],</span>
@@ -1196,7 +1197,7 @@
         <span class="k">for</span> <span class="n">decomp</span> <span class="ow">in</span> <span class="n">all_decomps</span><span class="p">:</span>
             <span class="n">current</span> <span class="o">=</span> <span class="p">[[]]</span>
             <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">decomp</span><span class="p">:</span>
-                <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">small_decomposition</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">small_decomp</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
             <span class="n">all_reps</span> <span class="o">=</span> <span class="n">all_reps</span> <span class="o">+</span> <span class="n">current</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">all_reps</span><span class="p">)</span></div>
 
@@ -1217,9 +1218,9 @@
 <span class="sd">        EXAMPLES::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]</span>
+<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: Q.get_Hasse_diagram_method_2((0,0,0), (2,4,3))</span>
+<span class="sd">            sage: Q.get_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))</span>
 <span class="sd">            </span>
 <span class="sd">            ([[[(0, 0, 1), 1],</span>
 <span class="sd">            [(0, 1, 0), 2],</span>
@@ -1302,9 +1303,9 @@
 <span class="sd">        EXAMPLES::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]</span>
+<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: Q.plot_Hasse_diagram_method_2((0,0,0), (2,4,3))</span>
+<span class="sd">            sage: Q.plot_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))</span>
 <span class="sd">            Finite poset containing 8 elements</span>
 
 <span class="sd">            sage: Q = LoopQuiver(3)</span>

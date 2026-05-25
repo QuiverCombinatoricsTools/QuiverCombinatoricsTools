@@ -1,6 +1,6 @@
-***********
+************************
 QuiverCombinatoricsTools
-***********
+************************
 
 `QuiverCombinatoricsTools` is a SageMath package that adds combinatorial functions to `QuiverTools` to calculate symplectic leaves of quiver varieties, available here `https://github.com/emanuel-roth/QuiverCombinatoricsTools <https://github.com/emanuel-roth/QuiverCombinatoricsTools>`_. It adds on to the `QuiverTools` package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here `https://sage.quiver.tools/ <https://sage.quiver.tools/>`_ and here `https://github.com/QuiverTools/QuiverTools <https://github.com/QuiverTools/QuiverTools>`_, so consult their documentation when needed.
 
@@ -39,9 +39,9 @@ Here are some functions that help generate quivers to test examples.
 We notate quivers by :math:`Q`, with vertices in :math:`Q_0` and edges in :math:`Q_1`.
 
 Constructing :math:`\Sigma_{\lambda}`
-==================
+=====================================
 
-We follow William Crawley-Boevey in `this paper <https://link.springer.com/article/10.1023/A:1017558904030>`_. Given a quiver :math:`Q` with :math:`n` vertices, and :math:`{\lambda}\in\mathbb{Z}^n`, :math:`\Sigma_{\lambda}` is the set of :math:`\alpha\in\mathbb{N}^n` such that :math:`\alpha` is a positive root of :math:`Q`, :math:`\alpha\cdot\lambda = 0`, and
+We follow William Crawley-Boevey in `this paper <https://link.springer.com/article/10.1023/A:1017558904030>`__. Given a quiver :math:`Q` with :math:`n` vertices, and :math:`{\lambda}\in\mathbb{Z}^n`, :math:`\Sigma_{\lambda}` is the set of :math:`\alpha\in\mathbb{N}^n` such that :math:`\alpha` is a positive root of :math:`Q`, :math:`\alpha\cdot\lambda = 0`, and
 
 .. math::
 
@@ -82,7 +82,7 @@ We allow :math:`\beta^{(i)}` to occur multiple times if it is an imaginary root,
 
    p(\tau):=\sum_{i=1}^k p(\beta^{(i)})
 
-is maximal. In order to construct CB-decompositions (called canonical decompositions in `this paper <https://link.springer.com/article/10.1023/A:1017558904030>`_, but are *not* the same as ``canonical_decomposition`` from `QuiverTools`). We first need to find all representation types of :math:`x`, up to a bound :math:`v`, for which we need the following helper functions.
+is maximal. In order to construct CB-decompositions (called canonical decompositions in `this paper <https://link.springer.com/article/10.1023/A:1017558904030>`__, but are *not* the same as ``canonical_decomposition`` from `QuiverTools`). We first need to find all representation types of :math:`x`, up to a bound :math:`v`, for which we need the following helper functions.
 
 .. autofunction:: quivercombinatorics.vector_decomposition
 
@@ -106,17 +106,17 @@ It's often important to know the codimension 2 leaves of the quiver variety :mat
 
 .. automethod:: quivercombinatorics.quivercombinatorics.Quiver.codimension_two_leaves
 
-:math:`ext`-quivers
-==================
+:math:`\mathrm{ext}`-quivers
+============================
 
-Let :math:`\tau=(\beta^{(1)},n_1;\dots;\beta^{(k)},n_k)` be a representation type of :math:`Q`. The *`ext`-quiver* :math:`\tilde{Q}` associated to the symplectic leaf is the quiver with :math:`k` vertices where the number of edges between vertex :math:`i` and vertex :math:`j` is :math:`-(\beta^{(i)},\beta^{(j)})` and the number of loops at vertex :math:`i` is :math:`p(\beta^{(i)})`. The corresponding dimension vector of :math:`\tilde{Q}` is :math:`\mathbf{n}=(n_1,\dots,n_k)`, and we take :math:`\tilde{\lambda}=0`.
+Let :math:`\tau=(\beta^{(1)},n_1;\dots;\beta^{(k)},n_k)` be a representation type of :math:`Q`. The :math:`\mathrm{ext}`\ *-quiver* :math:`\tilde{Q}` associated to the symplectic leaf is the quiver with :math:`k` vertices where the number of edges between vertex :math:`i` and vertex :math:`j` is :math:`-(\beta^{(i)},\beta^{(j)})` and the number of loops at vertex :math:`i` is :math:`p(\beta^{(i)})`. The corresponding dimension vector of :math:`\tilde{Q}` is :math:`\mathbf{n}=(n_1,\dots,n_k)`, and we take :math:`\tilde{\lambda}=0`.
 
 .. automethod:: quivercombinatorics.quivercombinatorics.Quiver.ext_quiver
 
 .. autofunction:: quivercombinatorics.ext_dimension_vector
 
 Classification of minimal degenerations of symplectic leaves
-==================
+============================================================
 
 For a quiver :math:`Q`, a positive root :math:`\alpha` is *minimal imaginary* if it is imaginary and given any positive root :math:`\beta`, :math:`\alpha>\beta` implies :math:`\beta` is real.
 
@@ -126,7 +126,7 @@ For a quiver :math:`Q`, a positive root :math:`\alpha` is *minimal imaginary* if
 
 Given a quiver :math:`Q`, a *subquiver* :math:`T = (T_0, T_1)` is specified by a subset :math:`T_0\subset Q_0` of the vertices. Then, for :math:`i, j \in T_0 \subset Q_0` the number of edges between vertex :math:`i` and :math:`j` in :math:`T` equals the number of edges between vertex :math:`i` and :math:`j` in :math:`Q`. In particular, if :math:`i\in T_0` then the number of loops at :math:`i` in :math:`T` is the same as the number of loops at :math:`i` in :math:`Q`. The support of a dimension vector :math:`v` is the subset :math:`T_0 \subset Q_0` of all vertices :math:`i` such that :math:`v_i\neq 0`. We think of the support of :math:`v` as a subquiver of :math:`Q`.
 
-We say that the subquiver :math:`T` is of *aﬃne ADE type* if it is one of the graphs appearing in the classification of simply-laced aﬃne Dynkin diagrams :math:`\tilde{A}_l`, :math:`\tilde{D}_l` or :math:`\tilde{E}_6`, :math:`\tilde{E}_7`, :math:`\tilde{E}_8`. Then there is a unique imaginary root :math:`\delta`, with :math:`p(\delta)=1`, whose support is :math:`T`. The key result is the classification of minimal imaginary roots is the following (Bellamy-Schedler 2026).
+We say that the subquiver :math:`T` is of *affine ADE type* if it is one of the graphs appearing in the classification of simply-laced affine Dynkin diagrams :math:`\tilde{A}_l`, :math:`\tilde{D}_l` or :math:`\tilde{E}_6`, :math:`\tilde{E}_7`, :math:`\tilde{E}_8`. Then there is a unique imaginary root :math:`\delta`, with :math:`p(\delta)=1`, whose support is :math:`T`. The key result is the classification of minimal imaginary roots is the following (Bellamy-Schedler 2026).
 
 .. admonition:: Theorem (Bellamy-Schedler, 2026)
 
@@ -138,7 +138,7 @@ We say that the subquiver :math:`T` is of *aﬃne ADE type* if it is one of the 
 
       3. :math:`(\mathbb{C}^{2g}/\mathbb{Z}_2,0)`.
 
-      4. :math:`Spec(\mathbb{C}[x\mid\deg x\geq 2])`.
+      4. :math:`\operatorname{Spec}(\mathbb{C}[x\mid\deg x\geq 2])`.
 
 We define :math:`\tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alpha_r-n\beta_r)`. In each of the above cases, the leaf :math:`L` from this theorem corresponds to representation types:
 
@@ -163,13 +163,13 @@ We assign the following labels to each subminimal representation type (i.e., rep
 .. automethod:: quivercombinatorics.quivercombinatorics.Quiver.all_subminimal_representation_types
 
 Plotting symplectic leaves in Hasse diagrams
-==================
+============================================
 
 We visualize the poset of symplectic leaves (equivalently of representation types) as a Hasse diagram: The vertices in this diagram are the representation types and the minimal degenerations, represented by an edge connecting two representation types, correspond to the situation where :math:`L_1\leq L_2` (equivalently, :math:`\tau_1\leq\tau_2`) but there does not exist :math:`L_3` such that :math:`L_1 < L_3 < L_2`. We wish to compute the Hasse diagram, for which there are two methods.
 
 .. admonition:: Method 1
 
-   Traverse the Hasse diagram from the bottom, starting with the lowest leaves. When we reach a leaf :math:`L_i`, we compute the :math:`ext`-quiver associated to :math:`L_i`. On this :math:`ext`-quiver, we compute subminimal representation types of :math:`\mathbf{n}`. For each such representation type :math:`\tilde{\tau}=(\gamma^{(1)},m_1;\dots;\gamma^{(r)},m_r)`, define:
+   Traverse the Hasse diagram from the bottom, starting with the lowest leaves. When we reach a leaf :math:`L_i`, we compute the :math:`\mathrm{ext}`-quiver associated to :math:`L_i`. On this :math:`\mathrm{ext}`-quiver, we compute subminimal representation types of :math:`\mathbf{n}`. For each such representation type :math:`\tilde{\tau}=(\gamma^{(1)},m_1;\dots;\gamma^{(r)},m_r)`, define:
 
    .. math::
 
@@ -213,7 +213,7 @@ The second method to compute this Hasse diagram is as follows.
    
       \left(n_1,\beta^{(1)};\dots;n_k,\beta^{(k)}\right),
    
-   where the :math:`\beta^{(i)}` are dimension vectors satisfying :math:`\beta^{(i)}\leq v`. Following `this paper <http://matrix.uantwerpen.be/lieven.lebruyn/b2hd-LeBruyn1988b.html>`_, we say that:
+   where the :math:`\beta^{(i)}` are dimension vectors satisfying :math:`\beta^{(i)}\leq v`. Following `this paper <http://matrix.uantwerpen.be/lieven.lebruyn/b2hd-LeBruyn1988b.html>`__, we say that:
 
    .. math::
    
@@ -237,9 +237,11 @@ The symplectic leaves form a subset of this set of decompositions, and by restri
 
 It seems that Method 2 is slower than Method 1, so we only implemented a TikZ exporter for Method 1.
 
-Future directions
-==================
-
-   1. We could compute the hyperplane arrangement on which the Namikawa-Weyl group acts.
-
-   2. We could rewrite this code in *Julia*, which is apparently more performant than SageMath in some instances. We can use that *QuiverTools* has a *Julia* implementation.
+..
+   Future directions
+..
+   ==================
+..
+      1. We could compute the hyperplane arrangement on which the Namikawa-Weyl group acts.
+..
+      2. We could rewrite this code in *Julia*, which is apparently more performant than SageMath in some instances. We can use that *QuiverTools* has a *Julia* implementation.
