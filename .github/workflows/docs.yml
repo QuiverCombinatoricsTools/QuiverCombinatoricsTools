@@ -37,7 +37,6 @@ jobs:
         run: |
           cd docs
           make html
-          make latexpdf
 
       - name: Prepare Pages folder
         run: |
@@ -45,7 +44,6 @@ jobs:
           mkdir -p docs/_site
           touch docs/_build/html/.nojekyll
           cp -r docs/_build/html/* docs/_site/
-          cp docs/_build/latex/quivertools.pdf docs/_site/
 
       - name: Commit built docs
         run: |
