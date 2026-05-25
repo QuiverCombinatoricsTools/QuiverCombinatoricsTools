@@ -8,7 +8,7 @@ We code an add-on to the SageMath package [QuiverTools](https://github.com/Quive
 
 Where you have sage installed, run 
 
-``pip install git+ssh://git@github.com/emanuel-roth/QuiverCombinatoricsTools.git``
+``pip install git+https://git@github.com/emanuel-roth/QuiverCombinatoricsTools.git``
 
 Then, in any sage code, use `from quivercombinatorics import *` to get started.
 
