@@ -6,32 +6,6 @@ We code an add-on to the SageMath package [QuiverTools](https://github.com/Quive
 
 # Instructions
 
-Since this is a private repository for now, you can access it as follows. In your unix bash terminal, add an .ssh folder if you don't have it already
-
-``mkdir -p ~/.ssh``
-
-Then open nano to make authorized_keys
-
-``nano ~/.ssh/authorized_keys``
-
-and add this key to the file
-
-``ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHt2WDoUV+R+t2sjWwsRrhYqbJiZJJsoagfGoNnlDXb QuiverCombinatoricsTools``
-
-Then open nano in the ssh config
-
-``nano ~/.ssh/config``
-
-and add this
-
-```
-Host github      
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519
-  IdentitiesOnly yes
-  ```
-
 Where you have sage installed, run 
 
 ``pip install git+ssh://git@github.com/emanuel-roth/QuiverCombinatoricsTools.git``
