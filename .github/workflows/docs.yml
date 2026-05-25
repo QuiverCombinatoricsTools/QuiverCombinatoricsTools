@@ -9,7 +9,9 @@ on:
       - ".github/workflows/docs.yml"
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -20,11 +22,17 @@ jobs:
       options: --user root
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Debug package import
+        run: |
+          sage -python -c "import quiver_tools; print('IMPORT OK'); print(quiver_tools.__file__)"
 
       - name: Install dependencies
         run: |
           export DEBIAN_FRONTEND=noninteractive
+
           apt-get update
           apt-get install -y \
             tzdata \
@@ -37,41 +45,51 @@ jobs:
             xindy \
             python3-sphinx
 
+          sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
+
+          sage --pip install sphinx
           sage --pip install sphinx-book-theme
+
           cd /tmp/build && rm -rf .git
           sage --pip install .
 
-      - name: Build docs
+      - name: Build documentation
         run: |
           cd docs
           sage -sh -c "make html"
           sage -sh -c "make latexpdf"
 
-      - name: Prepare Pages folder
+      - name: Prepare Pages artifact
         run: |
-          rm -rf docs/_site
-          mkdir -p docs/_site
-          touch docs/_build/html/.nojekyll
-          
-          cp -r docs/_build/html/* docs/_site/
-          
-          mkdir -p docs/_site/pdf
-          cp docs/_build/latex/*.pdf docs/_site/pdf/
+          rm -rf pages
+          mkdir -p pages
 
-      - name: Upload Artifacts
+          cp -a docs/_build/html/. pages/
+          touch pages/.nojekyll
+
+          mkdir -p pages/pdf
+          cp docs/_build/latex/*.pdf pages/pdf/ || true
+
+          echo "Pages contents:"
+          ls -R pages
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/_site
+          path: pages
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
+
     permissions:
       pages: write
       id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
