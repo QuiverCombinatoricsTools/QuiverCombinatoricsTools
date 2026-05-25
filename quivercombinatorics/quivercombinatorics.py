@@ -298,7 +298,7 @@ class Quiver(BaseQuiver):
         - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
         - ``v`` -- an element of :math:`\mathbb{N}Q_0`
 
-        OUTPUT: A list of elements of :math:`R_\lambda^+`, where ``l`` is `\lambda`, the set of positive roots :math:`\alpha` with :math:`\alpha\cdot\lambda=0`, up to the upper bound :math:`v`
+        OUTPUT: A list of elements of :math:`R_\lambda^+`, where ``l`` is :math:`\lambda`, the set of positive roots :math:`\alpha` with :math:`\alpha\cdot\lambda=0`, up to the upper bound :math:`v`
 
         EXAMPLE::
 
@@ -353,7 +353,7 @@ class Quiver(BaseQuiver):
         - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
         - ``x`` -- an element of :math:`\mathbb{N}Q_0`
 
-        OUTPUT: A list of representation types of a quiver, with respect to :math:`x`, and where ``l`` is `\lambda`. Each representation type is stored as a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`
+        OUTPUT: A list of representation types of a quiver, with respect to :math:`x`, and where ``l`` is :math:`\lambda`. Each representation type is stored as a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`
 
         EXAMPLES::
 
