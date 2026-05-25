@@ -30,7 +30,7 @@ def quiver_from_cartan_matrix(C):
         EXAMPLE::
         
             sage: from quivercombinatorics import *
-            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
+            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: quiver_from_cartan_matrix(C)
             a quiver with 3 vertices and 3 arrows
         
@@ -62,6 +62,7 @@ def random_quiver(vertices, max_arrows_per_edge):
             sage: random_quiver(46, 25)
             a quiver with 46 vertices and 26388 arrows
             
+        
         """
     A = [[random.randint(0, max_arrows_per_edge) for _ in range(vertices)] for _ in range(vertices)]
     G = DiGraph(matrix(A))
@@ -80,7 +81,7 @@ def N_set(S, v):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: N_set([[0,1]],[0,3])
+            sage: N_set([[0, 1]],[0, 3])
             [(0, 1), (0, 2), (0, 3)]
         
         """
@@ -103,38 +104,38 @@ def N_set(S, v):
         reachable = new_reachable
     return [vector(a) for a in reachable]
 
-def vector_decomposition(S, x):
+def vector_decomposition(x, S):
     r"""For a list of vectors :math:`S` in :math:`\mathbb{Z}Q_0`, returns all possible sums of vectors in :math:`S` as a list that sum up to :math:`x`. This is a helper function in order to define CB-decompositions
         
         INPUT:
 
-        - ``S`` -- a list of vectors `S` in :math:`\mathbb{Z}Q_0`
         - ``x`` -- a vector in :math:`\mathbb{Z}Q_0`
+        - ``S`` -- a list of vectors `S` in :math:`\mathbb{Z}Q_0`
 
         OUTPUT: All possible sums of vectors in :math:`S` as a list that sum up to :math:`x`
 
         EXAMPLE::
         
             sage: from quivercombinatorics import *
-            sage: vector_decomposition([(0,1),(1,0),(1,1)], (4,5))
+            sage: vector_decomposition((4, 5), [(0, 1),(1, 0),(1, 1)])
             [[[(0, 1), 1], [(1, 1), 4]],
             [[(0, 1), 2], [(1, 0), 1], [(1, 1), 3]],
             [[(0, 1), 3], [(1, 0), 2], [(1, 1), 2]],
             [[(0, 1), 4], [(1, 0), 3], [(1, 1), 1]],
             [[(0, 1), 5], [(1, 0), 4]]]
         
-    """
+        """
     x = vector(x)
     if all(i == 0 for i in x):
         return [[]]
     if not S:
         return []
     s = vector(S[0])
-    decomps = vector_decomposition(S[1:], x)
+    decomps = vector_decomposition(x, S[1:]) 
     n = 1
-    while all(i >= 0 for i in x - n*s): 
-        current = vector_decomposition(S[1:], x - n*s)
-        current = [[[s, n]] + item for item in current]
+    while all(i >= 0 for i in x - n*s):
+        current = vector_decomposition(x - n*s, S[1:])
+        current = [[[s,n]] + item for item in current]
         decomps = decomps + current
         n += 1
     return sorted(decomps)
@@ -152,7 +153,7 @@ def small_decomposition(v, n):
         EXAMPLE::
         
             sage: from quivercombinatorics import *
-            sage: small_decomposition((1,1), 3)
+            sage: small_decomp((1, 1), 3)
             [[[(1, 1), 1], [(1, 1), 1], [(1, 1), 1]],
             [[(1, 1), 2], [(1, 1), 1]],
             [[(1, 1), 3]]]
@@ -185,11 +186,11 @@ def ext_dimension_vector(tau):
     return vector([pair[1] for pair in tau])
 
 def D_map(m, tau):
-    r"""Evaluates a map :math:`D:\mathbb{Z}^k\to\mathbb{Z}^n` from dimension vectors of the :math:`ext`-quiver to dimension vectors of the original quiver by :math:`D(m_1,\dots,m_k):=\sum_{i=1}^k m_i\beta^{(i)}`
+    r"""Evaluates a map :math:`D:\mathbb{Z}^k\to\mathbb{Z}^n` from dimension vectors of the :math:`\mathrm{ext}`-quiver to dimension vectors of the original quiver by :math:`D(m_1,\dots,m_k):=\sum_{i=1}^k m_i\beta^{(i)}`
 
         INPUT:
         
-        - ``m`` -- a vector in :math:`\mathbb{Z}ext(Q)_0`
+        - ``m`` -- a vector in :math:`\mathbb{Z}\operatorname{ext}(Q)_0`
         - ``tau`` -- a representation type of the original quiver, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`
 
         OUTPUT: a vector in :math:`\mathbb{Z}Q_0`
@@ -205,20 +206,20 @@ def D_map(m, tau):
     return sum(m[i]*vector(tau[i][0]) for i in range(len(m)))
 
 def D_map_on_rep(tau, L):
-    r"""Applies ``d_map`` to a representation type of the :math:`ext`-quiver
+    r"""Applies ``d_map`` to a representation type of the :math:`\mathrm{ext}`-quiver
 
         INPUT:
 
-        - ``L`` -- a representation type of the :math:`ext`-quiver, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}ext(Q)_0`, and the second is in :math:`\mathbb{N}`
+        - ``L`` -- a representation type of the :math:`\mathrm{ext}`-quiver, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}\mathrm{ext}(Q)_0`, and the second is in :math:`\mathbb{N}`
         - ``tau`` -- a representation type, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`
 
-        OUTPUT: a representation type of the :math:`ext`-quiver
+        OUTPUT: a representation type of the :math:`\mathrm{ext}`-quiver
 
         EXAMPLE::
 
             sage: from quivercombinatorics import *
             sage: tau = [[(1, 1), 2], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]
-            sage: D_map_on_rep([[(1,2,8,-3),3]],tau)
+            sage: D_map_on_rep([[(1, 2, 8, -3), 3]],tau)
             [[(8, 8), 3]]
 
     """
@@ -240,8 +241,8 @@ def is_direct_successor(epsilon, rho):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: rho = [((1,0), 2), ((1,0), 3)]
-            sage: epsilon = [((1,0), 5)]
+            sage: rho = [((1, 0), 2), ((1, 0), 3)]
+            sage: epsilon = [((1, 0), 5)]
             sage: is_direct_successor(epsilon, rho)
             True
         
@@ -268,21 +269,21 @@ def is_direct_successor(epsilon, rho):
 
 class Quiver(BaseQuiver):
     def p_function(self, x):
-        r"""Outputs the function :math:`p(x)=1-0.5(x,x)`, where :math:`(x,x)` is the symmetrized Euler form. Note that :math:`p(x)\geq0` if :math:`x` is a root, and :math:`p(x)=0` if and only if :math:`x` is a real root
+        r"""Outputs the function :math:`p(x) = 1 - \frac{1}{2}(x, x)`, where :math:`(x, x)` is the symmetrized Euler form. Note that :math:`p(x)\geq 0` if :math:`x` is a root, and :math:`p(x) = 0` if and only if :math:`x` is a real root
         
         INPUT:
 
         - ``x`` -- an element of :math:`\mathbb{Z}Q_0`
 
-        OUTPUT: :math:`1-0.5(x,x)`
+        OUTPUT: :math:`1 - \frac{1}{2}(x, x)`
 
         EXAMPLE:
 
-        The :math:`p` function evaluated at :math:`(2,3)` of the doubled A2 quiver::
+        The :math:`p` function evaluated at :math:`(2, 3)` of the doubled A2 quiver::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1], [1,0]])
-            sage: Q.p_function((2,3))
+            sage: Q = Quiver([[0, 1], [1, 0]])
+            sage: Q.p_function((2, 3))
             0.0
         
         """
@@ -302,8 +303,8 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1], [1,0]])
-            sage: Q.R_lambda_plus((1,-1), (5,5))
+            sage: Q = Quiver([[0, 1], [1, 0]])
+            sage: Q.R_lambda_plus((1, -1), (5, 5))
             [(1, 1), (2, 2), (3, 3), (4, 4)]
         
         """
@@ -328,8 +329,8 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1], [1,0]])
-            sage: Q.sigma_lambda((1,-1), (5,5))
+            sage: Q = Quiver([[0, 1], [1, 0]])
+            sage: Q.sigma_lambda((1, -1), (5, 5))
             [(1, 1)]
         
         """
@@ -356,8 +357,8 @@ class Quiver(BaseQuiver):
 
         EXAMPLES::
 
-            Q = Quiver([[0,1], [1,0]])
-            Q.all_representation_types((1,-1), (5,5))
+            Q = Quiver([[0, 1], [1, 0]])
+            Q.all_representation_types((1, -1), (5, 5))
             [[[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]],
             [[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 2]],
             [[(1, 1), 1], [(1, 1), 1], [(1, 1), 3]],
@@ -388,12 +389,12 @@ class Quiver(BaseQuiver):
                 
         """
         x = self._coerce_dimension_vector(x)
-        all_decomps = vector_decomposition(self.sigma_lambda(l, x), x)
+        all_decomps = vector_decomposition(x, self.sigma_lambda(l, x))
         all_reps = []
         for decomp in all_decomps:
             current = [[]]
             for pair in decomp:
-                if self.is_imaginary_root(pair[0]):
+                if Q.is_imaginary_root(pair[0]):
                     current = [sorted(temp + item) for item in current for temp in small_decomposition(pair[0], pair[1])]
                 else:
                     current = [sorted([pair] + item) for item in current]
@@ -413,7 +414,7 @@ class Quiver(BaseQuiver):
         EXAMPLE::
             
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1],[1,0]])
+            sage: Q = Quiver([[0, 1],[1, 0]])
             sage: Q.symplectic_leaf_dimension([[(1, 1), 2], [(1, 1), 3]])
             4
         
@@ -437,8 +438,8 @@ class Quiver(BaseQuiver):
         EXAMPLE::
             
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1],[1,0]])
-            sage: Q.CB_decomposition((1,-1), (5,5))
+            sage: Q = Quiver([[0, 1],[1, 0]])
+            sage: Q.CB_decomposition((1, -1), (5, 5))
             [[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]
         
         """
@@ -466,8 +467,8 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1],[1,0]])
-            sage: Q.quiver_variety_dimension((1,-1), (5,5))
+            sage: Q = Quiver([[0, 1],[1, 0]])
+            sage: Q.quiver_variety_dimension((1, -1), (5, 5))
             10
         
         """
@@ -486,8 +487,8 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1],[1,0]])
-            sage: Q.codimension_two_leaves((0,0), (5,5))
+            sage: Q = Quiver([[0, 1],[1, 0]])
+            sage: Q.codimension_two_leaves((0, 0), (5, 5))
             [[[(0, 1), 1],
             [(1, 0), 1],
             [(1, 1), 1],
@@ -512,12 +513,12 @@ class Quiver(BaseQuiver):
 
         - ``tau`` -- a representation type, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`
 
-        OUTPUT: The ext-quiver
+        OUTPUT: The :math:`\mathrm{ext}`-quiver
 
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0,1],[1,0]])
+            sage: Q = Quiver([[0, 1], [1, 0]])
             sage: tau = [[(1, 1), 2], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]
             sage: Q.ext_quiver(tau)
             a quiver with 4 vertices and 4 arrows
@@ -587,7 +588,7 @@ class Quiver(BaseQuiver):
 
             sage: from quivercombinatorics import *
             sage: Q = CyclicQuiver(3)
-            sage: Q.all_subminimal_representation_types((3,3,3))
+            sage: Q.all_subminimal_representation_types((3, 3, 3))
             [([[(0, 0, 1), 2], [(0, 1, 0), 2], [(1, 0, 0), 2], [(1, 1, 1), 1]], 'A_{2}'),
             ([[(0, 0, 1), 1], [(0, 1, 0), 1], [(1, 0, 0), 1], [(1, 1, 1), 2]], 'A_{2}'),
             ([[(1, 1, 1), 3]], 'A_{2}')]
@@ -598,9 +599,9 @@ class Quiver(BaseQuiver):
             [([[(1), 1], [(1), 4]], 'm_{3}'), ([[(1), 2], [(1), 3]], 'm_{3}')]
 
             sage: from quivercombinatorics import *
-            sage: A = [[0,1,0,3], [1,0,0,0], [0,0,2,0], [0,0,0,0]]
+            sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]
             sage: Q = Quiver(A)
-            sage: Q.all_minimal_non_trivial_representation_types((1,1,4,1))
+            sage: Q.all_minimal_non_trivial_representation_types((1, 1, 4, 1))
             [([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]], 'A_1'),
             ([[(0, 0, 1, 0), 4], [(0, 1, 0, 0), 1], [(1, 0, 0, 1), 1]], 'a_{2}'),
             ([[(0, 0, 0, 1), 1],
@@ -695,7 +696,7 @@ class Quiver(BaseQuiver):
         EXAMPLES::
 
             sage: from quivercombinatorics import *
-            sage: A = [[0,1,0,3], [1,0,0,0], [0,0,2,0], [0,0,0,0]]
+            sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]
             sage: Q = Quiver(A)
             sage: Q.minimal_degenerations([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]])
             [([[(0, 0, 1, 0), 4], [(1, 1, 0, 1), 1]], '$a_{2}(1)$'),
@@ -731,7 +732,7 @@ class Quiver(BaseQuiver):
         EXAMPLES::
 
             sage: from quivercombinatorics import *
-            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
+            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
             sage: Q.get_Hasse_diagram_method_1((0,0,0), (2,4,3))
             
@@ -794,9 +795,9 @@ class Quiver(BaseQuiver):
         EXAMPLES::
 
             sage: from quivercombinatorics import *
-            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
+            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.plot_Hasse_diagram_method_1((0,0,0), (2,4,3))
+            sage: Q.plot_Hasse_diagram_method_1((0, 0, 0), (2, 4, 3))
             Finite poset containing 8 elements
 
             sage: Q = LoopQuiver(3)
@@ -825,9 +826,9 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
+            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
-            sage: P = self.plot_Hasse_diagram_method_1_labels((0,0,0), (2,4,3), latex=True, dimensions=True)
+            sage: P = self.plot_Hasse_diagram_method_1_labels((0, 0, 0), (2, 4, 3), latex=True, dimensions=True)
             sage: P.set_latex_options(format='dot2tex', prog='dot', rankdir='up', edge_labels=True, color_by_label=False)
             sage: tex_code = latex(P)
             sage: with open("poset_diagram.tex", "w") as f:
@@ -858,7 +859,7 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: A = [[0,1,0,3], [1,0,0,0], [0,0,2,0], [0,0,0,0]]
+            sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]
             sage: Q = Quiver(A)
             sage: Q.all_decompositions((1, 0, 2, 0))
             [[[(0, 0, 1, 0), 1], [(0, 0, 1, 0), 1], [(1, 0, 0, 0), 1]],
@@ -873,7 +874,7 @@ class Quiver(BaseQuiver):
         for decomp in all_decomps:
             current = [[]]
             for pair in decomp:
-                current = [sorted(temp + item) for item in current for temp in small_decomposition(pair[0], pair[1])]
+                current = [sorted(temp + item) for item in current for temp in small_decomp(pair[0], pair[1])]
             all_reps = all_reps + current
         return sorted(all_reps)
 
@@ -891,9 +892,9 @@ class Quiver(BaseQuiver):
         EXAMPLES::
 
             sage: from quivercombinatorics import *
-            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
+            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.get_Hasse_diagram_method_2((0,0,0), (2,4,3))
+            sage: Q.get_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))
             
             ([[[(0, 0, 1), 1],
             [(0, 1, 0), 2],
@@ -973,9 +974,9 @@ class Quiver(BaseQuiver):
         EXAMPLES::
 
             sage: from quivercombinatorics import *
-            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
+            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.plot_Hasse_diagram_method_2((0,0,0), (2,4,3))
+            sage: Q.plot_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))
             Finite poset containing 8 elements
 
             sage: Q = LoopQuiver(3)
