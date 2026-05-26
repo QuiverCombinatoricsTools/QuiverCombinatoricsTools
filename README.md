@@ -19,10 +19,4 @@ You can read the documentation of the original QuiverTools as:
 * [a webpage](https://sage.quiver.tools)
 * [a pdf](https://sage.quiver.tools/documentation.pdf)
 
-For the documentation of QuiverCombinatoricsTools, clone the repository wherever you want
-
-``git clone git@github.com:emanuel-roth/QuiverCombinatoricsTools.git``
-
-Then open the following in your web browser
-
- ``docs/_build/html/index.html``
+For the documentation of QuiverCombinatoricsTools, look here: https://emanuel-roth.github.io/QuiverCombinatoricsTools.
