@@ -244,20 +244,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for quivercombinatorics.quivercombinatorics</h1><div class="highlight"><pre>
-<span></span><span class="c1">#Packages required by QuiverTools</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.arith.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">gcd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.categories.cartesian_product</span><span class="w"> </span><span class="kn">import</span> <span class="n">cartesian_product</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.root_system.cartan_matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">CartanMatrix</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.root_system.cartan_matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">CartanMatrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.graphs.digraph</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiGraph</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.matrix.constructor</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.matrix.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">zero_matrix</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.misc.cachefunc</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_method</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.modules.free_module_element</span><span class="w"> </span><span class="kn">import</span> <span class="n">vector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">Integer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.rings.integer_ring</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZZ</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.structure.element</span><span class="w"> </span><span class="kn">import</span> <span class="n">Element</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">Poset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">latex</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quiver</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>                                                
 <span class="kn">from</span><span class="w"> </span><span class="nn">quiver</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quiver</span> <span class="k">as</span> <span class="n">BaseQuiver</span>
-
-<span class="c1">#Extra packages needed for QuiverToolsCombinatorics</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.partition</span><span class="w"> </span><span class="kn">import</span> <span class="n">Partitions</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.posets.hasse_diagram</span><span class="w"> </span><span class="kn">import</span> <span class="n">HasseDiagram</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.misc.latex</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatexExpr</span>
@@ -367,7 +365,7 @@
 <span class="sd">        INPUT:</span>
 
 <span class="sd">        - ``x`` -- a vector in :math:`\mathbb{Z}Q_0`</span>
-<span class="sd">        - ``S`` -- a list of vectors `S` in :math:`\mathbb{Z}Q_0`</span>
+<span class="sd">        - ``S`` -- a list of vectors :math:`S` in :math:`\mathbb{Z}Q_0`</span>
 
 <span class="sd">        OUTPUT: All possible sums of vectors in :math:`S` as a list that sum up to :math:`x`</span>
 
@@ -576,7 +574,7 @@
 <span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
 <span class="sd">        - ``v`` -- an element of :math:`\mathbb{N}Q_0`</span>
 
-<span class="sd">        OUTPUT: A list of elements of :math:`R_\lambda^+`, where ``l`` is `\lambda`, the set of positive roots :math:`\alpha` with :math:`\alpha\cdot\lambda=0`, up to the upper bound :math:`v`</span>
+<span class="sd">        OUTPUT: A list of elements of :math:`R_\lambda^+`, where ``l`` is :math:`\lambda`, the set of positive roots :math:`\alpha` with :math:`\alpha\cdot\lambda=0`, up to the upper bound :math:`v`</span>
 
 <span class="sd">        EXAMPLE::</span>
 
@@ -605,7 +603,7 @@
 <span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
 <span class="sd">        - ``v`` -- an element of :math:`\mathbb{N}Q_0`</span>
 
-<span class="sd">        OUTPUT: A list of elements of :math:`\Sigma_\lambda`, where ``l`` is `\lambda`, up to the upper bound :math:`v`</span>
+<span class="sd">        OUTPUT: A list of elements of :math:`\Sigma_\lambda`, where ``l`` is :math:`\lambda`, up to the upper bound :math:`v`</span>
 
 <span class="sd">        EXAMPLE::</span>
 
@@ -637,7 +635,7 @@
 <span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
 <span class="sd">        - ``x`` -- an element of :math:`\mathbb{N}Q_0`</span>
 
-<span class="sd">        OUTPUT: A list of representation types of a quiver, with respect to :math:`x`, and where ``l`` is `\lambda`. Each representation type is stored as a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`</span>
+<span class="sd">        OUTPUT: A list of representation types of a quiver, with respect to :math:`x`, and where ``l`` is :math:`\lambda`. Each representation type is stored as a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`</span>
 
 <span class="sd">        EXAMPLES::</span>
 
@@ -672,17 +670,23 @@
 <span class="sd">            [[(2, 4, 3), 1]]]</span>
 <span class="sd">                </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_dimension_vector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">all_decomps</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_lambda</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coerce_dimension_vector</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">all_decomps</span> <span class="o">=</span> <span class="n">vector_decomposition</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Q</span><span class="o">.</span><span class="n">sigma_lambda</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
         <span class="n">all_reps</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">decomp</span> <span class="ow">in</span> <span class="n">all_decomps</span><span class="p">:</span>
             <span class="n">current</span> <span class="o">=</span> <span class="p">[[]]</span>
             <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">decomp</span><span class="p">:</span>
+                <span class="n">next_current</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">if</span> <span class="n">Q</span><span class="o">.</span><span class="n">is_imaginary_root</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-                    <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">small_decomposition</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+                    <span class="n">expansions</span> <span class="o">=</span> <span class="n">small_decomposition</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">expansions</span><span class="p">:</span>
+                            <span class="n">next_current</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="n">temp</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">([</span><span class="n">pair</span><span class="p">]</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span><span class="p">]</span>
-        <span class="n">all_reps</span> <span class="o">=</span> <span class="n">all_reps</span> <span class="o">+</span> <span class="n">current</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span><span class="p">:</span>
+                        <span class="n">next_current</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="p">[</span><span class="n">pair</span><span class="p">]))</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">next_current</span>
+            <span class="n">all_reps</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">all_reps</span><span class="p">)</span></div>
 
     
@@ -1066,8 +1070,29 @@
 <span class="sd">            [[(0, 1, 0), 1], [(0, 1, 1), 1], [(0, 1, 1), 2], [(1, 0, 0), 2]],</span>
 <span class="sd">            [[(0, 1, 0), 1], [(0, 1, 1), 3], [(1, 0, 0), 2]],</span>
 <span class="sd">            [[(2, 4, 3), 1]]],</span>
-<span class="sd">            [4, 2, 2, 0, 6, 4, 2, 8],</span>
-<span class="sd">            Finite poset containing 8 elements)</span>
+<span class="sd">            [0, 1, 2, 3, 4, 5, 6, 7],</span>
+<span class="sd">            [(0, 4),</span>
+<span class="sd">            (1, 5),</span>
+<span class="sd">            (1, 0),</span>
+<span class="sd">            (2, 0),</span>
+<span class="sd">            (2, 5),</span>
+<span class="sd">            (3, 2),</span>
+<span class="sd">            (3, 1),</span>
+<span class="sd">            (3, 6),</span>
+<span class="sd">            (4, 7),</span>
+<span class="sd">            (5, 4),</span>
+<span class="sd">            (6, 5)],</span>
+<span class="sd">            [(0, 4, &#39;$A_1(1)$&#39;),</span>
+<span class="sd">            (1, 5, &#39;$A_1(1)$&#39;),</span>
+<span class="sd">            (1, 0, &#39;$c_{1}(1)$&#39;),</span>
+<span class="sd">            (2, 0, &#39;$A_1(1)$&#39;),</span>
+<span class="sd">            (2, 5, &#39;$A_1(1)$&#39;),</span>
+<span class="sd">            (3, 2, &#39;$A_1(1)$&#39;),</span>
+<span class="sd">            (3, 1, &#39;$A_1(1)$&#39;),</span>
+<span class="sd">            (3, 6, &#39;$A_1(1)$&#39;),</span>
+<span class="sd">            (4, 7, &#39;$D_{4}(1)$&#39;),</span>
+<span class="sd">            (5, 4, &#39;$c_{1}(1)$&#39;),</span>
+<span class="sd">            (6, 5, &#39;$m_{1}(1)$&#39;)])</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
@@ -1076,6 +1101,8 @@
             <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">,)</span>
         <span class="n">all_leaves</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_representation_types</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="n">num_of_leaves</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">)</span>
+        <span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">edge_labels</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">dimensions</span><span class="p">:</span>
             <span class="n">dim_counter</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
             <span class="n">elements</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1083,10 +1110,8 @@
                 <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symplectic_leaf_dimension</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
                 <span class="n">elements</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim_counter</span><span class="p">[</span><span class="n">dim</span><span class="p">]))</span>
                 <span class="n">dim_counter</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">))</span>
-                <span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="n">edge_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimal_degenerations</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
                 <span class="n">j</span> <span class="o">=</span> <span class="n">all_leaves</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -1197,7 +1222,7 @@
         <span class="k">for</span> <span class="n">decomp</span> <span class="ow">in</span> <span class="n">all_decomps</span><span class="p">:</span>
             <span class="n">current</span> <span class="o">=</span> <span class="p">[[]]</span>
             <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">decomp</span><span class="p">:</span>
-                <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">small_decomp</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">small_decomposition</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
             <span class="n">all_reps</span> <span class="o">=</span> <span class="n">all_reps</span> <span class="o">+</span> <span class="n">current</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">all_reps</span><span class="p">)</span></div>
 
@@ -1238,29 +1263,8 @@
 <span class="sd">            [[(0, 1, 0), 1], [(0, 1, 1), 1], [(0, 1, 1), 2], [(1, 0, 0), 2]],</span>
 <span class="sd">            [[(0, 1, 0), 1], [(0, 1, 1), 3], [(1, 0, 0), 2]],</span>
 <span class="sd">            [[(2, 4, 3), 1]]],</span>
-<span class="sd">            [0, 1, 2, 3, 4, 5, 6, 7],</span>
-<span class="sd">            [(0, 4),</span>
-<span class="sd">            (1, 5),</span>
-<span class="sd">            (1, 0),</span>
-<span class="sd">            (2, 0),</span>
-<span class="sd">            (2, 5),</span>
-<span class="sd">            (3, 2),</span>
-<span class="sd">            (3, 1),</span>
-<span class="sd">            (3, 6),</span>
-<span class="sd">            (4, 7),</span>
-<span class="sd">            (5, 4),</span>
-<span class="sd">            (6, 5)],</span>
-<span class="sd">            [(0, 4, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (1, 5, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (1, 0, &#39;$c_{1}(1)$&#39;),</span>
-<span class="sd">            (2, 0, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (2, 5, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (3, 2, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (3, 1, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (3, 6, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (4, 7, &#39;$D_{4}(1)$&#39;),</span>
-<span class="sd">            (5, 4, &#39;$c_{1}(1)$&#39;),</span>
-<span class="sd">            (6, 5, &#39;$m_{1}(1)$&#39;)])</span>
+<span class="sd">            [4, 2, 2, 0, 6, 4, 2, 8],</span>
+<span class="sd">            Finite poset containing 8 elements)</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
@@ -1316,6 +1320,33 @@
         <span class="n">rep_types</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">rep_types_poset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rep_types_poset</span></div>
 
+    
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">p_function</span> <span class="o">=</span> <span class="n">p_function</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">R_lambda_plus</span> <span class="o">=</span> <span class="n">R_lambda_plus</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">N_set</span> <span class="o">=</span> <span class="n">N_set</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">sigma_lambda</span> <span class="o">=</span> <span class="n">sigma_lambda</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">vector_decomposition</span> <span class="o">=</span> <span class="n">vector_decomposition</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">small_decomposition</span> <span class="o">=</span> <span class="n">small_decomposition</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">all_representation_types</span> <span class="o">=</span> <span class="n">all_representation_types</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">symplectic_leaf_dimension</span> <span class="o">=</span> <span class="n">symplectic_leaf_dimension</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">CB_decomposition</span> <span class="o">=</span> <span class="n">CB_decomposition</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">quiver_variety_dimension</span> <span class="o">=</span> <span class="n">quiver_variety_dimension</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">codimension_two_leaves</span> <span class="o">=</span> <span class="n">codimension_two_leaves</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">ext_quiver</span> <span class="o">=</span> <span class="n">ext_quiver</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">ext_dimension_vector</span> <span class="o">=</span> <span class="n">ext_dimension_vector</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">is_minimal_imaginary_root</span> <span class="o">=</span> <span class="n">is_minimal_imaginary_root</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">all_minimal_imaginary_positive_roots</span> <span class="o">=</span> <span class="n">all_minimal_imaginary_positive_roots</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">all_subminimal_representation_types</span> <span class="o">=</span> <span class="n">all_subminimal_representation_types</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">D_map</span> <span class="o">=</span> <span class="n">D_map</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">D_map_on_rep</span> <span class="o">=</span> <span class="n">D_map_on_rep</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">minimal_degenerations</span> <span class="o">=</span> <span class="n">minimal_degenerations</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_1</span> <span class="o">=</span> <span class="n">get_Hasse_diagram_method_1</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">plot_Hasse_diagram_method_1</span> <span class="o">=</span> <span class="n">plot_Hasse_diagram_method_1</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">plot_Hasse_diagram_method_1_labels</span> <span class="o">=</span> <span class="n">plot_Hasse_diagram_method_1_labels</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">all_decompositions</span> <span class="o">=</span> <span class="n">all_decompositions</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">is_direct_successor</span> <span class="o">=</span> <span class="n">is_direct_successor</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_2</span> <span class="o">=</span> <span class="n">get_Hasse_diagram_method_2</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">plot_Hasse_diagram_method_2</span> <span class="o">=</span> <span class="n">plot_Hasse_diagram_method_2</span>
 </pre></div>
 
                 </article>
