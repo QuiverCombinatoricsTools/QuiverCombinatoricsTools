@@ -393,7 +393,7 @@ class Quiver(BaseQuiver):
             current = [[]]
             for pair in decomp:
                 next_current = []
-                if Q.is_imaginary_root(pair[0]):
+                if self.is_imaginary_root(pair[0]):
                     expansions = small_decomposition(pair[0], pair[1])
                     for item in current:
                         for temp in expansions:
