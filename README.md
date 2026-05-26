@@ -19,5 +19,4 @@ You can read the documentation of the original QuiverTools as:
 * [a webpage](https://sage.quiver.tools)
 * [a pdf](https://sage.quiver.tools/documentation.pdf)
 
-For the documentation of QuiverCombinatoricsTools, look [here]([https://sage.quiver.tools](https://emanuel-roth.github.io/QuiverCombinatoricsTools/
-))
+For the documentation of QuiverCombinatoricsTools, look [here](https://sage.quiver.tools](https://emanuel-roth.github.io/QuiverCombinatoricsTools/).
