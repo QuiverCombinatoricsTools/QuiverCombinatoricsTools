@@ -12,6 +12,7 @@ from quiver import *
 from quiver import Quiver as BaseQuiver
 from sage.combinat.partition import Partitions
 from sage.combinat.posets.hasse_diagram import HasseDiagram
+from sage.misc.latex import latex
 from sage.misc.latex import LatexExpr
 import random
 from collections import defaultdict
