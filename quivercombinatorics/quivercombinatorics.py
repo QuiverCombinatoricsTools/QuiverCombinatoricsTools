@@ -845,7 +845,7 @@ class Quiver(BaseQuiver):
         - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
         - ``v`` -- an element of :math:`\mathbb{N}Q_0`
         - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
-        - ``latex`` -- When set to ``True``, the labels will be formatted to be ready for a latex export.
+        - ``latex`` -- When set to ``True``, the labels will be formatted to be ready for a latex export
 
         OUTPUT: The Hasse diagram as a poset, with labels
 
