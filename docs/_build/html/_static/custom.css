@@ -1,22 +1,36 @@
-/* Sphinx Book Theme: force navbar to allow shrinking */
+/* ===== Sphinx Book Theme mobile title hard fix ===== */
 @media (max-width: 768px) {
 
-  /* critical: allow flex children to shrink */
+  /* 1. Allow flexbox children to shrink (CRITICAL) */
   .bd-header .navbar-header-items,
   .bd-header .navbar-header-items__start,
+  .bd-header .navbar-header-items__center,
   .bd-header .navbar-brand {
     min-width: 0 !important;
     flex-shrink: 1 !important;
     overflow: hidden !important;
   }
 
-  /* actual title text */
-  p.logo__title {
-    display: block !important;
+  /* 2. Force ANY text inside header to obey truncation */
+  .bd-header {
+    min-width: 0 !important;
+  }
+
+  .bd-header * {
+    min-width: 0 !important;
+  }
+
+  /* 3. The actual visible title text */
+  .bd-header .navbar-brand,
+  .bd-header p,
+  .bd-header span {
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: 160px !important;
+
+    max-width: calc(100vw - 110px) !important;
+    display: block !important;
+
     font-size: 0.85rem !important;
     line-height: 1.1 !important;
   }
