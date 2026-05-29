@@ -1,0 +1,22 @@
+/* Mobile navbar title fix for Sphinx Book Theme */
+@media (max-width: 768px) {
+  .navbar-brand-box {
+    max-width: calc(100vw - 90px);
+    overflow: hidden;
+  }
+
+  .navbar-brand {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .navbar-brand p.title,
+  .navbar-brand .title {
+    display: block;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+}
