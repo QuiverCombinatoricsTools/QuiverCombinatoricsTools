@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.6.9)  29 MAY 2026 10:27
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.6.9)  29 MAY 2026 11:28
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1038,11 +1038,6 @@ Underfull \vbox (badness 10000) detected at line 1448
 [21]
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 1561--1563
-[]\TU/FreeMono(0)/m/n/10 dimensions \TU/FreeSerif(0)/m/n/10 – When set to \TU/FreeMono(0)/m/n/10 True\TU/FreeSerif(0)/m/n/10 , the leaves will be labeled by
- []
-
-
 
 [23]
 No file quivercombinatoricstools.ind.
@@ -1065,4 +1060,4 @@ Here is how much of TeX's memory you used:
  1349 hyphenation exceptions out of 8191
  79i,17n,94p,1309b,697s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on quivercombinatoricstools.xdv (28 pages, 418600 bytes).
+Output written on quivercombinatoricstools.xdv (28 pages, 418748 bytes).

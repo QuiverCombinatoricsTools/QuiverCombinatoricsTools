@@ -1,18 +1,18 @@
 # Fdb version 4
-["makeindex quivercombinatoricstools.idx"] 1780046854.23306 "quivercombinatoricstools.idx" "quivercombinatoricstools.ind" "quivercombinatoricstools" 1780046865.01298 2
-  "quivercombinatoricstools.idx" 1780046863.93592 5129 4393e880dad0a23e0f55034691176e1c "xelatex"
+["makeindex quivercombinatoricstools.idx"] 1780046854.23306 "quivercombinatoricstools.idx" "quivercombinatoricstools.ind" "quivercombinatoricstools" 1780050510.96143 2
+  "quivercombinatoricstools.idx" 1780050510.09853 5129 4393e880dad0a23e0f55034691176e1c "xelatex"
   (generated)
   "quivercombinatoricstools.ilg"
   "quivercombinatoricstools.ind"
   (rewritten before read)
-["xdvipdfmx"] 1780046864.04798 "quivercombinatoricstools.xdv" "quivercombinatoricstools.pdf" "quivercombinatoricstools" 1780046865.0179 0
-  "quivercombinatoricstools.xdv" 1780046863.93592 418600 c95b0a95aacc31bbc58ea95a83ac05d2 "xelatex"
+["xdvipdfmx"] 1780050510.20933 "quivercombinatoricstools.xdv" "quivercombinatoricstools.pdf" "quivercombinatoricstools" 1780050510.96497 0
+  "quivercombinatoricstools.xdv" 1780050510.09853 418748 eba792ee9e3d907912e07f078ad1bf90 "xelatex"
   (generated)
   "quivercombinatoricstools.pdf"
   (rewritten before read)
-["xelatex"] 1780046859.44503 "/home/s2712241/Documents/PhD/AGQ Computing Project/QuiverCombinatoricsTools/docs/_build/latex/quivercombinatoricstools.tex" "quivercombinatoricstools.xdv" "quivercombinatoricstools" 1780046865.01314 0
+["xelatex"] 1780050505.21871 "/home/s2712241/Documents/PhD/AGQ Computing Project/QuiverCombinatoricsTools/docs/_build/latex/quivercombinatoricstools.tex" "quivercombinatoricstools.xdv" "quivercombinatoricstools" 1780050510.96159 0
   "/etc/texmf/web2c/texmf.cnf" 1746918870.75497 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/s2712241/Documents/PhD/AGQ Computing Project/QuiverCombinatoricsTools/docs/_build/latex/quivercombinatoricstools.tex" 1780046848.343 111590 52573284dffbcaddfe2400d2403342f6 ""
+  "/home/s2712241/Documents/PhD/AGQ Computing Project/QuiverCombinatoricsTools/docs/_build/latex/quivercombinatoricstools.tex" 1780050493.96318 111648 94f01a4a1b7c17bc2c97b4abd9fea5a6 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -130,13 +130,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1749460158 5643068 61451dcf9203b5ec456f7c52152a1574 ""
   "poset_diagram.png" 1779710114.59398 51513 b117db7e33da5ab78e4e1134e76426b4 ""
-  "quivercombinatoricstools.aux" 1780046863.93235 6328 6b9d0fec16fc5b755948226b3ece7e7c "xelatex"
+  "quivercombinatoricstools.aux" 1780050510.09553 6328 6b9d0fec16fc5b755948226b3ece7e7c "xelatex"
   "quivercombinatoricstools.ind" 0 -1 0 "makeindex quivercombinatoricstools.idx"
-  "quivercombinatoricstools.out" 1780046863.93435 1112 25fab0a9da45f94c2d3c68d4ee408985 "xelatex"
-  "quivercombinatoricstools.tex" 1780046848.343 111590 52573284dffbcaddfe2400d2403342f6 ""
-  "quivercombinatoricstools.toc" 1780046863.93592 589 7ed1fbff7dbd8c8e01b382e9b76d9f7d "xelatex"
+  "quivercombinatoricstools.out" 1780050510.09853 1112 25fab0a9da45f94c2d3c68d4ee408985 "xelatex"
+  "quivercombinatoricstools.tex" 1780050493.96318 111648 94f01a4a1b7c17bc2c97b4abd9fea5a6 ""
+  "quivercombinatoricstools.toc" 1780050510.09853 589 7ed1fbff7dbd8c8e01b382e9b76d9f7d "xelatex"
   "sphinx.sty" 1740956636.16576 54203 ee7fe875437470f5328ee20661bb9f1d ""
-  "sphinxhighlight.sty" 1780046847.82834 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1780050493.5362 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxlatexadmonitions.sty" 1740956636.16676 19111 5e67a0f91439018bceb7cadf319345e6 ""
   "sphinxlatexcontainers.sty" 1740956636.16676 900 d61f923db071a7b54d3cee8a1e6935d3 ""
   "sphinxlatexgraphics.sty" 1740956636.16676 4918 c9266041d02bc615d54b890e96e3acd3 ""
@@ -151,7 +151,7 @@
   "sphinxlatexstyletext.sty" 1740956636.16976 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1740956636.16976 57643 7f1013c2fa11942370d867527bdda568 ""
   "sphinxmanual.cls" 1740956636.17076 4241 7b0d7a37df7b5715fb0dbd585c52ecdb ""
-  "sphinxmessages.sty" 1780046848.34886 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1780050493.96967 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1740956636.17076 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1740956636.17076 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1740956636.17076 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""
