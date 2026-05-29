@@ -70,9 +70,8 @@ html_theme_options = {
     "dark_logo": "logo-dark.svg",
 }
 html_favicon = "_static/favicon.ico"
-
+html_show_sourcelink = False
 viewcode_follow_imported_members = True
-
 autodoc_default_options = {
     "members": True,
     "inherited-members": True,

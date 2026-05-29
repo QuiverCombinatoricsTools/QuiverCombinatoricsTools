@@ -2,7 +2,7 @@
 QuiverCombinatoricsTools
 ==================
 
-`QuiverCombinatoricsTools` is a SageMath package that adds combinatorial functions to `QuiverTools` to calculate symplectic leaves of quiver varieties, available here `https://github.com/emanuel-roth/QuiverCombinatoricsTools <https://github.com/emanuel-roth/QuiverCombinatoricsTools>`_. It adds on to the `QuiverTools` package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here `https://sage.quiver.tools/ <https://sage.quiver.tools/>`_ and here `https://github.com/QuiverTools/QuiverTools <https://github.com/QuiverTools/QuiverTools>`_, so consult their documentation when needed.
+`QuiverCombinatoricsTools` is a SageMath package that adds combinatorial functions to `QuiverTools` to calculate symplectic leaves of quiver varieties, available here `https://github.com/emanuel-roth/QuiverCombinatoricsTools <https://github.com/emanuel-roth/QuiverCombinatoricsTools>`_. As a PDF, download this page :download:`here <_static/quivercombinatoricstools.pdf>`. It adds on to the `QuiverTools` package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here `https://sage.quiver.tools/ <https://sage.quiver.tools/>`_ and here `https://github.com/QuiverTools/QuiverTools <https://github.com/QuiverTools/QuiverTools>`_, so consult their documentation when needed.
 
 To install it, make sure you have both `QuiverTools` and `QuiverCombinatoricsTools`
 
@@ -140,15 +140,31 @@ We say that the subquiver :math:`T` is of *affine ADE type* if it is one of the 
 
       4. :math:`\operatorname{Spec}(\mathbb{C}[x\mid\deg x\geq 2])`.
 
-We define :math:`\tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alpha_r-n\beta_r)`. In each of the above cases, the leaf :math:`L` from this theorem corresponds to representation types:
+We define:
+
+   .. math::
+      
+      \tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alpha_r-n\beta_r)
+
+In each of the above cases, the leaf :math:`L` from this theorem corresponds to representation types:
 
    1. :math:`\tilde{\tau}(\delta,n)` for :math:`\delta` a minimal imaginary root on an affine ADE subquiver.
 
    2. :math:`\tilde{\tau}((1,1),n)` for a two-vertex subquiver with :math:`t\geq 3` edges between the vertices and no loops at the vertices.
 
-   3. :math:`\tau=(e_i,a;e_i,a;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)` where :math:`i` is a vertex with :math:`g\geq 1` loops and :math:`2a=\alpha_i`.
+   3.
+      .. math::
+      
+         \tau=(e_i,a;e_i,a;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)
+   
+   where :math:`i` is a vertex with :math:`g\geq 1` loops and :math:`2a=\alpha_i`.
 
-   4. :math:`\tau=(e_i,a;e_i,b;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)` where :math:`i` is a vertex with :math:`g\geq 1` loops and :math:`0<a\neq b<\alpha_i` with :math:`a+b=\alpha_i`.
+   4.
+      .. math::
+      
+         \tau=(e_i,a;e_i,b;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)
+      
+   where :math:`i` is a vertex with :math:`g\geq 1` loops and :math:`0<a\neq b<\alpha_i` with :math:`a+b=\alpha_i`.
 
 We assign the following labels to each subminimal representation type (i.e., representation types corresponding to a minimal degeneration):
 

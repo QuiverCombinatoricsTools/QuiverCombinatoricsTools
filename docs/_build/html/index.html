@@ -12,7 +12,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=374d150c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=767a9bcc" />
     
     
 
@@ -215,12 +215,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
-    <svg><use href="#svg-eye"></use></svg>
-    <span class="visually-hidden">View this page</span>
-  </a>
-</div>
+          
+
 <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
@@ -236,7 +232,7 @@
         <article role="main" id="furo-main-content">
           <section id="quivercombinatoricstools">
 <h1>QuiverCombinatoricsTools<a class="headerlink" href="#quivercombinatoricstools" title="Link to this heading">¶</a></h1>
-<p><cite>QuiverCombinatoricsTools</cite> is a SageMath package that adds combinatorial functions to <cite>QuiverTools</cite> to calculate symplectic leaves of quiver varieties, available here <a class="reference external" href="https://github.com/emanuel-roth/QuiverCombinatoricsTools">https://github.com/emanuel-roth/QuiverCombinatoricsTools</a>. It adds on to the <cite>QuiverTools</cite> package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here <a class="reference external" href="https://sage.quiver.tools/">https://sage.quiver.tools/</a> and here <a class="reference external" href="https://github.com/QuiverTools/QuiverTools">https://github.com/QuiverTools/QuiverTools</a>, so consult their documentation when needed.</p>
+<p><cite>QuiverCombinatoricsTools</cite> is a SageMath package that adds combinatorial functions to <cite>QuiverTools</cite> to calculate symplectic leaves of quiver varieties, available here <a class="reference external" href="https://github.com/emanuel-roth/QuiverCombinatoricsTools">https://github.com/emanuel-roth/QuiverCombinatoricsTools</a>. As a PDF, download this page <a class="reference download internal" download="" href="_downloads/2dcd52c8bff485079e305fefceb5d949/quivercombinatoricstools.pdf"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>. It adds on to the <cite>QuiverTools</cite> package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here <a class="reference external" href="https://sage.quiver.tools/">https://sage.quiver.tools/</a> and here <a class="reference external" href="https://github.com/QuiverTools/QuiverTools">https://github.com/QuiverTools/QuiverTools</a>, so consult their documentation when needed.</p>
 <p>To install it, make sure you have both <cite>QuiverTools</cite> and <cite>QuiverCombinatoricsTools</cite></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sage</span> <span class="o">--</span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">QuiverTools</span><span class="o">/</span><span class="n">QuiverTools</span><span class="o">.</span><span class="n">git</span>
 <span class="n">sage</span> <span class="o">--</span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">emanuel</span><span class="o">-</span><span class="n">roth</span><span class="o">/</span><span class="n">QuiverCombinatoricsTools</span><span class="o">.</span><span class="n">git</span>
@@ -668,14 +664,33 @@
 <li><p><span class="math notranslate nohighlight">\(\operatorname{Spec}(\mathbb{C}[x\mid\deg x\geq 2])\)</span>.</p></li>
 </ol>
 </div>
-<p>We define <span class="math notranslate nohighlight">\(\tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alpha_r-n\beta_r)\)</span>. In each of the above cases, the leaf <span class="math notranslate nohighlight">\(L\)</span> from this theorem corresponds to representation types:</p>
+<p>We define:</p>
 <blockquote>
-<div><ol class="arabic simple">
+<div><div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alpha_r-n\beta_r)\]</div>
+</div>
+</div></blockquote>
+<p>In each of the above cases, the leaf <span class="math notranslate nohighlight">\(L\)</span> from this theorem corresponds to representation types:</p>
+<blockquote>
+<div><ol class="arabic">
 <li><p><span class="math notranslate nohighlight">\(\tilde{\tau}(\delta,n)\)</span> for <span class="math notranslate nohighlight">\(\delta\)</span> a minimal imaginary root on an affine ADE subquiver.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\tilde{\tau}((1,1),n)\)</span> for a two-vertex subquiver with <span class="math notranslate nohighlight">\(t\geq 3\)</span> edges between the vertices and no loops at the vertices.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\tau=(e_i,a;e_i,a;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\)</span> where <span class="math notranslate nohighlight">\(i\)</span> is a vertex with <span class="math notranslate nohighlight">\(g\geq 1\)</span> loops and <span class="math notranslate nohighlight">\(2a=\alpha_i\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\tau=(e_i,a;e_i,b;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\)</span> where <span class="math notranslate nohighlight">\(i\)</span> is a vertex with <span class="math notranslate nohighlight">\(g\geq 1\)</span> loops and <span class="math notranslate nohighlight">\(0&lt;a\neq b&lt;\alpha_i\)</span> with <span class="math notranslate nohighlight">\(a+b=\alpha_i\)</span>.</p></li>
+<li><div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau=(e_i,a;e_i,a;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\]</div>
+</div>
+</li>
 </ol>
+<p>where <span class="math notranslate nohighlight">\(i\)</span> is a vertex with <span class="math notranslate nohighlight">\(g\geq 1\)</span> loops and <span class="math notranslate nohighlight">\(2a=\alpha_i\)</span>.</p>
+<ol class="arabic" start="4">
+<li><div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau=(e_i,a;e_i,b;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\]</div>
+</div>
+</li>
+</ol>
+<p>where <span class="math notranslate nohighlight">\(i\)</span> is a vertex with <span class="math notranslate nohighlight">\(g\geq 1\)</span> loops and <span class="math notranslate nohighlight">\(0&lt;a\neq b&lt;\alpha_i\)</span> with <span class="math notranslate nohighlight">\(a+b=\alpha_i\)</span>.</p>
 </div></blockquote>
 <p>We assign the following labels to each subminimal representation type (i.e., representation types corresponding to a minimal degeneration):</p>
 <blockquote>
