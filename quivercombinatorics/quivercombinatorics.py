@@ -912,7 +912,7 @@ class Quiver(BaseQuiver):
 
         - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
         - ``v`` -- an element of :math:`\mathbb{N}Q_0`
-        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension`` , ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
+        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
 
         OUTPUT: ``rep_types``, ``dimensions``, ``rep_types_poset``, the last output is the actual poset
 
