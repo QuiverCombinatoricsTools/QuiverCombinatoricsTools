@@ -1,29 +1,23 @@
-/* Force long title to stop breaking mobile header */
+/* Sphinx Book Theme: force navbar to allow shrinking */
 @media (max-width: 768px) {
 
-  /* header layout */
+  /* critical: allow flex children to shrink */
   .bd-header .navbar-header-items,
   .bd-header .navbar-header-items__start,
-  .bd-header .navbar-header-items__center {
-    min-width: 0 !important;
-    overflow: hidden !important;
-  }
-
-  /* brand container */
   .bd-header .navbar-brand {
     min-width: 0 !important;
-    flex: 1 1 auto !important;
+    flex-shrink: 1 !important;
     overflow: hidden !important;
   }
 
   /* actual title text */
-  .bd-header .navbar-brand .title,
-  .bd-header .navbar-brand p {
+  p.logo__title {
+    display: block !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: 100% !important;
-    font-size: 0.9rem !important;
-    margin: 0 !important;
+    max-width: 160px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.1 !important;
   }
 }
