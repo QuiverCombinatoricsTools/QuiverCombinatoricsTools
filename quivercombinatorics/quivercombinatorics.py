@@ -218,7 +218,7 @@ def D_map_on_rep(tau, L):
 
             sage: from quivercombinatorics import *
             sage: tau = [[(1, 1), 2], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]
-            sage: D_map_on_rep([[(1, 2, 8, -3), 3]],tau)
+            sage: D_map_on_rep([[(1, 2, 8, -3), 3]], tau)
             [[(8, 8), 3]]
 
     """
@@ -277,8 +277,6 @@ class Quiver(BaseQuiver):
         OUTPUT: :math:`1 - \frac{1}{2}(x, x)`
 
         EXAMPLE:
-
-        The :math:`p` function evaluated at :math:`(2, 3)` of the doubled A2 quiver::
 
             sage: from quivercombinatorics import *
             sage: Q = Quiver([[0, 1], [1, 0]])
@@ -356,8 +354,9 @@ class Quiver(BaseQuiver):
 
         EXAMPLES::
 
-            Q = Quiver([[0, 1], [1, 0]])
-            Q.all_representation_types((1, -1), (5, 5))
+            sage: from quivercombinatorics import *
+            sage: Q = Quiver([[0, 1], [1, 0]])
+            sage: Q.all_representation_types((1, -1), (5, 5))
             [[[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]],
             [[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 2]],
             [[(1, 1), 1], [(1, 1), 1], [(1, 1), 3]],
@@ -366,6 +365,7 @@ class Quiver(BaseQuiver):
             [[(1, 1), 2], [(1, 1), 3]],
             [[(1, 1), 5]]]
 
+            sage: from quivercombinatorics import *
             sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
             sage: Q = quiver_from_cartan_matrix(C)
             sage: Q.all_representation_types((0,0,0), (2,4,3))
@@ -600,13 +600,13 @@ class Quiver(BaseQuiver):
 
             sage: from quivercombinatorics import *
             sage: Q = LoopQuiver(3)
-            sage: Q.all_minimal_non_trivial_representation_types((5))
+            sage: Q.all_subminimal_representation_types((5))
             [([[(1), 1], [(1), 4]], 'm_{3}'), ([[(1), 2], [(1), 3]], 'm_{3}')]
 
             sage: from quivercombinatorics import *
             sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]
             sage: Q = Quiver(A)
-            sage: Q.all_minimal_non_trivial_representation_types((1, 1, 4, 1))
+            sage: Q.all_subminimal_representation_types((1, 1, 4, 1))
             [([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]], 'A_1'),
             ([[(0, 0, 1, 0), 4], [(0, 1, 0, 0), 1], [(1, 0, 0, 1), 1]], 'a_{2}'),
             ([[(0, 0, 0, 1), 1],
