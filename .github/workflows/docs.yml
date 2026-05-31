@@ -42,7 +42,7 @@ jobs:
 
           sage --pip install sphinx
           sage --pip install sphinx-book-theme
-          pip install dot2tex
+          sage --pip install dot2tex
 
           cd /tmp/build && rm -rf .git
           sage --pip install .
