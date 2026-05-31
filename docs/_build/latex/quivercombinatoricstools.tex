@@ -83,7 +83,7 @@
 
 
 \title{QuiverCombinatoricsTools}
-\date{May 29, 2026}
+\date{May 31, 2026}
 \release{1.0}
 \author{Tudor\sphinxhyphen{}Ioan Caba, Mia Lam, Emanuel Roth}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -100,7 +100,7 @@
 
 
 \sphinxAtStartPar
-\sphinxtitleref{QuiverCombinatoricsTools} is a SageMath package that adds combinatorial functions to \sphinxtitleref{QuiverTools} to calculate symplectic leaves of quiver varieties, available here \sphinxurl{https://github.com/emanuel-roth/QuiverCombinatoricsTools}. It adds on to the \sphinxtitleref{QuiverTools} package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here \sphinxurl{https://sage.quiver.tools/} and here \sphinxurl{https://github.com/QuiverTools/QuiverTools}, so consult their documentation when needed.
+\sphinxtitleref{QuiverCombinatoricsTools} is a SageMath package that adds combinatorial functions to \sphinxtitleref{QuiverTools} to calculate symplectic leaves of quiver varieties, available here \sphinxurl{https://github.com/emanuel-roth/QuiverCombinatoricsTools}. As a PDF, download this page \sphinxcode{\sphinxupquote{here}}. It adds on to the \sphinxtitleref{QuiverTools} package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here \sphinxurl{https://sage.quiver.tools/} and here \sphinxurl{https://github.com/QuiverTools/QuiverTools}, so consult their documentation when needed.
 
 \sphinxAtStartPar
 To install it, make sure you have both \sphinxtitleref{QuiverTools} and \sphinxtitleref{QuiverCombinatoricsTools}
@@ -268,16 +268,14 @@ OUTPUT: \(1 - \frac{1}{2}(x, x)\)
 
 \sphinxAtStartPar
 EXAMPLE:
+\begin{quote}
 
 \sphinxAtStartPar
-The \(p\) function evaluated at \((2, 3)\) of the doubled A2 quiver:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{p\PYGZus{}function}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
-\PYG{l+m+mf}{0.0}
-\end{sphinxVerbatim}
+sage: from quivercombinatorics import *
+sage: Q = Quiver({[}{[}0, 1{]}, {[}1, 0{]}{]})
+sage: Q.p\_function((2, 3))
+0.0
+\end{quote}
 
 \end{fulllineitems}
 
@@ -556,8 +554,9 @@ OUTPUT: A list of representation types of a quiver, with respect to \(x\), and w
 EXAMPLES:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
-\PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
@@ -566,6 +565,7 @@ EXAMPLES:
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{]}\PYG{p}{]}
 
+\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
@@ -882,7 +882,7 @@ EXAMPLE:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{KroneckerQuiver}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{is\PYGZus{}minimal\PYGZus{}imaginary\PYGZus{}root}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{is\PYGZus{}minimal\PYGZus{}imaginary\PYGZus{}root}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
 \PYG{k+kc}{True}
 \end{sphinxVerbatim}
 
@@ -919,8 +919,8 @@ EXAMPLE:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{KroneckerQuiver}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}minimal\PYGZus{}imaginary\PYGZus{}positive\PYGZus{}roots}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{]}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}minimal\PYGZus{}imaginary\PYGZus{}positive\PYGZus{}roots}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
+\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{]}
 \end{sphinxVerbatim}
 
 \end{fulllineitems}
@@ -958,7 +958,15 @@ The type A minimal nilpotent orbit closure \((\mathcal{O}_{\min},0)\) in \(\math
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
-We define \(\tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alpha_r-n\beta_r)\). In each of the above cases, the leaf \(L\) from this theorem corresponds to representation types:
+We define:
+\begin{quote}
+\begin{equation*}
+\begin{split}\tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alpha_r-n\beta_r)\end{split}
+\end{equation*}\end{quote}
+
+\sphinxAtStartPar
+In each of the above cases, the leaf \(L\) from this theorem corresponds to representation types:
+\begin{quote}
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
@@ -969,15 +977,24 @@ We define \(\tilde{\tau}(\beta,n):=(\beta,n;e_1,\alpha_1-n\beta_1;\dots;e_r,\alp
 \sphinxAtStartPar
 \(\tilde{\tau}((1,1),n)\) for a two\sphinxhyphen{}vertex subquiver with \(t\geq 3\) edges between the vertices and no loops at the vertices.
 
-\item {} 
-\sphinxAtStartPar
-\(\tau=(e_i,a;e_i,a;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\) where \(i\) is a vertex with \(g\geq 1\) loops and \(2a=\alpha_i\).
-
-\item {} 
-\sphinxAtStartPar
-\(\tau=(e_i,a;e_i,b;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\) where \(i\) is a vertex with \(g\geq 1\) loops and \(0<a\neq b<\alpha_i\) with \(a+b=\alpha_i\).
-
+\item {} \begin{equation*}
+\begin{split}\tau=(e_i,a;e_i,a;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\end{split}
+\end{equation*}
 \end{enumerate}
+
+\sphinxAtStartPar
+where \(i\) is a vertex with \(g\geq 1\) loops and \(2a=\alpha_i\).
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{3}
+\item {} \begin{equation*}
+\begin{split}\tau=(e_i,a;e_i,b;e_1,\alpha_1;\dots;e_{i-1},\alpha_{i-1};e_{i+1},\alpha_{i+1};\dots)\end{split}
+\end{equation*}
+\end{enumerate}
+
+\sphinxAtStartPar
+where \(i\) is a vertex with \(g\geq 1\) loops and \(0<a\neq b<\alpha_i\) with \(a+b=\alpha_i\).
+\end{quote}
 
 \sphinxAtStartPar
 We assign the following labels to each subminimal representation type (i.e., representation types corresponding to a minimal degeneration):
@@ -1038,14 +1055,14 @@ EXAMPLES:
 
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{LoopQuiver}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}minimal\PYGZus{}non\PYGZus{}trivial\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}subminimal\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{m\PYGZus{}}\PYG{l+s+si}{\PYGZob{}3\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{m\PYGZus{}}\PYG{l+s+si}{\PYGZob{}3\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}
 
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{A} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}minimal\PYGZus{}non\PYGZus{}trivial\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
-\PYG{p}{[}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}subminimal\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
+\PYG{p}{[}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
 \PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a\PYGZus{}}\PYG{l+s+si}{\PYGZob{}2\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
 \PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
@@ -1065,8 +1082,16 @@ EXAMPLES:
 
 
 
-\chapter{Plotting symplectic leaves in Hasse diagrams}
-\label{\detokenize{index:plotting-symplectic-leaves-in-hasse-diagrams}}
+\chapter{Plotting minimal degenerations of symplectic leaves in Hasse diagrams}
+\label{\detokenize{index:plotting-minimal-degenerations-of-symplectic-leaves-in-hasse-diagrams}}
+\sphinxAtStartPar
+To compute these Hasse diagrams, make sure you have \sphinxcode{\sphinxupquote{dot2tex}} and \sphinxcode{\sphinxupquote{graphviz}} installed.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sage} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{pip} \PYG{n}{install} \PYG{n}{dot2tex}
+\PYG{n}{sage} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{pip} \PYG{n}{install} \PYG{n}{graphviz}
+\end{sphinxVerbatim}
+
 \sphinxAtStartPar
 We visualize the poset of symplectic leaves (equivalently of representation types) as a Hasse diagram: The vertices in this diagram are the representation types and the minimal degenerations, represented by an edge connecting two representation types, correspond to the situation where \(L_1\leq L_2\) (equivalently, \(\tau_1\leq\tau_2\)) but there does not exist \(L_3\) such that \(L_1 < L_3 < L_2\). We wish to compute the Hasse diagram, for which there are two methods.
 
@@ -1083,6 +1108,9 @@ By (Bellamy\sphinxhyphen{}Schedler 2026), it is known that \(D(\tilde{\tau})\) i
 \sphinxAtStartPar
 In this way, we have a rule that assigns to each subminimal representation type of \(\tilde{Q}\) a representation type \(D(\tilde{\tau}(\alpha))\) of \(v\). It is known that \(\tau < D(\tilde{\tau}(\alpha))\) is a minimal degeneration and they all occur in this way. Proceeding in this way allows one to build the Hasse diagram from the bottom up.
 \end{sphinxadmonition}
+
+\sphinxAtStartPar
+For Method 1, we need the following helper functions.
 \index{D\_map() (in module quivercombinatorics)@\spxentry{D\_map()}\spxextra{in module quivercombinatorics}}
 
 \begin{fulllineitems}
@@ -1124,13 +1152,13 @@ EXAMPLE:
 
 \end{fulllineitems}
 
-\index{D\_map\_on\_rep() (in module quivercombinatorics)@\spxentry{D\_map\_on\_rep()}\spxextra{in module quivercombinatorics}}
+\index{D\_lifting() (in module quivercombinatorics)@\spxentry{D\_lifting()}\spxextra{in module quivercombinatorics}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:quivercombinatorics.D_map_on_rep}}
+\phantomsection\label{\detokenize{index:quivercombinatorics.D_lifting}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{quivercombinatorics.}}\sphinxbfcode{\sphinxupquote{D\_map\_on\_rep}}}
+{\sphinxcode{\sphinxupquote{quivercombinatorics.}}\sphinxbfcode{\sphinxupquote{D\_lifting}}}
 {\sphinxparam{\DUrole{n}{tau}}\sphinxparamcomma \sphinxparam{\DUrole{n}{L}}}
 {}
 \pysigstopsignatures
@@ -1159,7 +1187,7 @@ EXAMPLE:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{tau} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{D\PYGZus{}map\PYGZus{}on\PYGZus{}rep}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}\PYG{n}{tau}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{D\PYGZus{}lifting}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{n}{tau}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}
 \end{sphinxVerbatim}
 
@@ -1207,215 +1235,6 @@ EXAMPLES:
 
 \end{fulllineitems}
 
-\index{get\_Hasse\_diagram\_method\_1() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{get\_Hasse\_diagram\_method\_1()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:quivercombinatorics.quivercombinatorics.Quiver.get_Hasse_diagram_method_1}}
-\pysigstartsignatures
-\pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{Quiver.}}\sphinxbfcode{\sphinxupquote{get\_Hasse\_diagram\_method\_1}}}
-{\sphinxparam{\DUrole{n}{l}}\sphinxparamcomma \sphinxparam{\DUrole{n}{v}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dimensions}\DUrole{o}{=}\DUrole{default_value}{False}}}
-{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Applies Method 1 to obtain data for the Hasse diagram of minimal degenerations
-
-\sphinxAtStartPar
-INPUT:
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{l}} – an element of \(\mathbb{Z}Q_0\)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{v}} – an element of \(\mathbb{N}Q_0\)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{dimensions}} – When set to \sphinxcode{\sphinxupquote{True}}, the leaves will be labeled by (\sphinxcode{\sphinxupquote{symplectic\_leaf\_dimension}}, \sphinxcode{\sphinxupquote{counter}}), where \sphinxcode{\sphinxupquote{counter}} enumerates symplectic leaves of equal dimensions
-
-\end{itemize}
-
-\sphinxAtStartPar
-OUTPUT: \sphinxcode{\sphinxupquote{all\_leaves}}, \sphinxcode{\sphinxupquote{elements}}, \sphinxcode{\sphinxupquote{relations}}, \sphinxcode{\sphinxupquote{edge\_labels}}, the latter three are required to construct the Hasse diagram of minimal degenerations
-
-\sphinxAtStartPar
-EXAMPLES:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{get\PYGZus{}Hasse\PYGZus{}diagram\PYGZus{}method\PYGZus{}1}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
-
-\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{7}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{7}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,}
-\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}A\PYGZus{}1(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}A\PYGZus{}1(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}c\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}A\PYGZus{}1(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}A\PYGZus{}1(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}A\PYGZus{}1(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}A\PYGZus{}1(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}A\PYGZus{}1(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}D\PYGZus{}}\PYG{l+s+si}{\PYGZob{}4\PYGZcb{}}\PYG{l+s+s1}{(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}c\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZdl{}m\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)\PYGZdl{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\end{fulllineitems}
-
-\index{plot\_Hasse\_diagram\_method\_1() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{plot\_Hasse\_diagram\_method\_1()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram_method_1}}
-\pysigstartsignatures
-\pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{Quiver.}}\sphinxbfcode{\sphinxupquote{plot\_Hasse\_diagram\_method\_1}}}
-{\sphinxparam{\DUrole{n}{l}}\sphinxparamcomma \sphinxparam{\DUrole{n}{v}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dimensions}\DUrole{o}{=}\DUrole{default_value}{False}}}
-{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Constructs the Hasse diagram using Method 1, using \sphinxcode{\sphinxupquote{get\_Hasse\_diagram\_method\_1}}. The output can then be plotted by appending \sphinxcode{\sphinxupquote{.plot()}} for example
-
-\sphinxAtStartPar
-INPUT:
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{l}} – an element of \(\mathbb{Z}Q_0\)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{v}} – an element of \(\mathbb{N}Q_0\)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{dimensions}} – When set to \sphinxcode{\sphinxupquote{True}}, the leaves will be labeled by (\sphinxcode{\sphinxupquote{symplectic\_leaf\_dimension}}, \sphinxcode{\sphinxupquote{counter}}), where \sphinxcode{\sphinxupquote{counter}} enumerates symplectic leaves of equal dimensions
-
-\end{itemize}
-
-\sphinxAtStartPar
-OUTPUT: The Hasse diagram as a poset
-
-\sphinxAtStartPar
-EXAMPLES:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{plot\PYGZus{}Hasse\PYGZus{}diagram\PYGZus{}method\PYGZus{}1}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
-\PYG{n}{Finite} \PYG{n}{poset} \PYG{n}{containing} \PYG{l+m+mi}{8} \PYG{n}{elements}
-
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{LoopQuiver}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{plot\PYGZus{}Hasse\PYGZus{}diagram\PYGZus{}method\PYGZus{}1}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dimensions}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{n}{Finite} \PYG{n}{poset} \PYG{n}{containing} \PYG{l+m+mi}{11} \PYG{n}{elements}
-\end{sphinxVerbatim}
-
-\end{fulllineitems}
-
-
-\sphinxAtStartPar
-To export this Hasse diagram as a TikZ diagram, we need to install \sphinxcode{\sphinxupquote{dot2tex}} and \sphinxcode{\sphinxupquote{graphviz}}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sage} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{pip} \PYG{n}{install} \PYG{n}{dot2tex}
-\PYG{n}{sage} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{pip} \PYG{n}{install} \PYG{n}{graphviz}
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-and then make sure you import the following
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{sage}\PYG{n+nn}{.}\PYG{n+nn}{all}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{latex}
-\end{sphinxVerbatim}
-\index{plot\_Hasse\_diagram\_method\_1\_labels() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{plot\_Hasse\_diagram\_method\_1\_labels()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram_method_1_labels}}
-\pysigstartsignatures
-\pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{Quiver.}}\sphinxbfcode{\sphinxupquote{plot\_Hasse\_diagram\_method\_1\_labels}}}
-{\sphinxparam{\DUrole{n}{l}}\sphinxparamcomma \sphinxparam{\DUrole{n}{v}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dimensions}\DUrole{o}{=}\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{latex}\DUrole{o}{=}\DUrole{default_value}{False}}}
-{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Constructs the Hasse diagram using Method 1, using \sphinxcode{\sphinxupquote{get\_Hasse\_diagram\_method\_1}}, but also outputs the labels of the minimal degenerations. The TikZ code can be seen by applying \sphinxcode{\sphinxupquote{latex()}} to the output when \sphinxcode{\sphinxupquote{latex}} is set to \sphinxcode{\sphinxupquote{True}}.
-
-\sphinxAtStartPar
-INPUT:
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{l}} – an element of \(\mathbb{Z}Q_0\)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{v}} – an element of \(\mathbb{N}Q_0\)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{dimensions}} – When set to \sphinxcode{\sphinxupquote{True}}, the leaves will be labeled by (\sphinxcode{\sphinxupquote{symplectic\_leaf\_dimension}}, \sphinxcode{\sphinxupquote{counter}}), where \sphinxcode{\sphinxupquote{counter}} enumerates symplectic leaves of equal dimensions
-
-\item {} 
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{latex}} – When set to \sphinxcode{\sphinxupquote{True}}, the labels will be formatted to be ready for a latex export
-
-\end{itemize}
-
-\sphinxAtStartPar
-OUTPUT: The Hasse diagram as a poset, with labels
-
-\sphinxAtStartPar
-EXAMPLE:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{sage}\PYG{n+nn}{.}\PYG{n+nn}{all}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{latex}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{P} \PYG{o}{=} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{plot\PYGZus{}Hasse\PYGZus{}diagram\PYGZus{}method\PYGZus{}1\PYGZus{}labels}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{,} \PYG{n}{latex}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{dimensions}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{P}\PYG{o}{.}\PYG{n}{set\PYGZus{}latex\PYGZus{}options}\PYG{p}{(}\PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dot2tex}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{prog}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{rankdir}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{up}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{edge\PYGZus{}labels}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{color\PYGZus{}by\PYGZus{}label}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{tex\PYGZus{}code} \PYG{o}{=} \PYG{n}{latex}\PYG{p}{(}\PYG{n}{P}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{poset\PYGZus{}diagram.tex}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{w}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
-\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{:}     \PYG{n}{f}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{n}{tex\PYGZus{}code}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\end{fulllineitems}
-
-
-\sphinxAtStartPar
-The example above should export the following diagram:
-
-\noindent\sphinxincludegraphics{{poset_diagram}.png}
 
 \sphinxAtStartPar
 The second method to compute this Hasse diagram is as follows.
@@ -1448,7 +1267,7 @@ is a \sphinxstyleemphasis{direct successor} (\(\varepsilon\) is the successor of
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
-The symplectic leaves form a subset of this set of decompositions, and by restriction, they inherit a sub\sphinxhyphen{}poset structure. It is shown in (Bellamy\sphinxhyphen{}Schedler, 2026) that this is the partial ordering given by leaf closure.
+The symplectic leaves form a subset of this set of decompositions, and by restriction, they inherit a sub\sphinxhyphen{}poset structure. It is shown in (Bellamy\sphinxhyphen{}Schedler, 2026) that this is the partial ordering given by leaf closure. We need the following helper functions for Method 2.
 \index{all\_decompositions() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{all\_decompositions()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
 
 \begin{fulllineitems}
@@ -1533,18 +1352,21 @@ EXAMPLE:
 
 \end{fulllineitems}
 
-\index{get\_Hasse\_diagram\_method\_2() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{get\_Hasse\_diagram\_method\_2()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
+
+\sphinxAtStartPar
+We are now able to obtain and plot the Hasse diagram for Methods 1 and 2. Method 1 seems to be much faster, so it is enabled by default.
+\index{get\_Hasse\_diagram() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{get\_Hasse\_diagram()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:quivercombinatorics.quivercombinatorics.Quiver.get_Hasse_diagram_method_2}}
+\phantomsection\label{\detokenize{index:quivercombinatorics.quivercombinatorics.Quiver.get_Hasse_diagram}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{Quiver.}}\sphinxbfcode{\sphinxupquote{get\_Hasse\_diagram\_method\_2}}}
-{\sphinxparam{\DUrole{n}{l}}\sphinxparamcomma \sphinxparam{\DUrole{n}{v}}}
+{\sphinxcode{\sphinxupquote{Quiver.}}\sphinxbfcode{\sphinxupquote{get\_Hasse\_diagram}}}
+{\sphinxparam{\DUrole{n}{l}}\sphinxparamcomma \sphinxparam{\DUrole{n}{v}}\sphinxparamcomma \sphinxparam{\DUrole{n}{method}\DUrole{o}{=}\DUrole{default_value}{1}}}
 {}
 \pysigstopsignatures
 \sphinxAtStartPar
-Applies Method 2 to obtain data for the Hasse diagram of minimal degenerations
+Applies Method 1 or Method 2 to obtain data for the Hasse diagram of minimal degenerations
 
 \sphinxAtStartPar
 INPUT:
@@ -1559,23 +1381,41 @@ INPUT:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{dimensions}} – When set to \sphinxcode{\sphinxupquote{True}}, the leaves will be labeled by (\sphinxcode{\sphinxupquote{symplectic\_leaf\_dimension}}, \sphinxcode{\sphinxupquote{counter}}), where \sphinxcode{\sphinxupquote{counter}} enumerates symplectic leaves of equal dimensions
+\sphinxcode{\sphinxupquote{method}} – When set to \sphinxcode{\sphinxupquote{1}}, Method 1 will be used to obtain the Hasse diagram of minimal degenerations. When set to \sphinxcode{\sphinxupquote{2}}, Method 1 will be used to obtain the Hasse diagram of minimal degenerations.
 
 \end{itemize}
 
 \sphinxAtStartPar
-OUTPUT: \sphinxcode{\sphinxupquote{rep\_types}}, \sphinxcode{\sphinxupquote{dimensions}}, \sphinxcode{\sphinxupquote{rep\_types\_poset}}, the last output is the actual poset
+OUTPUT:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{leaves\_poset}} – the underlying poset of the Hasse diagram of minimal degenerations
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{all\_leaves}} – a list of all symplectic leaves, with respect to their representation types, so a list of representation types, i.e., a list whose elements are 2\sphinxhyphen{}tuples, the first element is in \(\mathbb{N}Q_0\), and the second is in \(\mathbb{N}\)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{dimensions}} – a list of dimensions of all the symplectic leaves, using \sphinxcode{\sphinxupquote{symplectic\_leaf\_dimension}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{edge\_labels}} – a list of 3\sphinxhyphen{}tuples, the first two entries of each tuple define the edge, and the last entry is the edge label of the corresponding minimal degeneration, classified by \sphinxcode{\sphinxupquote{all\_subminimal\_representation\_types}}
+
+\end{itemize}
 
 \sphinxAtStartPar
-EXAMPLES:
+EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{get\PYGZus{}Hasse\PYGZus{}diagram\PYGZus{}method\PYGZus{}2}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
-
-\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{get\PYGZus{}Hasse\PYGZus{}diagram}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
+\PYG{p}{(}\PYG{n}{Finite} \PYG{n}{poset} \PYG{n}{containing} \PYG{l+m+mi}{8} \PYG{n}{elements}\PYG{p}{,}
+\PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
@@ -1592,23 +1432,33 @@ EXAMPLES:
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{]}\PYG{p}{,}
-\PYG{n}{Finite} \PYG{n}{poset} \PYG{n}{containing} \PYG{l+m+mi}{8} \PYG{n}{elements}\PYG{p}{)}
+\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{c\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{7}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D\PYGZus{}}\PYG{l+s+si}{\PYGZob{}4\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{c\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{m\PYGZus{}}\PYG{l+s+si}{\PYGZob{}1\PYGZcb{}}\PYG{l+s+s1}{(1)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \end{fulllineitems}
 
-\index{plot\_Hasse\_diagram\_method\_2() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{plot\_Hasse\_diagram\_method\_2()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
+\index{plot\_Hasse\_diagram() (quivercombinatorics.quivercombinatorics.Quiver method)@\spxentry{plot\_Hasse\_diagram()}\spxextra{quivercombinatorics.quivercombinatorics.Quiver method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram_method_2}}
+\phantomsection\label{\detokenize{index:quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{Quiver.}}\sphinxbfcode{\sphinxupquote{plot\_Hasse\_diagram\_method\_2}}}
-{\sphinxparam{\DUrole{n}{l}}\sphinxparamcomma \sphinxparam{\DUrole{n}{v}}}
+{\sphinxcode{\sphinxupquote{Quiver.}}\sphinxbfcode{\sphinxupquote{plot\_Hasse\_diagram}}}
+{\sphinxparam{\DUrole{n}{l}}\sphinxparamcomma \sphinxparam{\DUrole{n}{v}}\sphinxparamcomma \sphinxparam{\DUrole{n}{method}\DUrole{o}{=}\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{format}\DUrole{o}{=}\DUrole{default_value}{'tikz'}}\sphinxparamcomma \sphinxparam{\DUrole{n}{filename}\DUrole{o}{=}\DUrole{default_value}{'output'}}}
 {}
 \pysigstopsignatures
 \sphinxAtStartPar
-Constructs the Hasse diagram using Method 2, using \sphinxcode{\sphinxupquote{get\_Hasse\_diagram\_method\_2}}. The output can then be plotted by appending \sphinxcode{\sphinxupquote{.plot()}} for example
+Applies Method 1 or Method 2 to plot the Hasse diagram for minimal degenerations
 
 \sphinxAtStartPar
 INPUT:
@@ -1623,33 +1473,62 @@ INPUT:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{dimensions}} – When set to \sphinxcode{\sphinxupquote{True}}, the leaves will be labeled by (\sphinxcode{\sphinxupquote{symplectic\_leaf\_dimension}}, \sphinxcode{\sphinxupquote{counter}}), where \sphinxcode{\sphinxupquote{counter}} enumerates symplectic leaves of equal dimensions
+\sphinxcode{\sphinxupquote{method}} – When set to \sphinxcode{\sphinxupquote{1}}, Method 1 will be used to obtain the Hasse diagram of minimal degenerations. When set to \sphinxcode{\sphinxupquote{2}}, Method 1 will be used to obtain the Hasse diagram of minimal degenerations.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{format}} – Takes values “tikz”, “dot”, and “sage”, depending on whether you want a \sphinxcode{\sphinxupquote{.tex}} file with \sphinxstyleemphasis{tikzpicture}, a \sphinxcode{\sphinxupquote{.dot}} file, or a sage Hasse diagram output
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{filename}} – filename of output
 
 \end{itemize}
 
 \sphinxAtStartPar
-OUTPUT: The Hasse diagram as a poset
+OUTPUT:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+the Hasse diagram for minimal degenerations
+
+\end{itemize}
 
 \sphinxAtStartPar
-EXAMPLES:
+EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{plot\PYGZus{}Hasse\PYGZus{}diagram\PYGZus{}method\PYGZus{}2}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
-\PYG{n}{Finite} \PYG{n}{poset} \PYG{n}{containing} \PYG{l+m+mi}{8} \PYG{n}{elements}
+sage: C = [[2, \PYGZhy{}1, 0], [\PYGZhy{}1, 2, \PYGZhy{}2], [0, \PYGZhy{}2, 2]]
+sage: Q = quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix(C)
+sage: Q.plot\PYGZus{}Hasse\PYGZus{}diagram((0, 0, 0), (2, 4, 3))
+\PYGZbs{}documentclass[tikz]\PYGZob{}standalone\PYGZcb{}
+\PYGZbs{}begin\PYGZob{}document\PYGZcb{}
 
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{LoopQuiver}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{plot\PYGZus{}Hasse\PYGZus{}diagram\PYGZus{}method\PYGZus{}2}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dimensions}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{n}{Finite} \PYG{n}{poset} \PYG{n}{containing} \PYG{l+m+mi}{11} \PYG{n}{elements}
+\PYGZbs{}begin\PYGZob{}tikzpicture\PYGZcb{}[\PYGZgt{}=latex,line join=bevel,]
+\PYGZpc{}\PYGZpc{}
+\PYGZbs{}begin\PYGZob{}scope\PYGZcb{}
+    \PYGZbs{}pgfsetstrokecolor\PYGZob{}black\PYGZcb{}
+\PYGZhy{}\PYGZhy{}\PYGZhy{}
+77 lines not printed (5057 characters in total).
+Use print to see the full content.
+\PYGZhy{}\PYGZhy{}\PYGZhy{}
+    \PYGZbs{}draw (221.5bp,185.5bp) node \PYGZob{}\PYGZdl{}c\PYGZus{}\PYGZob{}1\PYGZcb{}(1)\PYGZdl{}\PYGZcb{};
+    \PYGZbs{}draw [\PYGZhy{}\PYGZgt{}] (6) ..controls (293.59bp,110.99bp) and (289.95bp,119.79bp)  .. (284.0bp,126.0bp) .. controls (277.86bp,132.41bp) and (269.81bp,137.25bp)  .. (5);
+    \PYGZbs{}draw (320.5bp,118.5bp) node \PYGZob{}\PYGZdl{}m\PYGZus{}\PYGZob{}1\PYGZcb{}(1)\PYGZdl{}\PYGZcb{};
+\PYGZpc{}
+\PYGZbs{}end\PYGZob{}tikzpicture\PYGZcb{}
+\PYGZbs{}end\PYGZob{}document\PYGZcb{}
 \end{sphinxVerbatim}
 
 \end{fulllineitems}
 
 
 \sphinxAtStartPar
-It seems that Method 2 is slower than Method 1, so we only implemented a TikZ exporter for Method 1.
+The example above should export the following diagram:
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=0.850\linewidth]{{output}.svg}\hspace*{\fill}}
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=0.850\linewidth]{{output-dark}.svg}\hspace*{\fill}}
 
 
 

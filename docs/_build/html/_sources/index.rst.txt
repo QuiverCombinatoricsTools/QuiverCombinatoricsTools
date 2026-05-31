@@ -178,8 +178,15 @@ We assign the following labels to each subminimal representation type (i.e., rep
 
 .. automethod:: quivercombinatorics.quivercombinatorics.Quiver.all_subminimal_representation_types
 
-Plotting symplectic leaves in Hasse diagrams
+Plotting minimal degenerations of symplectic leaves in Hasse diagrams
 ============================================
+
+To compute these Hasse diagrams, make sure you have ``dot2tex`` and ``graphviz`` installed.
+
+.. code-block::
+
+   sage --pip install dot2tex
+   sage --pip install graphviz
 
 We visualize the poset of symplectic leaves (equivalently of representation types) as a Hasse diagram: The vertices in this diagram are the representation types and the minimal degenerations, represented by an edge connecting two representation types, correspond to the situation where :math:`L_1\leq L_2` (equivalently, :math:`\tau_1\leq\tau_2`) but there does not exist :math:`L_3` such that :math:`L_1 < L_3 < L_2`. We wish to compute the Hasse diagram, for which there are two methods.
 
@@ -195,35 +202,13 @@ We visualize the poset of symplectic leaves (equivalently of representation type
 
    In this way, we have a rule that assigns to each subminimal representation type of :math:`\tilde{Q}` a representation type :math:`D(\tilde{\tau}(\alpha))` of :math:`v`. It is known that :math:`\tau < D(\tilde{\tau}(\alpha))` is a minimal degeneration and they all occur in this way. Proceeding in this way allows one to build the Hasse diagram from the bottom up.
 
+For Method 1, we need the following helper functions.
+
 .. autofunction:: quivercombinatorics.D_map
 
-.. autofunction:: quivercombinatorics.D_map_on_rep
+.. autofunction:: quivercombinatorics.D_lifting
 
 .. automethod:: quivercombinatorics.quivercombinatorics.Quiver.minimal_degenerations
-
-.. automethod:: quivercombinatorics.quivercombinatorics.Quiver.get_Hasse_diagram_method_1
-   
-.. automethod:: quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram_method_1
-
-To export this Hasse diagram as a TikZ diagram, we need to install ``dot2tex`` and ``graphviz``.
-
-.. code-block::
-
-   sage --pip install dot2tex
-   sage --pip install graphviz
-
-and then make sure you import the following
-
-.. code-block::
-
-   from sage.all import latex
-
-.. automethod:: quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram_method_1_labels
-
-The example above should export the following diagram:
-
-.. image:: poset_diagram.png
-   :alt: Poset diagram
 
 The second method to compute this Hasse diagram is as follows.
 
@@ -247,23 +232,28 @@ The second method to compute this Hasse diagram is as follows.
 
       2. :math:`l=r-1` and :math:`\varepsilon` can be ordered such that for all :math:`1\leq i\leq r-2` we have :math:`(m_i,\alpha^{(i)})=(p_i,\gamma^{(i)})` and :math:`\alpha^{(r)}=\alpha^{(r-1)}=\gamma^{(r-1)},m_{r-1}+m_r=p_{r-1}`.
 
-The symplectic leaves form a subset of this set of decompositions, and by restriction, they inherit a sub-poset structure. It is shown in (Bellamy-Schedler, 2026) that this is the partial ordering given by leaf closure.
+The symplectic leaves form a subset of this set of decompositions, and by restriction, they inherit a sub-poset structure. It is shown in (Bellamy-Schedler, 2026) that this is the partial ordering given by leaf closure. We need the following helper functions for Method 2.
 
 .. automethod:: quivercombinatorics.quivercombinatorics.Quiver.all_decompositions
 
 .. autofunction:: quivercombinatorics.is_direct_successor
 
-.. automethod:: quivercombinatorics.quivercombinatorics.Quiver.get_Hasse_diagram_method_2
+We are now able to obtain and plot the Hasse diagram for Methods 1 and 2. Method 1 seems to be much faster, so it is enabled by default.
 
-.. automethod:: quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram_method_2
+.. automethod:: quivercombinatorics.quivercombinatorics.Quiver.get_Hasse_diagram
+   
+.. automethod:: quivercombinatorics.quivercombinatorics.Quiver.plot_Hasse_diagram
 
-It seems that Method 2 is slower than Method 1, so we only implemented a TikZ exporter for Method 1.
+The example above should export the following diagram:
 
-..
-   Future directions
-..
-   ==================
-..
-      1. We could compute the hyperplane arrangement on which the Namikawa-Weyl group acts.
-..
-      2. We could rewrite this code in *Julia*, which is apparently more performant than SageMath in some instances. We can use that *QuiverTools* has a *Julia* implementation.
+.. image:: _static/output.svg
+   :alt: Poset diagram
+   :align: center
+   :class: only-light
+   :width: 85%
+
+.. image:: _static/output-dark.svg
+   :alt: Poset diagram
+   :align: center
+   :class: only-dark
+   :width: 85%

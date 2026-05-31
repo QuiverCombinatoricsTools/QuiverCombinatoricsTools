@@ -1,21 +1,20 @@
+import random
+import dot2tex
+
+from sage.all import Integer, Poset
+from sage.combinat.partition import Partitions
+from sage.combinat.posets.hasse_diagram import HasseDiagram
 from sage.combinat.root_system.cartan_matrix import CartanMatrix
 from sage.graphs.digraph import DiGraph
 from sage.matrix.constructor import matrix
 from sage.matrix.special import zero_matrix
-from sage.modules.free_module_element import vector
-from sage.all import Integer
-from sage.rings.integer_ring import ZZ
-from sage.structure.element import Element
-from sage.all import Poset
-from sage.all import latex
-from quiver import *                                                
-from quiver import Quiver as BaseQuiver
-from sage.combinat.partition import Partitions
-from sage.combinat.posets.hasse_diagram import HasseDiagram
-from sage.misc.latex import latex
 from sage.misc.latex import LatexExpr
-import random
-from collections import defaultdict
+from sage.misc.latex_standalone import TikzPicture
+from sage.modules.free_module_element import vector
+from sage.structure.element import Element
+
+from quiver import *
+from quiver import Quiver as BaseQuiver
 
 def quiver_from_cartan_matrix(C):
     r"""Returns the quiver :math:`Q` given by a Cartan matrix :math:`C`
@@ -204,7 +203,7 @@ def D_map(m, tau):
     """
     return sum(m[i]*vector(tau[i][0]) for i in range(len(m)))
 
-def D_map_on_rep(tau, L):
+def D_lifting(tau, L):
     r"""Applies ``d_map`` to a representation type of the :math:`\mathrm{ext}`-quiver
 
         INPUT:
@@ -218,7 +217,7 @@ def D_map_on_rep(tau, L):
 
             sage: from quivercombinatorics import *
             sage: tau = [[(1, 1), 2], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]
-            sage: D_map_on_rep([[(1, 2, 8, -3), 3]], tau)
+            sage: D_lifting([[(1, 2, 8, -3), 3]], tau)
             [[(8, 8), 3]]
 
     """
@@ -550,7 +549,7 @@ class Quiver(BaseQuiver):
 
             sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(2)
-            sage: Q.is_minimal_imaginary_root((1,1))
+            sage: Q.is_minimal_imaginary_root((1, 1))
             True
 
         """
@@ -569,8 +568,8 @@ class Quiver(BaseQuiver):
 
             sage: from quivercombinatorics import *
             sage: Q = KroneckerQuiver(2)
-            sage: Q.all_minimal_imaginary_positive_roots((3,3))
-            [(1,1)]
+            sage: Q.all_minimal_imaginary_positive_roots((3, 3))
+            [(1, 1)]
 
         """
         return list(
@@ -607,7 +606,7 @@ class Quiver(BaseQuiver):
             sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]
             sage: Q = Quiver(A)
             sage: Q.all_subminimal_representation_types((1, 1, 4, 1))
-            [([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]], 'A_1'),
+            [([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]], 'A_{1}'),
             ([[(0, 0, 1, 0), 4], [(0, 1, 0, 0), 1], [(1, 0, 0, 1), 1]], 'a_{2}'),
             ([[(0, 0, 0, 1), 1],
             [(0, 0, 1, 0), 1],
@@ -652,7 +651,7 @@ class Quiver(BaseQuiver):
                 if len(supp) == 2:
                     r = subquiver.adjacency_matrix()[0][1] + subquiver.adjacency_matrix()[1][0]
                     if r == 2:
-                        label = f"A_1"
+                        label = f"A_{{1}}"
                 elif len(supp) >= 3 and CartanMatrix(subquiver.cartan_matrix()).is_affine():
                     subquiver_type = CartanMatrix(subquiver.cartan_matrix()).cartan_type()
                     label = f"{subquiver_type.type()}_{{{subquiver_type.rank() - 1}}}"
@@ -716,163 +715,12 @@ class Quiver(BaseQuiver):
         rep_types = Qtilde.all_subminimal_representation_types(n)
         lifted_rep_types_with_counts = []
         for tau in rep_types:
-            rep_type = D_map_on_rep(tau, L)
+            rep_type = D_lifting(tau, L)
             if lifted_rep_types_with_counts and lifted_rep_types_with_counts[-1][0] == rep_type:
                 lifted_rep_types_with_counts[-1][1] += 1
             else:
                 lifted_rep_types_with_counts.append([rep_type, 1])
-        return [(sorted(tau[0][0]),fr'${tau[0][1]}({tau[1]})$') for tau in lifted_rep_types_with_counts]
-    
-    def get_Hasse_diagram_method_1(self, l, v, dimensions=False):
-        r"""Applies Method 1 to obtain data for the Hasse diagram of minimal degenerations
-
-        INPUT:
-
-        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
-        - ``v`` -- an element of :math:`\mathbb{N}Q_0`
-        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
-
-        OUTPUT: ``all_leaves``, ``elements``, ``relations``, ``edge_labels``, the latter three are required to construct the Hasse diagram of minimal degenerations
-
-        EXAMPLES::
-
-            sage: from quivercombinatorics import *
-            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
-            sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.get_Hasse_diagram_method_1((0,0,0), (2,4,3))
-            
-            ([[[(0, 0, 1), 1],
-            [(0, 1, 0), 2],
-            [(0, 1, 1), 1],
-            [(0, 1, 1), 1],
-            [(1, 0, 0), 2]],
-            [[(0, 0, 1), 1], [(0, 1, 0), 2], [(0, 1, 1), 2], [(1, 0, 0), 2]],
-            [[(0, 0, 1), 2], [(0, 1, 0), 3], [(0, 1, 1), 1], [(1, 0, 0), 2]],
-            [[(0, 0, 1), 3], [(0, 1, 0), 4], [(1, 0, 0), 2]],
-            [[(0, 1, 0), 1],
-            [(0, 1, 1), 1],
-            [(0, 1, 1), 1],
-            [(0, 1, 1), 1],
-            [(1, 0, 0), 2]],
-            [[(0, 1, 0), 1], [(0, 1, 1), 1], [(0, 1, 1), 2], [(1, 0, 0), 2]],
-            [[(0, 1, 0), 1], [(0, 1, 1), 3], [(1, 0, 0), 2]],
-            [[(2, 4, 3), 1]]],
-            [0, 1, 2, 3, 4, 5, 6, 7],
-            [(0, 4),
-            (1, 5),
-            (1, 0),
-            (2, 0),
-            (2, 5),
-            (3, 2),
-            (3, 1),
-            (3, 6),
-            (4, 7),
-            (5, 4),
-            (6, 5)],
-            [(0, 4, '$A_1(1)$'),
-            (1, 5, '$A_1(1)$'),
-            (1, 0, '$c_{1}(1)$'),
-            (2, 0, '$A_1(1)$'),
-            (2, 5, '$A_1(1)$'),
-            (3, 2, '$A_1(1)$'),
-            (3, 1, '$A_1(1)$'),
-            (3, 6, '$A_1(1)$'),
-            (4, 7, '$D_{4}(1)$'),
-            (5, 4, '$c_{1}(1)$'),
-            (6, 5, '$m_{1}(1)$')])
-        
-        """
-        if isinstance(l, (int, Integer)):
-            l = (l,)
-        if isinstance(v, (int, Integer)):
-            v = (v,)
-        all_leaves = self.all_representation_types(l, v)
-        num_of_leaves = len(all_leaves)
-        relations = []
-        edge_labels = []
-        if dimensions:
-            dim_counter = defaultdict(int)
-            elements = []
-            for i, leaf in enumerate(all_leaves):
-                dim = self.symplectic_leaf_dimension(leaf)
-                elements.append((dim, dim_counter[dim]))
-                dim_counter[dim] += 1
-        else:
-            elements = list(range(num_of_leaves))
-        for i in range(num_of_leaves):
-            for L in self.minimal_degenerations(all_leaves[i]):
-                j = all_leaves.index(L[0])
-                relations.append((elements[i], elements[j]))
-                edge_labels.append((elements[i], elements[j], L[1]))
-        return all_leaves, elements, relations, edge_labels
-
-        
-    def plot_Hasse_diagram_method_1(self, l, v, dimensions=False):
-        r"""Constructs the Hasse diagram using Method 1, using ``get_Hasse_diagram_method_1``. The output can then be plotted by appending ``.plot()`` for example
-
-        INPUT:
-
-        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
-        - ``v`` -- an element of :math:`\mathbb{N}Q_0`
-        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
-
-        OUTPUT: The Hasse diagram as a poset
-
-        EXAMPLES::
-
-            sage: from quivercombinatorics import *
-            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
-            sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.plot_Hasse_diagram_method_1((0, 0, 0), (2, 4, 3))
-            Finite poset containing 8 elements
-
-            sage: Q = LoopQuiver(3)
-            sage: Q.plot_Hasse_diagram_method_1((0), (4), dimensions=True)
-            Finite poset containing 11 elements
-        
-        """
-        all_leaves, elements, relations, edge_labels = self.get_Hasse_diagram_method_1(l, v, dimensions)
-        P = Poset((elements, relations), cover_relations=False)
-        if dimensions:
-            P._dimension_labels = {x: x[0] for x in P}
-        return P
-    
-    def plot_Hasse_diagram_method_1_labels(self, l, v, dimensions=False, latex=False):
-        r"""Constructs the Hasse diagram using Method 1, using ``get_Hasse_diagram_method_1``, but also outputs the labels of the minimal degenerations. The TikZ code can be seen by applying ``latex()`` to the output when ``latex`` is set to ``True``.
-
-        INPUT:
-
-        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
-        - ``v`` -- an element of :math:`\mathbb{N}Q_0`
-        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
-        - ``latex`` -- When set to ``True``, the labels will be formatted to be ready for a latex export
-
-        OUTPUT: The Hasse diagram as a poset, with labels
-
-        EXAMPLE::
-
-            sage: from quivercombinatorics import *
-            sage: from sage.all import latex
-            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
-            sage: Q = quiver_from_cartan_matrix(C)
-            sage: P = Q.plot_Hasse_diagram_method_1_labels((0, 0, 0), (2, 4, 3), latex=True, dimensions=True)
-            sage: P.set_latex_options(format='dot2tex', prog='dot', rankdir='up', edge_labels=True, color_by_label=False)
-            sage: tex_code = latex(P)
-            sage: with open("poset_diagram.tex", "w") as f:
-            ....:     f.write(tex_code)
-        
-        """
-        all_leaves, elements, relations, edge_labels = self.get_Hasse_diagram_method_1(l, v, dimensions)
-        if latex: 
-            edge_labels = [
-            (i, j, LatexExpr(str(label).strip("$")))
-            for (i, j, label) in edge_labels
-            ]
-        P = Poset((elements, relations), cover_relations=False)
-        H = P.hasse_diagram()
-        for i, j, label in edge_labels:
-            H.set_edge_label(i, j, label)
-        return H
+        return [(sorted(tau[0][0]),fr'{tau[0][1]}({tau[1]})') for tau in lifted_rep_types_with_counts]
     
     def all_decompositions(self, v):
         r"""Constructs all decompositions of a given dimension vector :math:`v`
@@ -905,25 +753,30 @@ class Quiver(BaseQuiver):
             all_reps = all_reps + current
         return sorted(all_reps)
 
-    def get_Hasse_diagram_method_2(self, l, v):
-        r"""Applies Method 2 to obtain data for the Hasse diagram of minimal degenerations
+    def get_Hasse_diagram(self, l, v, method=1):
+        r"""Applies Method 1 or Method 2 to obtain data for the Hasse diagram of minimal degenerations
 
         INPUT:
 
         - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
         - ``v`` -- an element of :math:`\mathbb{N}Q_0`
-        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
+        - ``method`` -- When set to ``1``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations. When set to ``2``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations.
 
-        OUTPUT: ``rep_types``, ``dimensions``, ``rep_types_poset``, the last output is the actual poset
+        OUTPUT: 
+        
+        - ``leaves_poset`` -- the underlying poset of the Hasse diagram of minimal degenerations
+        - ``all_leaves`` -- a list of all symplectic leaves, with respect to their representation types, so a list of representation types, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`
+        - ``dimensions`` -- a list of dimensions of all the symplectic leaves, using ``symplectic_leaf_dimension``
+        - ``edge_labels`` -- a list of 3-tuples, the first two entries of each tuple define the edge, and the last entry is the edge label of the corresponding minimal degeneration, classified by ``all_subminimal_representation_types``
 
-        EXAMPLES::
+        EXAMPLE::
 
             sage: from quivercombinatorics import *
             sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.get_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))
-            
-            ([[[(0, 0, 1), 1],
+            sage: Q.get_Hasse_diagram((0, 0, 0), (2, 4, 3))
+            (Finite poset containing 8 elements,
+            [[[(0, 0, 1), 1],
             [(0, 1, 0), 2],
             [(0, 1, 1), 1],
             [(0, 1, 1), 1],
@@ -940,58 +793,151 @@ class Quiver(BaseQuiver):
             [[(0, 1, 0), 1], [(0, 1, 1), 3], [(1, 0, 0), 2]],
             [[(2, 4, 3), 1]]],
             [4, 2, 2, 0, 6, 4, 2, 8],
-            Finite poset containing 8 elements)
+            [(0, 4, 'A_{1}(1)'),
+            (1, 5, 'A_{1}(1)'),
+            (1, 0, 'c_{1}(1)'),
+            (2, 0, 'A_{1}(1)'),
+            (2, 5, 'A_{1}(1)'),
+            (3, 2, 'A_{1}(1)'),
+            (3, 1, 'A_{1}(1)'),
+            (3, 6, 'A_{1}(1)'),
+            (4, 7, 'D_{4}(1)'),
+            (5, 4, 'c_{1}(1)'),
+            (6, 5, 'm_{1}(1)')])
         
         """
+        if method != 1 and method != 2:
+            raise ValueError("Method can only take values 1 or 2.")
         if isinstance(l, (int, Integer)):
             l = (l,)
         if isinstance(v, (int, Integer)):
             v = (v,)
-        decomps = self.all_decompositions(v)
-        rep_types = self.all_representation_types(l, v)
-        indices = [decomps.index(x) for x in rep_types]
-        num_of_leaves = len(rep_types)
-        num_of_decomps = len(decomps)
-        elements = range(num_of_decomps)
+        all_leaves = self.all_representation_types(l, v)
+        dimensions = [self.symplectic_leaf_dimension(tau) for tau in all_leaves]
+        num_of_leaves = len(all_leaves)
+        edge_labels = []
         relations = []
-        for i in range(num_of_decomps):
-            for j in range(i):
-                if is_direct_successor(decomps[i],decomps[j]):
-                    relations = relations + [[i, j]]
-                elif is_direct_successor(decomps[j],decomps[i]):
-                    relations = relations + [[j, i]]
-        P = Poset((elements, relations), cover_relations=False)
-        relabelling = {indices[i]: i for i in range(num_of_leaves)}
-        rep_types_poset = P.subposet(indices).relabel(relabelling)
-        dimensions = [self.symplectic_leaf_dimension(rep_type) for rep_type in rep_types]       
-        return rep_types, dimensions, rep_types_poset
+        if method == 1:
+            elements = list(range(num_of_leaves))
+            for i in range(num_of_leaves):
+                for L in self.minimal_degenerations(all_leaves[i]):
+                    j = all_leaves.index(L[0])
+                    relations.append((elements[i], elements[j]))
+                    edge_labels.append((elements[i], elements[j], L[1]))
+            leaves_poset = Poset((elements, relations), cover_relations = False)
+        elif method == 2:
+            decomps = self.all_decompositions(v)
+            indices = [decomps.index(x) for x in all_leaves]
+            num_of_decomps = len(decomps)
+            elements = range(num_of_leaves)
+            for i in range(num_of_decomps):
+                for j in range(i):
+                    if is_direct_successor(decomps[i], decomps[j]):
+                        relations.append((i, j))
+                    elif is_direct_successor(decomps[j], decomps[i]):
+                        relations.append((j, i))
+            P = Poset((elements, relations), cover_relations=False)
+            relabelling = {indices[i]: i for i in range(num_of_leaves)}
+            leaves_poset = P.subposet(indices).relabel(relabelling)    
+            for i in range(num_of_leaves):
+                for tau, label in self.minimal_degenerations(all_leaves[i]):
+                    if tau in all_leaves:
+                        j = all_leaves.index(tau)
+                        if leaves_poset.covers(i, j):
+                            edge_labels.append((i, j, label))  
+        return leaves_poset, all_leaves, dimensions, edge_labels
 
-    def plot_Hasse_diagram_method_2(self, l, v):
-        r"""Constructs the Hasse diagram using Method 2, using ``get_Hasse_diagram_method_2``. The output can then be plotted by appending ``.plot()`` for example
+    def plot_Hasse_diagram(self, l, v, method=1, format="tikz", filename="output"):
+        r"""Applies Method 1 or Method 2 to plot the Hasse diagram for minimal degenerations
 
         INPUT:
 
         - ``l`` -- an element of :math:`\mathbb{Z}Q_0`
         - ``v`` -- an element of :math:`\mathbb{N}Q_0`
-        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions
+        - ``method`` -- When set to ``1``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations. When set to ``2``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations.
+        - ``format`` -- Takes values "tikz", "dot", and "sage", depending on whether you want a ``.tex`` file with *tikzpicture*, a ``.dot`` file, or a sage Hasse diagram output
+        - ``filename`` -- filename of output
 
-        OUTPUT: The Hasse diagram as a poset
+        OUTPUT: 
+        
+        - the Hasse diagram for minimal degenerations
 
-        EXAMPLES::
+        EXAMPLE::
 
-            sage: from quivercombinatorics import *
             sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.plot_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))
-            Finite poset containing 8 elements
+            sage: Q.plot_Hasse_diagram((0, 0, 0), (2, 4, 3))
+            \documentclass[tikz]{standalone}
+            \begin{document}
 
-            sage: Q = LoopQuiver(3)
-            sage: Q.plot_Hasse_diagram_method_2((0), (4), dimensions=True)
-            Finite poset containing 11 elements
+            \begin{tikzpicture}[>=latex,line join=bevel,]
+            %%
+            \begin{scope}
+                \pgfsetstrokecolor{black}
+            ---
+            77 lines not printed (5057 characters in total).
+            Use print to see the full content.
+            ---
+                \draw (221.5bp,185.5bp) node {$c_{1}(1)$};
+                \draw [->] (6) ..controls (293.59bp,110.99bp) and (289.95bp,119.79bp)  .. (284.0bp,126.0bp) .. controls (277.86bp,132.41bp) and (269.81bp,137.25bp)  .. (5);
+                \draw (320.5bp,118.5bp) node {$m_{1}(1)$};
+            %
+            \end{tikzpicture}
+            \end{document}
         
         """
-        rep_types, dimensions, rep_types_poset = self.get_Hasse_diagram_method_2(l, v)
-        return rep_types_poset
+        if format not in ["dot", "tikz", "sage"]:
+            raise ValueError("Possible formats are sage, dot and tikz.")
+        P, _, dimensions, edge_labels = self.get_Hasse_diagram(l, v, method)
+        H = P.hasse_diagram()
+        possible_dims = sorted(list(set(dimensions)))
+        if format == "sage":
+            heights = {
+                j: [
+                    i 
+                    for i in range(len(dimensions)) 
+                    if dimensions[i] == possible_dims[j]
+                ] 
+                for j in range(len(possible_dims))
+            }
+            pos = H.layout_acyclic_dummy(heights=heights)
+            H.set_pos(pos)
+            for i, j, label in edge_labels:
+                H.set_edge_label(i, j, label)
+            return H
+        elif format == "dot" or format == "tikz":
+            lines = []
+            lines.append('digraph G {')
+            lines.append('    graph [splines=true, overlap=false, rankdir="BT", d2toptions="-e utf8", labeldistance=0.5, nodesep = 0.1, ranksep = 0.2]')
+            lines.append('    node [shape=none]')
+            string = '    '
+            for dim in possible_dims:
+                lines.append(f'    dim{dim} [texlbl="$\dim={dim}$"]')
+                string = string + f'dim{dim} -> '
+            string = string[:-3] + '[style=invis]'
+            lines.append(string)
+            for i in range(len(dimensions)):
+                lines.append(f'    {i} [texlbl="$L_{{{i}}}$"]')
+            for dim in possible_dims:
+                string = '    {rank=same;'+f' dim{dim}'
+                for i in range(len(dimensions)):
+                    if dimensions[i] == dim:
+                        string += f'; {i}'
+                string += '}'
+                lines.append(string)
+            for i, j, label in edge_labels:
+                if H.has_edge(i, j):
+                    lines.append(f'    {i} -> {j} [texlbl="${label}$", label="{label}", lp="0,0"]')
+            lines.append('}')
+            s = '\n'.join(lines)
+            if format == "tikz":
+                t = TikzPicture(dot2tex.dot2tex(s, format='tikz', figonly='True', prog='dot', rankdir='down'))
+                _ = t.tex(filename+".tex")
+                return t
+            else:
+                with open(filename+".dot", "w") as f:
+                    f.write(s)
+                return s
     
     BaseQuiver.p_function = p_function
     BaseQuiver.R_lambda_plus = R_lambda_plus
@@ -1010,12 +956,9 @@ class Quiver(BaseQuiver):
     BaseQuiver.all_minimal_imaginary_positive_roots = all_minimal_imaginary_positive_roots
     BaseQuiver.all_subminimal_representation_types = all_subminimal_representation_types
     BaseQuiver.D_map = D_map
-    BaseQuiver.D_map_on_rep = D_map_on_rep
+    BaseQuiver.D_lifting = D_lifting
     BaseQuiver.minimal_degenerations = minimal_degenerations
-    BaseQuiver.get_Hasse_diagram_method_1 = get_Hasse_diagram_method_1
-    BaseQuiver.plot_Hasse_diagram_method_1 = plot_Hasse_diagram_method_1
-    BaseQuiver.plot_Hasse_diagram_method_1_labels = plot_Hasse_diagram_method_1_labels
     BaseQuiver.all_decompositions = all_decompositions
     BaseQuiver.is_direct_successor = is_direct_successor
-    BaseQuiver.get_Hasse_diagram_method_2 = get_Hasse_diagram_method_2
-    BaseQuiver.plot_Hasse_diagram_method_2 = plot_Hasse_diagram_method_2
+    BaseQuiver.get_Hasse_diagram = get_Hasse_diagram
+    BaseQuiver.plot_Hasse_diagram = plot_Hasse_diagram

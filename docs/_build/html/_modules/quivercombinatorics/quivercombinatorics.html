@@ -228,24 +228,23 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for quivercombinatorics.quivercombinatorics</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.root_system.cartan_matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">CartanMatrix</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dot2tex</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Poset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.partition</span><span class="w"> </span><span class="kn">import</span> <span class="n">Partitions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.posets.hasse_diagram</span><span class="w"> </span><span class="kn">import</span> <span class="n">HasseDiagram</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.root_system.cartan_matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">CartanMatrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.graphs.digraph</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiGraph</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.matrix.constructor</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.matrix.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">zero_matrix</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.modules.free_module_element</span><span class="w"> </span><span class="kn">import</span> <span class="n">vector</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">Integer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.rings.integer_ring</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZZ</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.structure.element</span><span class="w"> </span><span class="kn">import</span> <span class="n">Element</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">Poset</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.all</span><span class="w"> </span><span class="kn">import</span> <span class="n">latex</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">quiver</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>                                                
-<span class="kn">from</span><span class="w"> </span><span class="nn">quiver</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quiver</span> <span class="k">as</span> <span class="n">BaseQuiver</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.partition</span><span class="w"> </span><span class="kn">import</span> <span class="n">Partitions</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.combinat.posets.hasse_diagram</span><span class="w"> </span><span class="kn">import</span> <span class="n">HasseDiagram</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sage.misc.latex</span><span class="w"> </span><span class="kn">import</span> <span class="n">latex</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sage.misc.latex</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatexExpr</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.misc.latex_standalone</span><span class="w"> </span><span class="kn">import</span> <span class="n">TikzPicture</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.modules.free_module_element</span><span class="w"> </span><span class="kn">import</span> <span class="n">vector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sage.structure.element</span><span class="w"> </span><span class="kn">import</span> <span class="n">Element</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">quiver</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quiver</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quiver</span> <span class="k">as</span> <span class="n">BaseQuiver</span>
 
 <div class="viewcode-block" id="quiver_from_cartan_matrix">
 <a class="viewcode-back" href="../../index.html#quivercombinatorics.quiver_from_cartan_matrix">[docs]</a>
@@ -455,9 +454,9 @@
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">vector</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="D_map_on_rep">
-<a class="viewcode-back" href="../../index.html#quivercombinatorics.D_map_on_rep">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">D_map_on_rep</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+<div class="viewcode-block" id="D_lifting">
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.D_lifting">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">D_lifting</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies ``d_map`` to a representation type of the :math:`\mathrm{ext}`-quiver</span>
 
 <span class="sd">        INPUT:</span>
@@ -471,7 +470,7 @@
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: tau = [[(1, 1), 2], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]</span>
-<span class="sd">            sage: D_map_on_rep([[(1, 2, 8, -3), 3]], tau)</span>
+<span class="sd">            sage: D_lifting([[(1, 2, 8, -3), 3]], tau)</span>
 <span class="sd">            [[(8, 8), 3]]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -836,7 +835,7 @@
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(2)</span>
-<span class="sd">            sage: Q.is_minimal_imaginary_root((1,1))</span>
+<span class="sd">            sage: Q.is_minimal_imaginary_root((1, 1))</span>
 <span class="sd">            True</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -858,8 +857,8 @@
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: Q = KroneckerQuiver(2)</span>
-<span class="sd">            sage: Q.all_minimal_imaginary_positive_roots((3,3))</span>
-<span class="sd">            [(1,1)]</span>
+<span class="sd">            sage: Q.all_minimal_imaginary_positive_roots((3, 3))</span>
+<span class="sd">            [(1, 1)]</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span>
@@ -899,7 +898,7 @@
 <span class="sd">            sage: A = [[0, 1, 0, 3], [1, 0, 0, 0], [0, 0, 2, 0], [0, 0, 0, 0]]</span>
 <span class="sd">            sage: Q = Quiver(A)</span>
 <span class="sd">            sage: Q.all_subminimal_representation_types((1, 1, 4, 1))</span>
-<span class="sd">            [([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]], &#39;A_1&#39;),</span>
+<span class="sd">            [([[(0, 0, 0, 1), 1], [(0, 0, 1, 0), 4], [(1, 1, 0, 0), 1]], &#39;A_{1}&#39;),</span>
 <span class="sd">            ([[(0, 0, 1, 0), 4], [(0, 1, 0, 0), 1], [(1, 0, 0, 1), 1]], &#39;a_{2}&#39;),</span>
 <span class="sd">            ([[(0, 0, 0, 1), 1],</span>
 <span class="sd">            [(0, 0, 1, 0), 1],</span>
@@ -944,7 +943,7 @@
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">supp</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="n">r</span> <span class="o">=</span> <span class="n">subquiver</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">subquiver</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                        <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;A_1&quot;</span>
+                        <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;A_</span><span class="se">{{</span><span class="s2">1</span><span class="se">}}</span><span class="s2">&quot;</span>
                 <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">supp</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">CartanMatrix</span><span class="p">(</span><span class="n">subquiver</span><span class="o">.</span><span class="n">cartan_matrix</span><span class="p">())</span><span class="o">.</span><span class="n">is_affine</span><span class="p">():</span>
                     <span class="n">subquiver_type</span> <span class="o">=</span> <span class="n">CartanMatrix</span><span class="p">(</span><span class="n">subquiver</span><span class="o">.</span><span class="n">cartan_matrix</span><span class="p">())</span><span class="o">.</span><span class="n">cartan_type</span><span class="p">()</span>
                     <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subquiver_type</span><span class="o">.</span><span class="n">type</span><span class="p">()</span><span class="si">}</span><span class="s2">_</span><span class="se">{{</span><span class="si">{</span><span class="n">subquiver_type</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
@@ -1011,172 +1010,12 @@
         <span class="n">rep_types</span> <span class="o">=</span> <span class="n">Qtilde</span><span class="o">.</span><span class="n">all_subminimal_representation_types</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="n">lifted_rep_types_with_counts</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">rep_types</span><span class="p">:</span>
-            <span class="n">rep_type</span> <span class="o">=</span> <span class="n">D_map_on_rep</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+            <span class="n">rep_type</span> <span class="o">=</span> <span class="n">D_lifting</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">lifted_rep_types_with_counts</span> <span class="ow">and</span> <span class="n">lifted_rep_types_with_counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">rep_type</span><span class="p">:</span>
                 <span class="n">lifted_rep_types_with_counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">lifted_rep_types_with_counts</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">rep_type</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-        <span class="k">return</span> <span class="p">[(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="sa">fr</span><span class="s1">&#39;$</span><span class="si">{</span><span class="n">tau</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">tau</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">lifted_rep_types_with_counts</span><span class="p">]</span></div>
-
-    
-<div class="viewcode-block" id="Quiver.get_Hasse_diagram_method_1">
-<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.get_Hasse_diagram_method_1">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_Hasse_diagram_method_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies Method 1 to obtain data for the Hasse diagram of minimal degenerations</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-<span class="sd">        - ``v`` -- an element of :math:`\mathbb{N}Q_0`</span>
-<span class="sd">        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions</span>
-
-<span class="sd">        OUTPUT: ``all_leaves``, ``elements``, ``relations``, ``edge_labels``, the latter three are required to construct the Hasse diagram of minimal degenerations</span>
-
-<span class="sd">        EXAMPLES::</span>
-
-<span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
-<span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: Q.get_Hasse_diagram_method_1((0,0,0), (2,4,3))</span>
-<span class="sd">            </span>
-<span class="sd">            ([[[(0, 0, 1), 1],</span>
-<span class="sd">            [(0, 1, 0), 2],</span>
-<span class="sd">            [(0, 1, 1), 1],</span>
-<span class="sd">            [(0, 1, 1), 1],</span>
-<span class="sd">            [(1, 0, 0), 2]],</span>
-<span class="sd">            [[(0, 0, 1), 1], [(0, 1, 0), 2], [(0, 1, 1), 2], [(1, 0, 0), 2]],</span>
-<span class="sd">            [[(0, 0, 1), 2], [(0, 1, 0), 3], [(0, 1, 1), 1], [(1, 0, 0), 2]],</span>
-<span class="sd">            [[(0, 0, 1), 3], [(0, 1, 0), 4], [(1, 0, 0), 2]],</span>
-<span class="sd">            [[(0, 1, 0), 1],</span>
-<span class="sd">            [(0, 1, 1), 1],</span>
-<span class="sd">            [(0, 1, 1), 1],</span>
-<span class="sd">            [(0, 1, 1), 1],</span>
-<span class="sd">            [(1, 0, 0), 2]],</span>
-<span class="sd">            [[(0, 1, 0), 1], [(0, 1, 1), 1], [(0, 1, 1), 2], [(1, 0, 0), 2]],</span>
-<span class="sd">            [[(0, 1, 0), 1], [(0, 1, 1), 3], [(1, 0, 0), 2]],</span>
-<span class="sd">            [[(2, 4, 3), 1]]],</span>
-<span class="sd">            [0, 1, 2, 3, 4, 5, 6, 7],</span>
-<span class="sd">            [(0, 4),</span>
-<span class="sd">            (1, 5),</span>
-<span class="sd">            (1, 0),</span>
-<span class="sd">            (2, 0),</span>
-<span class="sd">            (2, 5),</span>
-<span class="sd">            (3, 2),</span>
-<span class="sd">            (3, 1),</span>
-<span class="sd">            (3, 6),</span>
-<span class="sd">            (4, 7),</span>
-<span class="sd">            (5, 4),</span>
-<span class="sd">            (6, 5)],</span>
-<span class="sd">            [(0, 4, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (1, 5, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (1, 0, &#39;$c_{1}(1)$&#39;),</span>
-<span class="sd">            (2, 0, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (2, 5, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (3, 2, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (3, 1, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (3, 6, &#39;$A_1(1)$&#39;),</span>
-<span class="sd">            (4, 7, &#39;$D_{4}(1)$&#39;),</span>
-<span class="sd">            (5, 4, &#39;$c_{1}(1)$&#39;),</span>
-<span class="sd">            (6, 5, &#39;$m_{1}(1)$&#39;)])</span>
-<span class="sd">        </span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="p">,)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">,)</span>
-        <span class="n">all_leaves</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_representation_types</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-        <span class="n">num_of_leaves</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">)</span>
-        <span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">edge_labels</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">dimensions</span><span class="p">:</span>
-            <span class="n">dim_counter</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">leaf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">):</span>
-                <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symplectic_leaf_dimension</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
-                <span class="n">elements</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim_counter</span><span class="p">[</span><span class="n">dim</span><span class="p">]))</span>
-                <span class="n">dim_counter</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimal_degenerations</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
-                <span class="n">j</span> <span class="o">=</span> <span class="n">all_leaves</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-                <span class="n">edge_labels</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-        <span class="k">return</span> <span class="n">all_leaves</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">edge_labels</span></div>
-
-
-        
-<div class="viewcode-block" id="Quiver.plot_Hasse_diagram_method_1">
-<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.plot_Hasse_diagram_method_1">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">plot_Hasse_diagram_method_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructs the Hasse diagram using Method 1, using ``get_Hasse_diagram_method_1``. The output can then be plotted by appending ``.plot()`` for example</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-<span class="sd">        - ``v`` -- an element of :math:`\mathbb{N}Q_0`</span>
-<span class="sd">        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions</span>
-
-<span class="sd">        OUTPUT: The Hasse diagram as a poset</span>
-
-<span class="sd">        EXAMPLES::</span>
-
-<span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
-<span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: Q.plot_Hasse_diagram_method_1((0, 0, 0), (2, 4, 3))</span>
-<span class="sd">            Finite poset containing 8 elements</span>
-
-<span class="sd">            sage: Q = LoopQuiver(3)</span>
-<span class="sd">            sage: Q.plot_Hasse_diagram_method_1((0), (4), dimensions=True)</span>
-<span class="sd">            Finite poset containing 11 elements</span>
-<span class="sd">        </span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">all_leaves</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">edge_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_1</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">)</span>
-        <span class="n">P</span> <span class="o">=</span> <span class="n">Poset</span><span class="p">((</span><span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">),</span> <span class="n">cover_relations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dimensions</span><span class="p">:</span>
-            <span class="n">P</span><span class="o">.</span><span class="n">_dimension_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">P</span><span class="p">}</span>
-        <span class="k">return</span> <span class="n">P</span></div>
-
-    
-<div class="viewcode-block" id="Quiver.plot_Hasse_diagram_method_1_labels">
-<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.plot_Hasse_diagram_method_1_labels">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">plot_Hasse_diagram_method_1_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructs the Hasse diagram using Method 1, using ``get_Hasse_diagram_method_1``, but also outputs the labels of the minimal degenerations. The TikZ code can be seen by applying ``latex()`` to the output when ``latex`` is set to ``True``.</span>
-
-<span class="sd">        INPUT:</span>
-
-<span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
-<span class="sd">        - ``v`` -- an element of :math:`\mathbb{N}Q_0`</span>
-<span class="sd">        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions</span>
-<span class="sd">        - ``latex`` -- When set to ``True``, the labels will be formatted to be ready for a latex export</span>
-
-<span class="sd">        OUTPUT: The Hasse diagram as a poset, with labels</span>
-
-<span class="sd">        EXAMPLE::</span>
-
-<span class="sd">            sage: from quivercombinatorics import *</span>
-<span class="sd">            sage: from sage.all import latex</span>
-<span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
-<span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: P = Q.plot_Hasse_diagram_method_1_labels((0, 0, 0), (2, 4, 3), latex=True, dimensions=True)</span>
-<span class="sd">            sage: P.set_latex_options(format=&#39;dot2tex&#39;, prog=&#39;dot&#39;, rankdir=&#39;up&#39;, edge_labels=True, color_by_label=False)</span>
-<span class="sd">            sage: tex_code = latex(P)</span>
-<span class="sd">            sage: with open(&quot;poset_diagram.tex&quot;, &quot;w&quot;) as f:</span>
-<span class="sd">            ....:     f.write(tex_code)</span>
-<span class="sd">        </span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">all_leaves</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">,</span> <span class="n">edge_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_1</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">latex</span><span class="p">:</span> 
-            <span class="n">edge_labels</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">LatexExpr</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;$&quot;</span><span class="p">)))</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="n">edge_labels</span>
-            <span class="p">]</span>
-        <span class="n">P</span> <span class="o">=</span> <span class="n">Poset</span><span class="p">((</span><span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">),</span> <span class="n">cover_relations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">H</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">hasse_diagram</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">edge_labels</span><span class="p">:</span>
-            <span class="n">H</span><span class="o">.</span><span class="n">set_edge_label</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">H</span></div>
+        <span class="k">return</span> <span class="p">[(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="sa">fr</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tau</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">tau</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">lifted_rep_types_with_counts</span><span class="p">]</span></div>
 
     
 <div class="viewcode-block" id="Quiver.all_decompositions">
@@ -1213,27 +1052,32 @@
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">all_reps</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Quiver.get_Hasse_diagram_method_2">
-<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.get_Hasse_diagram_method_2">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_Hasse_diagram_method_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies Method 2 to obtain data for the Hasse diagram of minimal degenerations</span>
+<div class="viewcode-block" id="Quiver.get_Hasse_diagram">
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.get_Hasse_diagram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_Hasse_diagram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies Method 1 or Method 2 to obtain data for the Hasse diagram of minimal degenerations</span>
 
 <span class="sd">        INPUT:</span>
 
 <span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
 <span class="sd">        - ``v`` -- an element of :math:`\mathbb{N}Q_0`</span>
-<span class="sd">        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions</span>
+<span class="sd">        - ``method`` -- When set to ``1``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations. When set to ``2``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations.</span>
 
-<span class="sd">        OUTPUT: ``rep_types``, ``dimensions``, ``rep_types_poset``, the last output is the actual poset</span>
+<span class="sd">        OUTPUT: </span>
+<span class="sd">        </span>
+<span class="sd">        - ``leaves_poset`` -- the underlying poset of the Hasse diagram of minimal degenerations</span>
+<span class="sd">        - ``all_leaves`` -- a list of all symplectic leaves, with respect to their representation types, so a list of representation types, i.e., a list whose elements are 2-tuples, the first element is in :math:`\mathbb{N}Q_0`, and the second is in :math:`\mathbb{N}`</span>
+<span class="sd">        - ``dimensions`` -- a list of dimensions of all the symplectic leaves, using ``symplectic_leaf_dimension``</span>
+<span class="sd">        - ``edge_labels`` -- a list of 3-tuples, the first two entries of each tuple define the edge, and the last entry is the edge label of the corresponding minimal degeneration, classified by ``all_subminimal_representation_types``</span>
 
-<span class="sd">        EXAMPLES::</span>
+<span class="sd">        EXAMPLE::</span>
 
 <span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: Q.get_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))</span>
-<span class="sd">            </span>
-<span class="sd">            ([[[(0, 0, 1), 1],</span>
+<span class="sd">            sage: Q.get_Hasse_diagram((0, 0, 0), (2, 4, 3))</span>
+<span class="sd">            (Finite poset containing 8 elements,</span>
+<span class="sd">            [[[(0, 0, 1), 1],</span>
 <span class="sd">            [(0, 1, 0), 2],</span>
 <span class="sd">            [(0, 1, 1), 1],</span>
 <span class="sd">            [(0, 1, 1), 1],</span>
@@ -1250,61 +1094,154 @@
 <span class="sd">            [[(0, 1, 0), 1], [(0, 1, 1), 3], [(1, 0, 0), 2]],</span>
 <span class="sd">            [[(2, 4, 3), 1]]],</span>
 <span class="sd">            [4, 2, 2, 0, 6, 4, 2, 8],</span>
-<span class="sd">            Finite poset containing 8 elements)</span>
+<span class="sd">            [(0, 4, &#39;A_{1}(1)&#39;),</span>
+<span class="sd">            (1, 5, &#39;A_{1}(1)&#39;),</span>
+<span class="sd">            (1, 0, &#39;c_{1}(1)&#39;),</span>
+<span class="sd">            (2, 0, &#39;A_{1}(1)&#39;),</span>
+<span class="sd">            (2, 5, &#39;A_{1}(1)&#39;),</span>
+<span class="sd">            (3, 2, &#39;A_{1}(1)&#39;),</span>
+<span class="sd">            (3, 1, &#39;A_{1}(1)&#39;),</span>
+<span class="sd">            (3, 6, &#39;A_{1}(1)&#39;),</span>
+<span class="sd">            (4, 7, &#39;D_{4}(1)&#39;),</span>
+<span class="sd">            (5, 4, &#39;c_{1}(1)&#39;),</span>
+<span class="sd">            (6, 5, &#39;m_{1}(1)&#39;)])</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">method</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Method can only take values 1 or 2.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
             <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="p">,)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
             <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">,)</span>
-        <span class="n">decomps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_decompositions</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="n">rep_types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_representation_types</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">decomps</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rep_types</span><span class="p">]</span>
-        <span class="n">num_of_leaves</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rep_types</span><span class="p">)</span>
-        <span class="n">num_of_decomps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">decomps</span><span class="p">)</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_decomps</span><span class="p">)</span>
+        <span class="n">all_leaves</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_representation_types</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">symplectic_leaf_dimension</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">all_leaves</span><span class="p">]</span>
+        <span class="n">num_of_leaves</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">)</span>
+        <span class="n">edge_labels</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_decomps</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">is_direct_successor</span><span class="p">(</span><span class="n">decomps</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">decomps</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
-                    <span class="n">relations</span> <span class="o">=</span> <span class="n">relations</span> <span class="o">+</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]]</span>
-                <span class="k">elif</span> <span class="n">is_direct_successor</span><span class="p">(</span><span class="n">decomps</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">decomps</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
-                    <span class="n">relations</span> <span class="o">=</span> <span class="n">relations</span> <span class="o">+</span> <span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]</span>
-        <span class="n">P</span> <span class="o">=</span> <span class="n">Poset</span><span class="p">((</span><span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">),</span> <span class="n">cover_relations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">relabelling</span> <span class="o">=</span> <span class="p">{</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">)}</span>
-        <span class="n">rep_types_poset</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">subposet</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="n">relabelling</span><span class="p">)</span>
-        <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">symplectic_leaf_dimension</span><span class="p">(</span><span class="n">rep_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">rep_type</span> <span class="ow">in</span> <span class="n">rep_types</span><span class="p">]</span>       
-        <span class="k">return</span> <span class="n">rep_types</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">rep_types_poset</span></div>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimal_degenerations</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">all_leaves</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+                    <span class="n">edge_labels</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">leaves_poset</span> <span class="o">=</span> <span class="n">Poset</span><span class="p">((</span><span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">),</span> <span class="n">cover_relations</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">decomps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_decompositions</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">decomps</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_leaves</span><span class="p">]</span>
+            <span class="n">num_of_decomps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">decomps</span><span class="p">)</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_decomps</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">is_direct_successor</span><span class="p">(</span><span class="n">decomps</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">decomps</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
+                        <span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+                    <span class="k">elif</span> <span class="n">is_direct_successor</span><span class="p">(</span><span class="n">decomps</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">decomps</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                        <span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="n">Poset</span><span class="p">((</span><span class="n">elements</span><span class="p">,</span> <span class="n">relations</span><span class="p">),</span> <span class="n">cover_relations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">relabelling</span> <span class="o">=</span> <span class="p">{</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">)}</span>
+            <span class="n">leaves_poset</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">subposet</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="n">relabelling</span><span class="p">)</span>    
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_leaves</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">tau</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimal_degenerations</span><span class="p">(</span><span class="n">all_leaves</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">all_leaves</span><span class="p">:</span>
+                        <span class="n">j</span> <span class="o">=</span> <span class="n">all_leaves</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">leaves_poset</span><span class="o">.</span><span class="n">covers</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+                            <span class="n">edge_labels</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">label</span><span class="p">))</span>  
+        <span class="k">return</span> <span class="n">leaves_poset</span><span class="p">,</span> <span class="n">all_leaves</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">edge_labels</span></div>
 
 
-<div class="viewcode-block" id="Quiver.plot_Hasse_diagram_method_2">
-<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.plot_Hasse_diagram_method_2">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">plot_Hasse_diagram_method_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructs the Hasse diagram using Method 2, using ``get_Hasse_diagram_method_2``. The output can then be plotted by appending ``.plot()`` for example</span>
+<div class="viewcode-block" id="Quiver.plot_Hasse_diagram">
+<a class="viewcode-back" href="../../index.html#quivercombinatorics.Quiver.plot_Hasse_diagram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_Hasse_diagram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;tikz&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies Method 1 or Method 2 to plot the Hasse diagram for minimal degenerations</span>
 
 <span class="sd">        INPUT:</span>
 
 <span class="sd">        - ``l`` -- an element of :math:`\mathbb{Z}Q_0`</span>
 <span class="sd">        - ``v`` -- an element of :math:`\mathbb{N}Q_0`</span>
-<span class="sd">        - ``dimensions`` -- When set to ``True``, the leaves will be labeled by (``symplectic_leaf_dimension``, ``counter``), where ``counter`` enumerates symplectic leaves of equal dimensions</span>
+<span class="sd">        - ``method`` -- When set to ``1``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations. When set to ``2``, Method 1 will be used to obtain the Hasse diagram of minimal degenerations.</span>
+<span class="sd">        - ``format`` -- Takes values &quot;tikz&quot;, &quot;dot&quot;, and &quot;sage&quot;, depending on whether you want a ``.tex`` file with *tikzpicture*, a ``.dot`` file, or a sage Hasse diagram output</span>
+<span class="sd">        - ``filename`` -- filename of output</span>
 
-<span class="sd">        OUTPUT: The Hasse diagram as a poset</span>
+<span class="sd">        OUTPUT: </span>
+<span class="sd">        </span>
+<span class="sd">        - the Hasse diagram for minimal degenerations</span>
 
-<span class="sd">        EXAMPLES::</span>
+<span class="sd">        EXAMPLE::</span>
 
-<span class="sd">            sage: from quivercombinatorics import *</span>
 <span class="sd">            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]</span>
 <span class="sd">            sage: Q = quiver_from_cartan_matrix(C)</span>
-<span class="sd">            sage: Q.plot_Hasse_diagram_method_2((0, 0, 0), (2, 4, 3))</span>
-<span class="sd">            Finite poset containing 8 elements</span>
+<span class="sd">            sage: Q.plot_Hasse_diagram((0, 0, 0), (2, 4, 3))</span>
+<span class="sd">            \documentclass[tikz]{standalone}</span>
+<span class="sd">            \begin{document}</span>
 
-<span class="sd">            sage: Q = LoopQuiver(3)</span>
-<span class="sd">            sage: Q.plot_Hasse_diagram_method_2((0), (4), dimensions=True)</span>
-<span class="sd">            Finite poset containing 11 elements</span>
+<span class="sd">            \begin{tikzpicture}[&gt;=latex,line join=bevel,]</span>
+<span class="sd">            %%</span>
+<span class="sd">            \begin{scope}</span>
+<span class="sd">                \pgfsetstrokecolor{black}</span>
+<span class="sd">            ---</span>
+<span class="sd">            77 lines not printed (5057 characters in total).</span>
+<span class="sd">            Use print to see the full content.</span>
+<span class="sd">            ---</span>
+<span class="sd">                \draw (221.5bp,185.5bp) node {$c_{1}(1)$};</span>
+<span class="sd">                \draw [-&gt;] (6) ..controls (293.59bp,110.99bp) and (289.95bp,119.79bp)  .. (284.0bp,126.0bp) .. controls (277.86bp,132.41bp) and (269.81bp,137.25bp)  .. (5);</span>
+<span class="sd">                \draw (320.5bp,118.5bp) node {$m_{1}(1)$};</span>
+<span class="sd">            %</span>
+<span class="sd">            \end{tikzpicture}</span>
+<span class="sd">            \end{document}</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">rep_types</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">rep_types_poset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">rep_types_poset</span></div>
+        <span class="k">if</span> <span class="nb">format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;dot&quot;</span><span class="p">,</span> <span class="s2">&quot;tikz&quot;</span><span class="p">,</span> <span class="s2">&quot;sage&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Possible formats are sage, dot and tikz.&quot;</span><span class="p">)</span>
+        <span class="n">P</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">edge_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Hasse_diagram</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">hasse_diagram</span><span class="p">()</span>
+        <span class="n">possible_dims</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s2">&quot;sage&quot;</span><span class="p">:</span>
+            <span class="n">heights</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">j</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">i</span> 
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dimensions</span><span class="p">))</span> 
+                    <span class="k">if</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">possible_dims</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="p">]</span> 
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">possible_dims</span><span class="p">))</span>
+            <span class="p">}</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">layout_acyclic_dummy</span><span class="p">(</span><span class="n">heights</span><span class="o">=</span><span class="n">heights</span><span class="p">)</span>
+            <span class="n">H</span><span class="o">.</span><span class="n">set_pos</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">edge_labels</span><span class="p">:</span>
+                <span class="n">H</span><span class="o">.</span><span class="n">set_edge_label</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">H</span>
+        <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s2">&quot;dot&quot;</span> <span class="ow">or</span> <span class="nb">format</span> <span class="o">==</span> <span class="s2">&quot;tikz&quot;</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;digraph G {&#39;</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;    graph [splines=true, overlap=false, rankdir=&quot;BT&quot;, d2toptions=&quot;-e utf8&quot;, labeldistance=0.5, nodesep = 0.1, ranksep = 0.2]&#39;</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;    node [shape=none]&#39;</span><span class="p">)</span>
+            <span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;    &#39;</span>
+            <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">possible_dims</span><span class="p">:</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    dim</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1"> [texlbl=&quot;$\dim=</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1">$&quot;]&#39;</span><span class="p">)</span>
+                <span class="n">string</span> <span class="o">=</span> <span class="n">string</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;dim</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1"> -&gt; &#39;</span>
+            <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;[style=invis]&#39;</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)):</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> [texlbl=&quot;$L_</span><span class="se">{{</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">}}</span><span class="s1">$&quot;]&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">possible_dims</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;    {rank=same;&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39; dim</span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">dim</span><span class="p">:</span>
+                        <span class="n">string</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;; </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;}&#39;</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">edge_labels</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">H</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+                    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> -&gt; </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1"> [texlbl=&quot;$</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s1">$&quot;, label=&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s1">&quot;, lp=&quot;0,0&quot;]&#39;</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s2">&quot;tikz&quot;</span><span class="p">:</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">TikzPicture</span><span class="p">(</span><span class="n">dot2tex</span><span class="o">.</span><span class="n">dot2tex</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;tikz&#39;</span><span class="p">,</span> <span class="n">figonly</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="n">rankdir</span><span class="o">=</span><span class="s1">&#39;down&#39;</span><span class="p">))</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">tex</span><span class="p">(</span><span class="n">filename</span><span class="o">+</span><span class="s2">&quot;.tex&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">t</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="o">+</span><span class="s2">&quot;.dot&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">s</span></div>
 
     
     <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">p_function</span> <span class="o">=</span> <span class="n">p_function</span>
@@ -1324,15 +1261,12 @@
     <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">all_minimal_imaginary_positive_roots</span> <span class="o">=</span> <span class="n">all_minimal_imaginary_positive_roots</span>
     <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">all_subminimal_representation_types</span> <span class="o">=</span> <span class="n">all_subminimal_representation_types</span>
     <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">D_map</span> <span class="o">=</span> <span class="n">D_map</span>
-    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">D_map_on_rep</span> <span class="o">=</span> <span class="n">D_map_on_rep</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">D_lifting</span> <span class="o">=</span> <span class="n">D_lifting</span>
     <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">minimal_degenerations</span> <span class="o">=</span> <span class="n">minimal_degenerations</span>
-    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_1</span> <span class="o">=</span> <span class="n">get_Hasse_diagram_method_1</span>
-    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">plot_Hasse_diagram_method_1</span> <span class="o">=</span> <span class="n">plot_Hasse_diagram_method_1</span>
-    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">plot_Hasse_diagram_method_1_labels</span> <span class="o">=</span> <span class="n">plot_Hasse_diagram_method_1_labels</span>
     <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">all_decompositions</span> <span class="o">=</span> <span class="n">all_decompositions</span>
     <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">is_direct_successor</span> <span class="o">=</span> <span class="n">is_direct_successor</span>
-    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">get_Hasse_diagram_method_2</span> <span class="o">=</span> <span class="n">get_Hasse_diagram_method_2</span>
-    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">plot_Hasse_diagram_method_2</span> <span class="o">=</span> <span class="n">plot_Hasse_diagram_method_2</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">get_Hasse_diagram</span> <span class="o">=</span> <span class="n">get_Hasse_diagram</span>
+    <span class="n">BaseQuiver</span><span class="o">.</span><span class="n">plot_Hasse_diagram</span> <span class="o">=</span> <span class="n">plot_Hasse_diagram</span>
 </pre></div>
         </article>
       </div>

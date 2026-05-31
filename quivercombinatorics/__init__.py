@@ -11,6 +11,6 @@ from .quivercombinatorics import (
     small_decomposition,
     ext_dimension_vector,
     D_map,
-    D_map_on_rep,
+    D_lifting,
     is_direct_successor,
 )
