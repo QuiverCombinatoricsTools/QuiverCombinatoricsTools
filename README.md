@@ -1,9 +1,9 @@
-# QuiverCombinatoricsTools
-
-![logo](docs/_static/logo.svg#gh-light-mode-only)
-![logo](docs/_static/logo-dark.svg#gh-dark-mode-only)
+<p align="center">
+  <img src="docs/_static/logo.svg#gh-light-mode-only" width="300" alt="logo" />
+  <img src="docs/_static/logo-dark.svg#gh-dark-mode-only" width="300" alt="logo" />
+</p>
  
-AGQ computing project by Tudor-Ioan Caba, Mia Lam & Emanuel Roth, supervised by Gwyn Bellamy.
+An AGQ computing project by Tudor-Ioan Caba, Mia Lam & Emanuel Roth, supervised by Gwyn Bellamy.
 
 We code an add-on to the SageMath package [QuiverTools](https://github.com/QuiverTools/QuiverTools) written by Pieter Bielmans, Hans Franzen, and Gianni Petrella. All of our code will be written in `quivercombinatorics.py`.
 
