@@ -1,4 +1,7 @@
 # QuiverCombinatoricsTools
+
+![logo](docs/_static/logo.svg#gh-light-mode-only)
+![logo](docs/_static/logo-dark.svg#gh-dark-mode-only)
  
 AGQ computing project by Tudor-Ioan Caba, Mia Lam & Emanuel Roth, supervised by Gwyn Bellamy.
 
