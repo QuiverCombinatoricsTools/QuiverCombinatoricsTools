@@ -4,14 +4,7 @@
 </p>
  
 
-*QuiverCombinatoricsTools* is a SageMath package that adds combinatorial functions to *QuiverTools* to calculate symplectic leaves of quiver varieties. It adds on to the QuiverTools package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen [here](https://sage.quiver.tools/) and [here](https://github.com/QuiverTools/QuiverTools), so consult their documentation when needed.
-
-To install it, make sure you have both QuiverTools and QuiverCombinatoricsTools
-
-```
-sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
-sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools.git
-```
+*QuiverCombinatoricsTools* is a SageMath package that adds combinatorial functions to *QuiverTools* to calculate symplectic leaves of quiver varieties. It adds on to the QuiverTools package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen [here](https://sage.quiver.tools/) and [here](https://github.com/QuiverTools/QuiverTools).
 
 # Authors
 
@@ -19,16 +12,44 @@ sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools.
 * Mia Lam (University of Edinburgh)
 * Emanuel Roth (University of Edinburgh)
 
-We code an add-on to the SageMath package [QuiverTools](https://github.com/QuiverTools/QuiverTools) written by Pieter Bielmans, Hans Franzen, and Gianni Petrella. All of our code will be written in `quivercombinatorics.py`.
+We were supervised by Gwyn Bellamy (University of Glasgow), as part of an [AGQ](https://www.agq-cdt.org/) computing project. The project is licensed under the *MIT license*. We are open to improvements and suggestions. 
+
+# Instructions
+
+To install it, make sure you have both QuiverTools and QuiverCombinatoricsTools
+```
+sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
+sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools.git
+```
+and then you can simply run
+```
+from quiver import *
+from quivercombinatorics import *
+```
+to get started.
+
+Alternatively, you can run it from your browser in a notebook here.
 
 # Documentation
 
-You can read the documentation of QuiverCombinatoricsTools as:
+You can read the documentation of *QuiverCombinatoricsTools* as:
 
 * [a webpage](https://emanuel-roth.github.io/QuiverCombinatoricsTools)
 * [a pdf](https://emanuel-roth.github.io/QuiverCombinatoricsTools/_downloads/2dcd52c8bff485079e305fefceb5d949/quivercombinatoricstools.pdf)
 
-You can read the documentation of the original QuiverTools as:
+This builds on *QuiverTools*, and you can read the documentation of *QuiverTools* as:
 
 * [a webpage](https://sage.quiver.tools)
 * [a pdf](https://sage.quiver.tools/documentation.pdf)
+
+# How to cite QuiverCombinatoricsTools
+
+If you have used this code in any way, please consider citing it in the following way.
+```
+@software{quivercombinatoricstools,
+  author = {Caba, Tudor-Ioan and Lam, Mia and Roth, Emanuel},
+  title = {QuiverTools},
+  url = {to be added},
+  doi = {},
+}
+```
