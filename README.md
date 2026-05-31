@@ -8,9 +8,10 @@
 
 To install it, make sure you have both QuiverTools and QuiverCombinatoricsTools
 
-```python
+```
 sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
 sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools.git
+```
 
 # Authors
 
