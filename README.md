@@ -34,8 +34,8 @@ Alternatively, you can run it from your browser in a notebook here using [binder
 
 You can read the documentation of *QuiverCombinatoricsTools* as:
 
-* [a webpage](https://quivercombinatoricstools.github.io/QuiverCombinatoricsTools/)
-* [a pdf](https://raw.githubusercontent.com/QuiverCombinatoricsTools/QuiverCombinatoricsTools/main/docs/_static/quivercombinatoricstools.pdf)
+* [a webpage](https://quivercombinatoricstools.github.io/)
+* [a pdf](https://raw.githubusercontent.com/QuiverCombinatoricsTools/quivercombinatoricstools.github.io/main/docs/_static/quivercombinatoricstools.pdf)
 
 This builds on *QuiverTools*, and you can read the documentation of *QuiverTools* as:
 
