@@ -204,7 +204,7 @@ def D_map(m, tau):
     return sum(m[i]*vector(tau[i][0]) for i in range(len(m)))
 
 def D_lifting(tau, L):
-    r"""Applies ``d_map`` to a representation type of the :math:`\mathrm{ext}`-quiver
+    r"""Applies ``D_map`` to a representation type of the :math:`\mathrm{ext}`-quiver
 
         INPUT:
 
