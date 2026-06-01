@@ -83,6 +83,8 @@ def N_set(S, v):
             [(0, 1), (0, 2), (0, 3)]
         
         """
+    if isinstance(v, (int, Integer)):
+            v = (v,)
     if isinstance(v, int):
         v = vector([v])
     else:
@@ -623,6 +625,8 @@ class Quiver(BaseQuiver):
 
         """
         rep_types_with_labels = []
+        if isinstance(v, (int, Integer)):
+            v = (v,)
         if isinstance(v, int):
             v = vector([v])
         else:
