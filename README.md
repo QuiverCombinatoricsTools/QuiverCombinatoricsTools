@@ -48,7 +48,7 @@ If you have used this code in any way, please consider citing it in the followin
 ```
 @software{quivercombinatoricstools,
   author = {Caba, Tudor-Ioan and Lam, Mia and Roth, Emanuel},
-  title = {QuiverTools},
+  title = {QuiverCombinatoricsTools},
   url = {https://quivercombinatoricstools.github.io/QuiverCombinatoricsTools/},
 }
 ```
