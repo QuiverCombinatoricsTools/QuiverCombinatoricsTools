@@ -83,7 +83,7 @@
 
 
 \title{QuiverCombinatoricsTools}
-\date{May 31, 2026}
+\date{Jun 01, 2026}
 \release{1.0}
 \author{Tudor\sphinxhyphen{}Ioan Caba, Mia Lam, Emanuel Roth}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -268,14 +268,13 @@ OUTPUT: \(1 - \frac{1}{2}(x, x)\)
 
 \sphinxAtStartPar
 EXAMPLE:
-\begin{quote}
 
-\sphinxAtStartPar
-sage: from quivercombinatorics import *
-sage: Q = Quiver({[}{[}0, 1{]}, {[}1, 0{]}{]})
-sage: Q.p\_function((2, 3))
-0.0
-\end{quote}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{p\PYGZus{}function}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
+\PYG{l+m+mf}{0.0}
+\end{sphinxVerbatim}
 
 \end{fulllineitems}
 
@@ -366,7 +365,7 @@ EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{N\PYGZus{}set}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{N\PYGZus{}set}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{]}
 \end{sphinxVerbatim}
 
@@ -466,7 +465,7 @@ EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{vector\PYGZus{}decomposition}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{vector\PYGZus{}decomposition}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
@@ -566,9 +565,9 @@ EXAMPLES:
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{]}\PYG{p}{]}
 
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{C} \PYG{o}{=} \PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{quiver\PYGZus{}from\PYGZus{}cartan\PYGZus{}matrix}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{all\PYGZus{}representation\PYGZus{}types}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
@@ -622,7 +621,7 @@ EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{symplectic\PYGZus{}leaf\PYGZus{}dimension}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \PYG{l+m+mi}{4}
 \end{sphinxVerbatim}
@@ -663,7 +662,7 @@ EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{CB\PYGZus{}decomposition}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}
 \end{sphinxVerbatim}
@@ -707,7 +706,7 @@ EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{quiver\PYGZus{}variety\PYGZus{}dimension}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
 \PYG{l+m+mi}{10}
 \end{sphinxVerbatim}
@@ -751,7 +750,7 @@ EXAMPLE:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{sage}\PYG{p}{:} \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{quivercombinatorics}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
-\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q} \PYG{o}{=} \PYG{n}{Quiver}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \PYG{n}{sage}\PYG{p}{:} \PYG{n}{Q}\PYG{o}{.}\PYG{n}{codimension\PYGZus{}two\PYGZus{}leaves}\PYG{p}{(}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
 \PYG{p}{[}\PYG{p}{[}\PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
 \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
@@ -1163,7 +1162,7 @@ EXAMPLE:
 {}
 \pysigstopsignatures
 \sphinxAtStartPar
-Applies \sphinxcode{\sphinxupquote{d\_map}} to a representation type of the \(\mathrm{ext}\)\sphinxhyphen{}quiver
+Applies \sphinxcode{\sphinxupquote{D\_map}} to a representation type of the \(\mathrm{ext}\)\sphinxhyphen{}quiver
 
 \sphinxAtStartPar
 INPUT:
