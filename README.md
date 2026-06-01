@@ -35,7 +35,7 @@ Alternatively, you can run it from your browser in a notebook here.
 You can read the documentation of *QuiverCombinatoricsTools* as:
 
 * [a webpage](https://emanuel-roth.github.io/QuiverCombinatoricsTools)
-* [a pdf](docs/_static/quivercombinatoricstools.pdf)
+* [a pdf](https://raw.githubusercontent.com/emanuel-roth/QuiverCombinatoricsTools/main/docs/_static/quivercombinatoricstools.pdf)
 
 This builds on *QuiverTools*, and you can read the documentation of *QuiverTools* as:
 
