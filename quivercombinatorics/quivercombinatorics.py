@@ -275,7 +275,7 @@ class Quiver(BaseQuiver):
 
         OUTPUT: :math:`1 - \frac{1}{2}(x, x)`
 
-        EXAMPLE:
+        EXAMPLE::
 
             sage: from quivercombinatorics import *
             sage: Q = Quiver([[0, 1], [1, 0]])
