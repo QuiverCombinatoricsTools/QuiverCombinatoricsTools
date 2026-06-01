@@ -79,7 +79,7 @@ def N_set(S, v):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: N_set([[0, 1]],[0, 3])
+            sage: N_set([[0, 1]], [0, 3])
             [(0, 1), (0, 2), (0, 3)]
         
         """
@@ -115,7 +115,7 @@ def vector_decomposition(x, S):
         EXAMPLE::
         
             sage: from quivercombinatorics import *
-            sage: vector_decomposition((4, 5), [(0, 1),(1, 0),(1, 1)])
+            sage: vector_decomposition((4, 5), [(0, 1), (1, 0), (1, 1)])
             [[[(0, 1), 1], [(1, 1), 4]],
             [[(0, 1), 2], [(1, 0), 1], [(1, 1), 3]],
             [[(0, 1), 3], [(1, 0), 2], [(1, 1), 2]],
@@ -365,9 +365,9 @@ class Quiver(BaseQuiver):
             [[(1, 1), 5]]]
 
             sage: from quivercombinatorics import *
-            sage: C = [[2,-1,0], [-1,2,-2], [0,-2,2]]
+            sage: C = [[2, -1, 0], [-1, 2, -2], [0, -2, 2]]
             sage: Q = quiver_from_cartan_matrix(C)
-            sage: Q.all_representation_types((0,0,0), (2,4,3))
+            sage: Q.all_representation_types((0, 0, 0), (2, 4, 3))
             [[[(0, 0, 1), 1],
             [(0, 1, 0), 2],
             [(0, 1, 1), 1],
@@ -418,7 +418,7 @@ class Quiver(BaseQuiver):
         EXAMPLE::
             
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0, 1],[1, 0]])
+            sage: Q = Quiver([[0, 1], [1, 0]])
             sage: Q.symplectic_leaf_dimension([[(1, 1), 2], [(1, 1), 3]])
             4
         
@@ -471,7 +471,7 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0, 1],[1, 0]])
+            sage: Q = Quiver([[0, 1], [1, 0]])
             sage: Q.quiver_variety_dimension((1, -1), (5, 5))
             10
         
@@ -491,7 +491,7 @@ class Quiver(BaseQuiver):
         EXAMPLE::
 
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0, 1],[1, 0]])
+            sage: Q = Quiver([[0, 1], [1, 0]])
             sage: Q.codimension_two_leaves((0, 0), (5, 5))
             [[[(0, 1), 1],
             [(1, 0), 1],
