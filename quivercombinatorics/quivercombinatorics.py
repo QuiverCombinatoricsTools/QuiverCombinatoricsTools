@@ -83,12 +83,10 @@ def N_set(S, v):
             [(0, 1), (0, 2), (0, 3)]
         
         """
-    if isinstance(v, (int, Integer)):
-            v = (v,)
-    if isinstance(v, int):
-        v = vector([v])
-    else:
+    try:
         v = vector(v)
+    except TypeError:
+        v = vector([v])
     reachable = {tuple(a) for a in S}
     changed = True
     while changed:
@@ -625,12 +623,10 @@ class Quiver(BaseQuiver):
 
         """
         rep_types_with_labels = []
-        if isinstance(v, (int, Integer)):
-            v = (v,)
-        if isinstance(v, int):
-            v = vector([v])
-        else:
+        try:
             v = vector(v)
+        except TypeError:
+            v = vector([v])
         n = len(v)
         A = self.adjacency_matrix()
         G = DiGraph(matrix(A))
