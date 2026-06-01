@@ -28,7 +28,7 @@ from quivercombinatorics import *
 ```
 to get started.
 
-Alternatively, you can run it from your browser in a notebook here.
+Alternatively, you can run it from your browser in a notebook here using [binder](https://mybinder.org/v2/gh/QuiverCombinatoricsTools/QuiverCombinatoricsTools/main?filepath=notebooks/example.ipynb).
 
 # Documentation
 
