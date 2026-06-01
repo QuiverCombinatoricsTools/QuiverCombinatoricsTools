@@ -442,7 +442,7 @@ class Quiver(BaseQuiver):
         EXAMPLE::
             
             sage: from quivercombinatorics import *
-            sage: Q = Quiver([[0, 1],[1, 0]])
+            sage: Q = Quiver([[0, 1], [1, 0]])
             sage: Q.CB_decomposition((1, -1), (5, 5))
             [[(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1], [(1, 1), 1]]
         
