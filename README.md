@@ -19,7 +19,7 @@ We were supervised by Gwyn Bellamy (University of Glasgow), as part of an [AGQ](
 To install it, make sure you have both QuiverTools and QuiverCombinatoricsTools
 ```
 sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
-sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools.git
+sage --pip install git+https://github.com/QuiverCombinatoricsTools/QuiverCombinatoricsTools.git
 ```
 and then you can simply run
 ```
@@ -34,8 +34,8 @@ Alternatively, you can run it from your browser in a notebook here.
 
 You can read the documentation of *QuiverCombinatoricsTools* as:
 
-* [a webpage](https://emanuel-roth.github.io/QuiverCombinatoricsTools)
-* [a pdf](https://raw.githubusercontent.com/emanuel-roth/QuiverCombinatoricsTools/main/docs/_static/quivercombinatoricstools.pdf)
+* [a webpage](https://quivercombinatoricstools.github.io/QuiverCombinatoricsTools/)
+* [a pdf](https://raw.githubusercontent.com/QuiverCombinatoricsTools/QuiverCombinatoricsTools/main/docs/_static/quivercombinatoricstools.pdf)
 
 This builds on *QuiverTools*, and you can read the documentation of *QuiverTools* as:
 

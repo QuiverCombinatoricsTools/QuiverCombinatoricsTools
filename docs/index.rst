@@ -2,14 +2,14 @@
 QuiverCombinatoricsTools
 ==================
 
-`QuiverCombinatoricsTools` is a SageMath package that adds combinatorial functions to `QuiverTools` to calculate symplectic leaves of quiver varieties, available here `https://github.com/emanuel-roth/QuiverCombinatoricsTools <https://github.com/emanuel-roth/QuiverCombinatoricsTools>`_. As a PDF, download this page :download:`here <https://raw.githubusercontent.com/emanuel-roth/QuiverCombinatoricsTools/main/docs/_static/quivercombinatoricstools.pdf>`. It adds on to the `QuiverTools` package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here `https://sage.quiver.tools/ <https://sage.quiver.tools/>`_ and here `https://github.com/QuiverTools/QuiverTools <https://github.com/QuiverTools/QuiverTools>`_, so consult their documentation when needed.
+`QuiverCombinatoricsTools` is a SageMath package that adds combinatorial functions to `QuiverTools` to calculate symplectic leaves of quiver varieties, available here `https://github.com/emanuel-roth/QuiverCombinatoricsTools <https://github.com/QuiverCombinatoricsTools/QuiverCombinatoricsTools>`_. It adds on to the `QuiverTools` package written by Pieter Belmans, Hans Franzen and Gianni Petrella, as seen here `https://sage.quiver.tools/ <https://sage.quiver.tools/>`_ and here `https://github.com/QuiverTools/QuiverTools <https://github.com/QuiverTools/QuiverTools>`_, so consult their documentation when needed.
 
 To install it, make sure you have both `QuiverTools` and `QuiverCombinatoricsTools`
 
 .. code-block::
 
    sage --pip install git+https://github.com/QuiverTools/QuiverTools.git
-   sage --pip install git+https://github.com/emanuel-roth/QuiverCombinatoricsTools.git
+   sage --pip install git+https://github.com/QuiverCombinatoricsTools/QuiverCombinatoricsTools.git
 
 and then you can simply run
 
