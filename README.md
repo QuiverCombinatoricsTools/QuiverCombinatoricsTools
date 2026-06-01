@@ -10,7 +10,7 @@
 
 * Tudor-Ioan Caba (University of Edinburgh)
 * Mia Lam (University of Edinburgh)
-* Emanuel Roth (University of Edinburgh)
+* Emanuel Roth (University of Edinburgh) Test
 
 We were supervised by Gwyn Bellamy (University of Glasgow), as part of an [AGQ](https://www.agq-cdt.org/) computing project. The project is licensed under the *MIT license*. We are open to improvements and suggestions. 
 
