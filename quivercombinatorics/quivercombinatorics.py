@@ -1,5 +1,4 @@
 import random
-import dot2tex
 
 from sage.all import Integer, Poset
 from sage.combinat.partition import Partitions
@@ -931,6 +930,7 @@ class Quiver(BaseQuiver):
             lines.append('}')
             s = '\n'.join(lines)
             if format == "tikz":
+                import dot2tex
                 t = TikzPicture(dot2tex.dot2tex(s, format='tikz', figonly='True', prog='dot', rankdir='down'))
                 _ = t.tex(filename+".tex")
                 return t
